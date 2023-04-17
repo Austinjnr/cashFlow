@@ -1,6 +1,6 @@
 const { add, subtract } =  require('./cashflow');
 
-describe('test.js tests', () =>{
+describe('cashflow.js tests', () =>{
     it ('should test add', () =>{
         expect(add(2, 2)).toBe(4);
     })
