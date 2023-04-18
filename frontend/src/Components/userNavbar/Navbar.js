@@ -1,47 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import './Navigation.css'
+import React, { useState } from "react"
+import "./Navigation.css";
+import { Link } from "react-router-dom"
+import { FaBars } from "react-icons/fa"
+import { ImCross } from "react-icons/im"
 
 const Navbar = () => {
-
-    const [Navbar, setNavbar] = useState(false)
-
-    return ( 
-        <section className="navbar">
-
-            <ul className={Navbar ? "nav-links" : "nav"}
-            onClick={() => setNavbar(false)}>
-
-                <Link to='/' className="home">
+  const [Navbar, setNavbar] = useState(false)
+  return (
+    <section>
+      <nav className='navbar'>
+        <ul>
+            <Link to='/' className='home'>
                 <li>CashFlow</li>
-                </Link>
-
-                <Link to='/wallet' className="wallet">
+            </Link>
+        </ul>
+        <ul className={Navbar ? "nav-links" : "nav"} onClick={() => setNavbar(false)}>
+            <Link to='/wallet' className="wallet">
                 <li>Wallet</li>
-                </Link>
+            </Link>
 
-                <Link to='/send' className="send">
+            <Link to='/send' className="send">
                 <li>Send</li>
-                </Link>
+            </Link>
 
-                <Link to='/withdraw' className="withdraw">
+            <Link to='/withdraw' className="withdraw">
                 <li>Withdraw</li>
-                </Link>
+            </Link>
 
-                <Link to='transactions' className="transactions">
+            <Link to='transactions' className="transactions">
                 <li>Transactions</li>
-                </Link>
+            </Link>
 
-                <Link to='profile' className="profile">
+            <Link to='profile' className="profile">
                 <li>Profile</li>
-                </Link>
+            </Link>
 
-                <Link>
-                <li>Log out</li>
-                </Link>
-            </ul>
-        </section>
-     );
+            <Link to='/authentication' className="log-out">
+                <li>LogOut</li>
+            </Link>
+        </ul>
+        {/* 
+        whenever we click on button = setMobile(!Mobile) ==  is mobile oppsite to setMobile 
+        */}
+        <button className='menu-icon' onClick={() => setNavbar(!Navbar)}>
+          {Navbar ? <ImCross /> : <FaBars />}
+        </button>
+      </nav>
+    </section>
+  )
 }
- 
-export default Navbar;
+export default Navbar

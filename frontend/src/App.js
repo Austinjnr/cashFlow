@@ -1,9 +1,10 @@
 import './App.css';
+import Navigation from './Components/userNavbar/Navigation';
 
 function App() {
   return (
     <div className="App">
-      <h1>Cash Flow web App UI</h1>
+      <Navigation />
     </div>
   );
 }
