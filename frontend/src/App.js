@@ -1,9 +1,10 @@
 import './App.css';
+import LoginPage from './Components/register/Login';
 
 function App() {
   return (
     <div className="App">
-      <h1>Cash Flow web App UI</h1>
+      <LoginPage />
     </div>
   );
 }
