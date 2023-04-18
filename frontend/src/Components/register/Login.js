@@ -8,7 +8,7 @@ function LoginPage() {
     <div className="form">
       <img className='image' src={loginImage} alt="Login Image" />
       <div>
-        <h2 className='text'> Welcome Back</h2>
+        <h2 data-testid="login-1" className='text'> Welcome Back</h2>
        
           <label className='email'>
             EMAIL
