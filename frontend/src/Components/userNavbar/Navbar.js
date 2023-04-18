@@ -7,7 +7,7 @@ import { ImCross } from "react-icons/im"
 const Navbar = () => {
   const [Navbar, setNavbar] = useState(false)
   return (
-    <section>
+    <section data-testid="Navbar-1">
       <nav className='navbar'>
         <ul>
             <Link to='/' className='home'>
