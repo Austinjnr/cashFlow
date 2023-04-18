@@ -14,7 +14,6 @@ function LoginPage() {
             EMAIL
             <input className='emailInput' type="email" name="email" required />
           </label>
-          {/* added password input */}
           <label className='password'>
             PASSWORD
             <input className='passwordInput' type="password" name="password" required />
