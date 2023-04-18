@@ -1,51 +1,70 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
-
-  # GET /users
+  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+ 
   def index
-    @users = User.all
+    users = User.all
+    render json: users
+  end
+    
+  def authenticate
+    user = User.find_by(email: params[:email])
 
-    render json: @users
+    if user.nil?
+      user_not_found
+    elsif user.authenticate(params[:password])
+      session[:user_id] = user.id
+      role = user.email.include?('admin') ? 'admin' : 'user'
+      render json: { message: role }, status: :ok
+    else
+      record_invalid("Invalid password")
+    end
+
+  rescue => e
+    render json: { error: "Login failed" }, status: :bad_request
   end
 
-  # GET /users/1
-  def show
-    render json: @user
-  end
-
-  # POST /users
   def create
-    @user = User.new(user_params)
+    begin
+      user = User.new(user_params)
+      user.password = params[:password]
+      user.password_confirmation = params[:password_confirmation]
+      user.save!
 
-    if @user.save
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
+      session[:user_id] = user.id
+      render json: { status: :created, message: "User successfully registered", user: user }
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+    rescue ActiveRecord::RecordNotUnique => e
+      render json: { errors: [e.message] }, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /users/1
-  def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+  def show
+    user = User.find(session[:user_id])
+    render json: user
   end
 
-  # DELETE /users/1
   def destroy
-    @user.destroy
+    session[:user_id] = nil
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:email, :username, :password)
-    end
+  def user_params
+    params.require(:user).permit(:username, :role, :email, :password, :password_confirmation)
+  end
+
+  def record_invalid(invalid)
+    render json: { errors: invalid }, status: :unprocessable_entity
+  end
+
+  def user_not_found
+    render json: { errors: "Account not found for that email address" }, status: :not_found
+  end
+
+  def not_found
+    render json: { error: "User Not Found" }, status: :unauthorized
+  end
 end
