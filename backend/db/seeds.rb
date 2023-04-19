@@ -38,6 +38,14 @@ User.all.sample(7).each do |user|
     last_transaction: "Deposit",
     account: account
   )
+
+  #craete a transaction for each account
+  Transaction.create!(
+    transaction_type: ["shopping" , "bills" , "rental"].sample,
+    transaction_fee: Faker::Number.number(digits: 3),
+    amount: Faker::Number.number(digits: 5),
+    account: account
+  )
 end
 
 puts "Completed seeding"

@@ -37,9 +37,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_054419) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "trasaction_type"
+    t.string "transaction_type"
     t.integer "amount"
-    t.string "trasaction_fee"
+    t.string "transaction_fee"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
