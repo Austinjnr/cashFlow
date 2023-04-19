@@ -1,4 +1,5 @@
 require 'faker'
+
 puts "Seeding records..."
 
 # Create some users
@@ -12,18 +13,31 @@ end
 
 # Create some user accounts 
 User.all.sample(7).each do |user|
-  Account.create!(
+  account = Account.create!(
     name: user.username,
     phone_number: Faker::PhoneNumber.cell_phone,
     avatar_url: Faker::Avatar.image,
     id_number: Faker::Number.number(digits: 8),
     account_number: Faker::Number.number(digits: 8),
-    user_id: user.id
+    user: user
+  )
+
+  # Create some beneficiaries for each account
+  3.times do
+    Beneficiary.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone_number: Faker::PhoneNumber.cell_phone,
+      account: account
+    )
+  end
+
+  # Create a wallet for each account
+  Wallet.create!(
+    balance: Faker::Number.number(digits: 6),
+    last_transaction: "Deposit",
+    account: account
   )
 end
 
-
-
-    
-
-puts "Complited seeding"
+puts "Completed seeding"
