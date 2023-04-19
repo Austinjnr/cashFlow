@@ -12,9 +12,9 @@
 # # of tools you can use to make these specs even more expressive, but we're
 # # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-# RSpec.describe "/users", type: :request do
+# RSpec.describe "/beneficiaries", type: :request do
 #   # This should return the minimal set of attributes required to create a valid
-#   # User. As you add validations to User, be sure to
+#   # Beneficiary. As you add validations to Beneficiary, be sure to
 #   # adjust the attributes here as well.
 #   let(:valid_attributes) {
 #     skip("Add a hash of attributes valid for your model")
@@ -26,7 +26,7 @@
 
 #   # This should return the minimal set of values that should be in the headers
 #   # in order to pass any filters (e.g. authentication) defined in
-#   # UsersController, or in your router and rack
+#   # BeneficiariesController, or in your router and rack
 #   # middleware. Be sure to keep this updated too.
 #   let(:valid_headers) {
 #     {}
@@ -34,48 +34,48 @@
 
 #   describe "GET /index" do
 #     it "renders a successful response" do
-#       User.create! valid_attributes
-#       get users_url, headers: valid_headers, as: :json
+#       Beneficiary.create! valid_attributes
+#       get beneficiaries_url, headers: valid_headers, as: :json
 #       expect(response).to be_successful
 #     end
 #   end
 
 #   describe "GET /show" do
 #     it "renders a successful response" do
-#       user = User.create! valid_attributes
-#       get user_url(user), as: :json
+#       beneficiary = Beneficiary.create! valid_attributes
+#       get beneficiary_url(beneficiary), as: :json
 #       expect(response).to be_successful
 #     end
 #   end
 
 #   describe "POST /create" do
 #     context "with valid parameters" do
-#       it "creates a new User" do
+#       it "creates a new Beneficiary" do
 #         expect {
-#           post users_url,
-#                params: { user: valid_attributes }, headers: valid_headers, as: :json
-#         }.to change(User, :count).by(1)
+#           post beneficiaries_url,
+#                params: { beneficiary: valid_attributes }, headers: valid_headers, as: :json
+#         }.to change(Beneficiary, :count).by(1)
 #       end
 
-#       it "renders a JSON response with the new user" do
-#         post users_url,
-#              params: { user: valid_attributes }, headers: valid_headers, as: :json
+#       it "renders a JSON response with the new beneficiary" do
+#         post beneficiaries_url,
+#              params: { beneficiary: valid_attributes }, headers: valid_headers, as: :json
 #         expect(response).to have_http_status(:created)
 #         expect(response.content_type).to match(a_string_including("application/json"))
 #       end
 #     end
 
 #     context "with invalid parameters" do
-#       it "does not create a new User" do
+#       it "does not create a new Beneficiary" do
 #         expect {
-#           post users_url,
-#                params: { user: invalid_attributes }, as: :json
-#         }.to change(User, :count).by(0)
+#           post beneficiaries_url,
+#                params: { beneficiary: invalid_attributes }, as: :json
+#         }.to change(Beneficiary, :count).by(0)
 #       end
 
-#       it "renders a JSON response with errors for the new user" do
-#         post users_url,
-#              params: { user: invalid_attributes }, headers: valid_headers, as: :json
+#       it "renders a JSON response with errors for the new beneficiary" do
+#         post beneficiaries_url,
+#              params: { beneficiary: invalid_attributes }, headers: valid_headers, as: :json
 #         expect(response).to have_http_status(:unprocessable_entity)
 #         expect(response.content_type).to eq("application/json")
 #       end
@@ -88,28 +88,28 @@
 #         skip("Add a hash of attributes valid for your model")
 #       }
 
-#       it "updates the requested user" do
-#         user = User.create! valid_attributes
-#         patch user_url(user),
-#               params: { user: new_attributes }, headers: valid_headers, as: :json
-#         user.reload
+#       it "updates the requested beneficiary" do
+#         beneficiary = Beneficiary.create! valid_attributes
+#         patch beneficiary_url(beneficiary),
+#               params: { beneficiary: new_attributes }, headers: valid_headers, as: :json
+#         beneficiary.reload
 #         skip("Add assertions for updated state")
 #       end
 
-#       it "renders a JSON response with the user" do
-#         user = User.create! valid_attributes
-#         patch user_url(user),
-#               params: { user: new_attributes }, headers: valid_headers, as: :json
+#       it "renders a JSON response with the beneficiary" do
+#         beneficiary = Beneficiary.create! valid_attributes
+#         patch beneficiary_url(beneficiary),
+#               params: { beneficiary: new_attributes }, headers: valid_headers, as: :json
 #         expect(response).to have_http_status(:ok)
 #         expect(response.content_type).to match(a_string_including("application/json"))
 #       end
 #     end
 
 #     context "with invalid parameters" do
-#       it "renders a JSON response with errors for the user" do
-#         user = User.create! valid_attributes
-#         patch user_url(user),
-#               params: { user: invalid_attributes }, headers: valid_headers, as: :json
+#       it "renders a JSON response with errors for the beneficiary" do
+#         beneficiary = Beneficiary.create! valid_attributes
+#         patch beneficiary_url(beneficiary),
+#               params: { beneficiary: invalid_attributes }, headers: valid_headers, as: :json
 #         expect(response).to have_http_status(:unprocessable_entity)
 #         expect(response.content_type).to eq("application/json")
 #       end
@@ -117,11 +117,11 @@
 #   end
 
 #   describe "DELETE /destroy" do
-#     it "destroys the requested user" do
-#       user = User.create! valid_attributes
+#     it "destroys the requested beneficiary" do
+#       beneficiary = Beneficiary.create! valid_attributes
 #       expect {
-#         delete user_url(user), headers: valid_headers, as: :json
-#       }.to change(User, :count).by(-1)
+#         delete beneficiary_url(beneficiary), headers: valid_headers, as: :json
+#       }.to change(Beneficiary, :count).by(-1)
 #     end
 #   end
 # end
