@@ -3,6 +3,7 @@ databases:
     databaseName: cashflow
     user: cashflow_user
 
+# services
 services:
   - type: web
     name: cashflow
