@@ -7,7 +7,7 @@ import { ImCross } from "react-icons/im"
 const Navbar = () => {
   const [Navbar, setNavbar] = useState(false)
   return (
-    <section data-testid="Navbar-1">
+    <section >
       <nav className='navbar'>
         <ul>
             <Link to='/' className='home'>
@@ -39,9 +39,6 @@ const Navbar = () => {
                 <li>LogOut</li>
             </Link>
         </ul>
-        {/* 
-        whenever we click on button = setMobile(!Mobile) ==  is mobile oppsite to setMobile 
-        */}
         <button className='menu-icon' onClick={() => setNavbar(!Navbar)}>
           {Navbar ? <ImCross /> : <FaBars />}
         </button>

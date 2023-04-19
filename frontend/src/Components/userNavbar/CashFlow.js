@@ -1,8 +1,10 @@
+
+
 function CashFlow() {
     return ( 
-        <section>
-            
-        </section>
+        <>
+        
+        </>
      );
 }
 

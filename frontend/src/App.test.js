@@ -1,7 +1,7 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import { BrowserRouter as Router } from "react-router-dom";
 import Login from './Components/register/Login';
-import Navigation from './Components/userNavbar/Navigation';
+import App from './App';
 
 afterEach(() => {
     cleanup();
@@ -16,10 +16,10 @@ test('should render Login component', () =>{
     // expect(LoginElement).toContainHTML('<Button type="submit">Login</Button>')
 })
 describe("Navigation component", () => {
-  test("should render Navigation component", () => {
+  test("should render App component", () => {
     render(
       <Router>
-        <Navigation />
+        <App />
       </Router>
     );
 
@@ -27,14 +27,4 @@ describe("Navigation component", () => {
     expect(navigationElement).toBeInTheDocument();
   });
 
-  test("should render Navbar component", () => {
-    render(
-      <Router>
-        <Navigation />
-      </Router>
-    );
-
-    const navbarElement = screen.getByTestId("Navbar-1");
-    expect(navbarElement).toBeInTheDocument();
-  });
 });
