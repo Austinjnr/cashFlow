@@ -25,9 +25,4 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  host: <%= ENV["BACKEND_DATABASE_HOST"] %>
-  encoding: unicode
-  database: backend_production
-  username: backend
-  password: <%= ENV["BACKEND_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
