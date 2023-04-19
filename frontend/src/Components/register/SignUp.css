@@ -1,27 +1,25 @@
-.image {
+.signupimage {
   position: absolute;
   width: 1060px;
   height: 710px;
-  left: -30px;
-  top: 180px;
-  }
-  
-  .form {
-    position: absolute;
-    width: 500px;
-    height: 649px;
-    left: 9px;
-    top: -80px;
-  }
+  left: -85px;
+  top: 100px;
+}
 
-  
-  .text {
+.signup-form {
+  position: absolute;
+  height: 650px;
+  left: -10px;
+  top: 0px;
+}
+
+.signup-text {
     position: absolute;
-    width: 200px;
+    width: 100px;
     height: 50px;
-    left: 1131px;
-    top: 190px;
-  
+    left: 1180px;
+    top: 100px;
+    
     font-family: 'Outfit';
     font-style: normal;
     font-weight: 700;
@@ -32,12 +30,44 @@
     align-items: center;
     text-align: center;
     text-transform: capitalize;
+    
+    color: #000000;
+}
+
+.username {
+    position: absolute;
+    height: 50px;
+    left: 964px;
+    top: 180px;
+  
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    /* identical to box height, or 208% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
   
     color: #000000;
-  }
-  .email {
+}
+
+.usernameInput {
     position: absolute;
-    width: 76px;
+    width: 420px;
+    height: 45px;
+    left: 60px;
+    top: 55px;
+    font-size: 25px;
+    border-radius: 10px;
+  
+    background: #e6e3e3
+}
+
+.email {
+    position: absolute;
     height: 50px;
     left: 964px;
     top: 309px;
@@ -54,25 +84,25 @@
     text-transform: capitalize;
   
     color: #000000;
-  }
-  .emailInput {
+}
+
+.emailInput {
     position: absolute;
-    width: 420px;
-    height: 50px;
+    height: 45px;
     left: 60px;
     top: 55px;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 10px;
   
     background: #e6e3e3;
-  
-  }
-  .password {
+}
+
+.password {
     position: absolute;
     width: 130px;
     height: 45px;
     left: 964px;
-    top: 455px;
+    top: 450px;
   
     font-family: 'Outfit';
     font-style: normal;
@@ -82,73 +112,67 @@
     /* identical to box height, or 208% */
     display: flex;
     align-items: center;
-    text-align: center;
-    text-transform: capitalize;
+    text-align: left;
   
     color: #000000;
-  }
-  
-  .passwordInput {
+}
+
+.passwordInput {
     position: absolute;
-    width: 420px;
-    height: 50px;
+    height: 45px;
     left: 60px;
-    top: 55px;
+    top: 70px;
     font-size: 25px;
-    border-radius: 10px;
-  
+
+    display: flex;
+    align-items: center;
+    text-align: center;
     background: #e6e3e3;
-  
-  }
+}
 
-
-  .login-btn{
+.confirmPassword {
     position: absolute;
-    width: 200px;
-    height: 50px;
-    left: 1150px;
-    top: 600px;
-    border-radius: 50px;
-    font-size: 20px;
+    width: 500px;
+    height: 45px;
+    left: 964px;
+    top: 610px;
   
-    background: rgb(106, 163, 244);
-  }
-  .reset-btn {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    left: 1150px;
-    top: 690px;
-    border-radius: 50px;
-    font-size: 20px;
-  
-    background: rgb(106, 163, 244);
-  }
-  
-  .no-account-btn {
-    position: absolute;
-    width: 428px;
-    height: 50px;
-    left: 1070px;
-    top: 770px;
-    
     font-family: 'Outfit';
     font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
+    font-weight: 400;
+    font-size: 20px;
     line-height: 50px;
     /* identical to box height, or 208% */
     display: flex;
     align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-    
-    color: #000000;
-  }
+    text-align: left;
   
-  .create-account {
+    color: #000000;
+}
+
+.confirm-passwordInput {
     position: absolute;
-    width: 100px;
-    height: 30px;
-    left: 250px;
-  }
+    height: 45px;
+    width: 420px;
+    left: 60px;
+    top: 70px;
+    font-size: 25px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: #e6e3e3;
+}
+
+.signup-btn {
+   position: absolute;
+   width: 200px;
+   height: 50px;
+   left: 1150px;
+   top: 790px;
+   border-radius: 50px;
+   font-size: 20px;
+   
+   background: rgb(106, 163, 244);
+}

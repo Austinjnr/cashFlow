@@ -6,7 +6,7 @@ import loginImage from './login.jpeg';
 function LoginPage() {
   return (
     <div className="form">
-      <img className='image' src={loginImage} alt="Login Image" />
+      <img className='image' src={loginImage} alt="" />
       <div>
         <h2 data-testid="login-1" className='text'> Welcome Back</h2>
        
