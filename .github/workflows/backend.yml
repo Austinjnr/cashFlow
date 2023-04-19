@@ -2,7 +2,7 @@ on:
   push:
     branches: [main, briandev, moses-dev, roy-dev, testing-dev]
   pull_request:
-    branches: [main, briandev, mosesdev, roy-dev, testing-dev]
+    branches: [main, briandev, moses-dev, roy-dev, testing-dev]
 
 jobs:
   test:
