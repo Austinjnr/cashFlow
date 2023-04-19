@@ -1,0 +1,91 @@
+.homepageImage {
+  position: absolute;
+  width: 850px;
+  height: 800px;
+  left: 10px;
+  top: 90px;
+}
+
+.cashflow-heading {
+   position: absolute;
+   width: 500px;
+   height: 50px;
+   left: 1020px;
+   top: 150px;
+   
+   font-family: 'Arial';
+   font-style: normal;
+   font-weight: 700;
+   font-size: 40px;
+   line-height: 50px;
+   /* identical to box height, or 156% */
+   display: flex;
+   align-items: center;
+   text-align: center;
+   text-transform: capitalize;
+   
+   color: #000000;
+}
+
+.cashflow-paragraph-1 {
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    left: 1010px;
+    top: 300px;
+    
+    font-family: 'Outline';
+    font-style: normal;
+    font-weight: 50;
+    font-size: 30px;
+    line-height: 50px;
+    /* identical to box height, or 156% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* text-transform: capitalize; */
+    
+    color: #000000;
+}
+
+.cashflow-paragraph-2 {
+    position: absolute;
+    width: 500px;
+    height: 60px;
+    left: 1060px;
+    top: 470px;
+    
+    font-family: 'Outline';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 50px;
+    /* identical to box height, or 156% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* text-transform: capitalize; */
+    
+    color: #000000;
+}
+
+.cashflow-paragraph-3 {
+    position: absolute;
+    width: 500px;
+    height: 60px;
+    left: 1030px;
+    top: 750px;
+    
+    font-family: 'Outline';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 50px;
+    /* identical to box height, or 156% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* text-transform: capitalize; */
+    
+    color: #0e63ae;
+}
