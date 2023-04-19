@@ -1,5 +1,5 @@
 class WalletsController < ApplicationController
-  before_action :set_wallet, only: %i[ show update destroy ]
+  before_action :set_wallet, only: %i[ show ]
 
   # GET /wallets
   def index
@@ -24,19 +24,6 @@ class WalletsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /wallets/1
-  def update
-    if @wallet.update(wallet_params)
-      render json: @wallet
-    else
-      render json: @wallet.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /wallets/1
-  def destroy
-    @wallet.destroy
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
