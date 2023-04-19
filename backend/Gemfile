@@ -42,3 +42,7 @@ gem "factory_bot_rails", "~> 6.2"
 gem "database_cleaner", "~> 2.0"
 
 gem "shoulda-matchers", "~> 5.3"
+
+gem "twilio-ruby", "~> 5.76"
+
+gem "phonelib", "~> 0.8.1"
