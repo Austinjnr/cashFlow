@@ -43,7 +43,7 @@ User.all.sample(7).each do |user|
   Account.all.each do |account|
     4.times do
       Transaction.create!(
-        transaction_type: ["shopping" , "bills" , "rental"].sample,
+        transaction_type: ["shopping" , "bills" , "rental" , "top_up"].sample,
         transaction_fee: Faker::Number.number(digits: 3),
         amount: Faker::Number.number(digits: 5),
         account: account
