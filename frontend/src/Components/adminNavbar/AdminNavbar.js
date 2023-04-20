@@ -1,37 +1,69 @@
-import React, { useState } from "react"
-import "./Admin.css";
-import { Link } from "react-router-dom"
-import { FaBars } from "react-icons/fa"
-import { ImCross } from "react-icons/im"
+import React, { useState, useEffect } from 'react';
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
 
-const AdminNavbar = () => {
+function AdminNavbar() {
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
-    const [Navbar, setNavbar] = useState(false)
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
 
-    return ( 
-        <section data-testid="Navbar-1">
-            <nav className='navbar'>
-                <h3>CashFlow</h3>
-            <ul className={Navbar ? "nav-links" : "nav"} onClick={() => setNavbar(false)}>
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
 
-                    <Link to='/' className="home">
-                        <li>Home</li>
-                    </Link>
+  useEffect(() => {
+    showButton();
+  }, []);
 
-                    <Link to='/wallet' className="wallet">
-                        <li>Wallet</li>
-                    </Link>
+  window.addEventListener('resize', showButton);
 
-                    <Link to='/login' className="log-out">
-                        <li>LogOut</li>
-                    </Link>
-        </ul>
-        <button className='menu-icon' onClick={() => setNavbar(!Navbar)}>
-          {Navbar ? <ImCross /> : <FaBars />}
-        </button>
+  return (
+    <>
+      <nav className='navbar'>
+        <div className='navbar-container'>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            CashFlow
+            <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
+          </Link>
+          <div className='menu-icon' onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <li className='nav-item'>
+              <Link to='/admin-home' className='nav-links' onClick={closeMobileMenu}>
+                Home
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                to='/admin-wallet'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Wallet
+              </Link>
+            </li>
+            <li>
+              <Link
+                to='/login'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}
+              >
+                LogOut
+              </Link>
+            </li>
+          </ul>
+          {button && <Button buttonStyle='btn--outline'>LOGIN</Button>}
+        </div>
       </nav>
-        </section>
-     );
+    </>
+  );
 }
- 
+
 export default AdminNavbar;

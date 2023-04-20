@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
-import './Landingpg.css';
+import '../Navbar.css';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -25,10 +25,10 @@ function Navbar() {
   window.addEventListener('resize', showButton);
 
   return (
-    <>
+    <sectio>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/landingpg' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             CashFlow
             <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
           </Link>
@@ -63,7 +63,7 @@ function Navbar() {
           {button && <Button buttonStyle='btn--outline'>LOGIN</Button>}
         </div>
       </nav>
-    </>
+    </sectio>
   );
 }
 

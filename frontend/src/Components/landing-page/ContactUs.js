@@ -1,4 +1,4 @@
-import './Landingpg.css';
+import './landing.css';
 
 const Contact = () => {
     return ( 

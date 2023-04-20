@@ -1,154 +1,77 @@
-.image {
-  position: absolute;
-  width: 1060px;
-  height: 710px;
-  left: -30px;
-  top: 180px;
-  }
-  
-  .form {
-    position: absolute;
-    width: 500px;
-    height: 649px;
-    left: 9px;
-    top: -80px;
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    position: relative;
   }
 
-  
-  .text {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    left: 1131px;
-    top: 190px;
-  
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 50px;
-    /* identical to box height, or 156% */
+  .image-container {
+    grid-column: span 6;
     display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-  
-    color: #000000;
   }
-  .email {
-    position: absolute;
-    width: 76px;
-    height: 50px;
-    left: 964px;
-    top: 309px;
   
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 50px;
-    /* identical to box height, or 208% */
+.auth-form-container {
+    text-align: center;
     display: flex;
+    min-height: 100vh;
     align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-  
-    color: #000000;
+    color: black;
+    grid-column: span 6;
   }
-  .emailInput {
-    position: absolute;
-    width: 420px;
-    height: 50px;
-    left: 60px;
-    top: 55px;
-    font-size: 25px;
+
+  .auth-form-container, .login-form, .register-form, .profile-form, .reset-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media screen and (min-width: 600px) {
+    .auth-form-container {
+      padding: 5rem;
+      border: 1px solid white;
+      border-radius: 10px;
+      margin: 0.5rem;
+    }
+  }
+  
+  label {
+    text-align: left;
+    padding: 0.25rem 0;
+  }
+  
+  input {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 20rem;
     border-radius: 10px;
-  
-    background: #e6e3e3;
-  
-  }
-  .password {
-    position: absolute;
-    width: 130px;
-    height: 45px;
-    left: 964px;
-    top: 455px;
-  
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 50px;
-    /* identical to box height, or 208% */
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-  
-    color: #000000;
   }
   
-  .passwordInput {
-    position: absolute;
-    width: 420px;
-    height: 50px;
-    left: 60px;
-    top: 55px;
-    font-size: 25px;
-    border-radius: 10px;
-  
-    background: #e6e3e3;
-  
+  button {
+    background-color: #8976C7;
+    padding: 4px;
+    width: fit-content;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-
-  .login-btn{
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    left: 1150px;
-    top: 600px;
-    border-radius: 50px;
-    font-size: 20px;
-  
-    background: rgb(106, 163, 244);
+    .btn-1{
+    margin: 0.5rem 0;
+    padding: 4px;
+    width: fit-content;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .reset-btn {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    left: 1150px;
-    top: 690px;
-    border-radius: 50px;
-    font-size: 20px;
-  
-    background: rgb(106, 163, 244);
-  }
-  
-  .no-account-btn {
-    position: absolute;
-    width: 428px;
-    height: 50px;
-    left: 1070px;
-    top: 770px;
-    
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 200;
-    font-size: 24px;
-    line-height: 50px;
-    /* identical to box height, or 208% */
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-    
-    color: #000000;
-  }
-  
-  .create-account {
-    position: absolute;
-    width: 100px;
-    height: 30px;
-    left: 250px;
+  .link-btn {
+    border: none;
+    background: none;
+    color:#8976C7;
+    text-decoration: underline;
   }

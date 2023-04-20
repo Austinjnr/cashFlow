@@ -6,27 +6,31 @@ import Withdraw from './Components/userNavbar/Withdraw';
 import Transactions from './Components/userNavbar/Transactions';
 import Profile from './Components/userNavbar/Profile';
 // import Navbar from './Components/userNavbar/Navbar';
-// import AdminNavbar from './Components/adminNavbar/AdminNavbar';
-import Home from './Components/adminNavbar/Home';
-import AdminWallet from './Components/adminNavbar/AdminWallet';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LandingNavbar from './Components/landing-page/LandingpgNavbar';
 import Fees from './Components/landing-page/Fees';
 import Contact from './Components/landing-page/ContactUs';
 import CashFlowLandingpg from './Components/landing-page/CashFlowHome';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingNavbar from './Components/landing-page/LandingpgNavbar';
+import Authentication from './Components/register/Authentication';
+import Reset from './Components/register/Reset';
+import SignUp from './Components/register/SignUp';
+import ProfileSetup from './Components/register/ProfileSetup';
+// import AdminNavbar from './Components/adminNavbar/AdminNavbar';
+// import Home from './Components/adminNavbar/Home';
+// import AdminWallet from './Components/adminNavbar/AdminWallet';
 
 function App() {
   return (
     <div data-testid="Navigation-1">
-    <Router>
-                {/* <Navbar />
-                <AdminNavbar /> */}
-                <LandingNavbar />
+    <Router> 
+                {/* <Navbar /> */}
+                {/* <AdminNavbar />  */}
+                 <LandingNavbar /> 
 
-                <Switch>
-                    {/* Landingpage */}
+                 <Switch> 
+                   {/* Landingpage  */}
 
-                    <Route path='/landingpg' exact>
+                    <Route path='/' exact>
                         <CashFlowLandingpg />
                     </Route>
 
@@ -35,10 +39,27 @@ function App() {
                     </Route>
 
                     <Route path='/contact-us' exact>
-                    <Contact />
-                    </Route>                    
+                        <Contact />
+                    </Route> 
+
+                    <Route path='/login' exact>
+                        <Authentication />
+                    </Route>     
+
+                    <Route path='/reset-password' exact>
+                        <Reset />
+                    </Route>
+
+                    <Route path='/sign-up' exact>
+                        <SignUp />
+                    </Route>
+
+                    <Route path='/profile-setup' exact>
+                        <ProfileSetup/>
+                    </Route>
+
                     {/* userNavbar */}
-                    <Route path='/' component={CashFlow} exact>
+                    <Route path='/home' component={CashFlow} exact>
                         <CashFlow />
                     </Route>
 
@@ -62,18 +83,17 @@ function App() {
                         <Profile />
                     </Route>
 
-                    <Route>
-                    {/* log out */}
+                    <Route> 
                     </Route>
 
                     {/* AdminNavigationComponent */}
-                    <Route path='/' exact>
+                    {/* <Route path='/' exact>
                         <Home />
                     </Route>
 
                     <Route path='/wallet' exact>
                         <AdminWallet />
-                    </Route>
+                    </Route> */}
 
                     {/* <Route path='/login' exact>
                         <Login />
