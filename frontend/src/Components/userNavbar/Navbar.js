@@ -1,49 +1,79 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from 'react';
+import { Button } from '../landing-page/Button';
+import { Link } from 'react-router-dom';
 import '../Navbar.css';
-import { Link } from "react-router-dom"
-import { FaBars } from "react-icons/fa"
-import { ImCross } from "react-icons/im"
 
-const Navbar = () => {
-  const [Navbar, setNavbar] = useState(false)
+function Navbar() {
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  window.addEventListener('resize', showButton);
+
   return (
-    <section >
+    <sectio>
       <nav className='navbar'>
-        <ul>
-            <Link to='/' className='home'>
-                <li>CashFlow</li>
-            </Link>
-        </ul>
-        <ul className={Navbar ? "nav-links" : "nav"} onClick={() => setNavbar(false)}>
-            <Link to='/wallet' className="wallet">
-                <li>Wallet</li>
-            </Link>
-
-            <Link to='/send' className="send">
-                <li>Send</li>
-            </Link>
-
-            <Link to='/withdraw' className="withdraw">
-                <li>Withdraw</li>
-            </Link>
-
-            <Link to='transactions' className="transactions">
-                <li>Transactions</li>
-            </Link>
-
-            <Link to='profile' className="profile">
-                <li>Profile</li>
-            </Link>
-
-            <Link to='/authentication' className="log-out">
-                <li>LogOut</li>
-            </Link>
-        </ul>
-        <button className='menu-icon' onClick={() => setNavbar(!Navbar)}>
-          {Navbar ? <ImCross /> : <FaBars />}
-        </button>
+        <div className='navbar-container'>
+          <Link to='/user-home' className='navbar-logo' onClick={closeMobileMenu}>
+            CashFlow
+            <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
+          </Link>
+          <div className='menu-icon' onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <li className='nav-item'>
+              <Link to='/user-wallet' className='nav-links' onClick={closeMobileMenu}>
+                Wallet
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                to='/user-transactions'
+                className='nav-links's
+                onClick={closeMobileMenu}
+              >
+                Transactions
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                to='/user-profile'
+                className='nav-links's
+                onClick={closeMobileMenu}
+              >
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link
+                to='/login'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}
+              >
+                Login
+              </Link>
+            </li>
+          </ul>
+          {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
+        </div>
       </nav>
-    </section>
-  )
+    </sectio>
+  );
 }
-export default Navbar
+
+export default Navbar;

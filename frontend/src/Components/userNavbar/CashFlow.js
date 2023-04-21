@@ -1,17 +1,30 @@
 import React from 'react';
 
-import './CashFlow.css'
 
 function CashFlow() {
     return (
-      <div>
-        <img className='homepageImage' src='/images/home.png' alt="" />
-        <h2 className='cashflow-heading'><strong>Send and Receive Money</strong></h2>
-        <p className='cashflow-paragraph-1'>Quickly and easily send and request money online with CashFlow. Trusted by businesses for its security and low fees.</p>
-        <p className='cashflow-paragraph-2'>Payment solutions for everyone.</p>
-        <p className='cashflow-paragraph-3'>The Future of Banking Now in your Hands.</p>
-        {/* Rest of the page content goes here */}
-      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+  <img
+    classname="homepageImage"
+    src="/images/home.png"
+    alt=""
+    style={{ flex: "0 0 auto", marginRight: "1rem"}}
+  />
+  <div style={{ flex: 1 }}>
+    <h2 classname="cashflow-heading" style={{ margin: 0 }}>
+      <strong>Send and Receive Money</strong>
+    </h2>
+    <p classname="cashflow-paragraph-1" style={{ marginTop: 0 }}>
+      Quickly and easily send and request money online with CashFlow. Trusted by
+      businesses for its security and low fees.
+    </p>
+    <p classname="cashflow-paragraph-2">Payment solutions for everyone.</p>
+    <p classname="cashflow-paragraph-3">
+      The Future of Banking Now in your Hands.
+    </p>
+  </div>
+</div>
+
     );
   }
   
