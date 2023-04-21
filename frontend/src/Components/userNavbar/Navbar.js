@@ -69,7 +69,11 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
+          {button && <Button buttonStyle='btn--outline'
+          onClick={()=>{
+            // window.location.reload();
+          }}
+          >LOG OUT</Button>}
         </div>
       </nav>
     </sectio>
