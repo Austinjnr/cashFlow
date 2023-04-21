@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :wallets
+  resources :wallets do
+    member do
+      post 'top_up'
+    end
+  end
   resources :users, only: [:index]
   resources :transactions
   resources :beneficiaries
