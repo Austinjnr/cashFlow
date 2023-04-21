@@ -51,6 +51,7 @@ function AdminNav() {
               </Link>
             </li>
             <li>
+              
               <Link
                 to='/login'
                 className='nav-links-mobile'
@@ -60,7 +61,11 @@ function AdminNav() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
+          {button && <Button buttonStyle='btn--outline'
+           onClick={()=>{
+            // window.location.reload();
+           }}
+          >LOG OUT</Button>}
         </div>
       </nav>
     </section>
