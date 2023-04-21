@@ -1,7 +1,7 @@
 const Transactions = () => {
     return ( 
         <section>
-            
+            <h2>transactions page</h2>
         </section>
      );
 }

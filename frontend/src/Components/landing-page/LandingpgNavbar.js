@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../landing-page/Button';
+import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import '../Navbar.css';
 
@@ -28,7 +28,7 @@ function Navbar() {
     <sectio>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/user-home' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             CashFlow
             <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
           </Link>
@@ -37,26 +37,17 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/user-wallet' className='nav-links' onClick={closeMobileMenu}>
-                Wallet
+              <Link to='/fees' className='nav-links' onClick={closeMobileMenu}>
+                Charges
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/user-transactions'
-                className='nav-links's
+                to='/contact-us'
+                className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Transactions
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/user-profile'
-                className='nav-links's
-                onClick={closeMobileMenu}
-              >
-                Profile
+                Contact Us
               </Link>
             </li>
             <li>
@@ -69,7 +60,7 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
+          {button && <Button buttonStyle='btn--outline'>LOGIN</Button>}
         </div>
       </nav>
     </sectio>
