@@ -1,0 +1,19 @@
+section{
+    background: #E7EFFC;
+    height: 100vh;
+}
+
+h1{
+text-align: center;
+text-transform: capitalize;
+color: #1A1919;
+}
+.col-md-7 {
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+    color: #000000;
+    margin: 0 auto; /* Add this property to center the element horizontally */
+    max-width: 50%; /* Add this property to limit the width of the element to 50% of its parent container */
+  }
+  

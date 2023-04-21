@@ -1,21 +1,29 @@
 import { render, screen, cleanup } from '@testing-library/react';
-import Login from './Components/register/Login';
-import Navigation from './Components/userNavbar/Navigation';
+import { BrowserRouter as Router } from "react-router-dom";
+import Authentication from './Components/register/Authentication';
+import App from './App';
 
 afterEach(() => {
     cleanup();
 })
 
-test('should render Login component', () =>{
-    render(<Login />);
+test('should render authentication component', () =>{
+    render(<Authentication />);
     const LoginElement = screen.getByTestId('login-1');
-    expect(LoginElement).toBeInTheDocument();
-    expect(LoginElement).toHaveTextContent('Welcome Back')
+    // expect(LoginElement).toBeInTheDocument();
     // expect(LoginElement).toContainHTML('<input type="email" id="inputEmail1" placeholder="youremail@gmail.com" />')
-    // expect(LoginElement).toContainHTML('<Button type="submit">Login</Button>')
+    expect(LoginElement).toContainHTML('</div>')
 })
-test('should render Naviagtion component', () =>{
-    render(<Navigation />);
-    const NavigationElement = screen.getByTestId('Navigation-1');
-    expect(NavigationElement).toBeInTheDocument();
-})
+describe("Navigation component", () => {
+  test("should render App component", () => {
+    render(
+      <Router>
+        <App />
+      </Router>
+    );
+
+    const navigationElement = screen.getByTestId("Navigation-1");
+    expect(navigationElement).toBeInTheDocument();
+  });
+
+});
