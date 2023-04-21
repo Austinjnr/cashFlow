@@ -4,42 +4,44 @@ import './Register.css';
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+  
     const history = useHistory();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          // Fetch data from API with login credentials
-          const response = await fetch('https://api.example.com/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, pass }),
-          });
-    
-          if (response.ok) {
-            const data = await response.json();
-            // Check if it's an admin or user email
-            if (data.role === 'admin') {
-      
-              history.push("/admin-home");
-            } else {
-         
-              history.push("/user-home");
-            }
-          } else {
-            // Handle error response from API
-            console.error('Failed to login:', response.statusText);
-          }
-        } catch (error) {
-          // Handle fetch error
-          console.error('Failed to fetch:', error);
-        }
+  
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      setIsLoggingIn(true);
+      const res = await fetch("https://cashflow-dwee.onrender.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const data = await res.json();
+      if (data.message === "admin") {
+        history.push('/admin-home')
+        window.location.reload();
+        setMessage(data.message);
+      } else if (data.message === "user"){
+        history.push("/user-home")
+        setMessage(data.message);
+        window.location.reload();
+        
       }
-    
+      else {
+        setMessage("");
+        setError(data.errors);
+        console.log(data.errors);
+        setIsLoggingIn(false);
+      }
+    };
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -54,7 +56,7 @@ export const Login = (props) => {
         </div>
         <div className="auth-form-container">
             <h2>Welcome Back</h2>
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleLogin}>
                 <label htmlFor="email">Email</label>
                 <input 
                 required
@@ -67,12 +69,18 @@ export const Login = (props) => {
                 <label htmlFor="password">Password</label>
                 <input 
                 required
-                value={pass} onChange={(e) => setPass(e.target.value)} 
+                value={password} onChange={(e) => setPassword(e.target.value)} 
                 type="password" 
                 placeholder="********" 
                 id="password" 
                 name="password" />
-                <button type="submit" onClick={handleSubmit}>Log In</button>
+                  <button type="submit" disabled={isLoggingIn}>
+                  {isLoggingIn ? "LoggingIn..." : "LOGIN"}
+                </button>
+                <div style={{backgroundColor: "red" , color: "black"}}>
+                  {message && <p>{message}</p>}
+                  {error && <p>{error}</p>}
+                </div>
                 <button className="btn-1" type="submit" onClick={handleChange}>Forgot Password</button>
             </form>
             <button className="link-btn" onClick={() => props.onFormSwitch('sign-up')}>Don't have an account? Register here.</button>

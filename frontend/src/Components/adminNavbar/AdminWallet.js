@@ -1,7 +1,7 @@
 import './admin.css'
 const AdminWallet = () => {
     return ( 
-        <sectin>
+        <section>
             <img className="homepageImage" src="/images/home.png" alt=""/>
             <div className="card w-75 mb-3">
                 <div className="user-preview">
@@ -21,7 +21,7 @@ const AdminWallet = () => {
                     </ul>
                 </div>
                </div>
-        </sectin>
+        </section>
      );
 }
  
