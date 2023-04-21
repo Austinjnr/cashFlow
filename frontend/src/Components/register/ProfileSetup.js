@@ -75,17 +75,14 @@ function ProfileSetup() {
                 required
                 value={phone} 
                 onChange={(e) => setPhone(e.target.value)}
-                type="phone number" 
-                id="number" 
-                name="number" />
+                type="tele" 
+                placeholder="+254"/>
                 <label htmlFor="image">Profile Picture</label>
                 <input 
                 value={picture} 
                 onChange={(e) => setPicture(e.target.value)}
-                type="image/jpeg/png" 
-                placeholder="img.png" 
-                id="image" 
-                name="image" />
+                type="file" 
+                 />
                 <button type="submit">Create Profile</button>
             </form>
             </div>
