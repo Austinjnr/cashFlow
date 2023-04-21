@@ -11,11 +11,35 @@ function SignUp(props) {
 
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
-    history.push("/profile-setup");
-}
+    try {
+      const requestBody = {
+        name: name,
+        email: email,
+        password: password,
+        confirm_password: pass
+      };
+
+      const response = await fetch('http://localhost:8000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (response.ok) {
+
+        history.push("/profile-setup");
+      } else {
+        const errorData = await response.json();
+        console.log(errorData); 
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return ( 
     <div className="container">

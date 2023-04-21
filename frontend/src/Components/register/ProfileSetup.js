@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import './Register.css';
 
 function ProfileSetup() {
@@ -8,11 +9,41 @@ function ProfileSetup() {
     const [phone, setPhone] = useState ('');
     const [picture, setPicture] = useState ('');
 
+    const history = useHistory();
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(phone);
+        try {
+            const response = await fetch('https://api.example.com/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add your login credentials here
+
+                    'Authorization': 'Bearer <YOUR_ACCESS_TOKEN>'
+                },
+                body: JSON.stringify({
+                    number,
+                    identity,
+                    phone,
+                    picture
+                })
+            });
+
+            if (response.ok) {
+            
+                history.push("/user-home");
+            } else {
+                // Handle error response from the API
+                console.error('Failed to create profile:', response.status);
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
     }
+
+    
 
     return (  
         <div className="container">
@@ -37,8 +68,8 @@ function ProfileSetup() {
                 onChange={(e) => setIdentity(e.target.value)}
                 type="id number" 
                 placeholder="1234567" 
-                id="number" 
-                name="number" />
+                id="identity" 
+                name="identity number" />
                 <label htmlFor="number">Phone Number</label>
                 <input 
                 required

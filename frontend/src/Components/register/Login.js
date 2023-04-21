@@ -8,10 +8,38 @@ export const Login = (props) => {
 
     const history = useHistory();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
-    }
+        try {
+          // Fetch data from API with login credentials
+          const response = await fetch('https://api.example.com/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, pass }),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            // Check if it's an admin or user email
+            if (data.role === 'admin') {
+      
+              history.push("/admin-home");
+            } else {
+         
+              history.push("/user-home");
+            }
+          } else {
+            // Handle error response from API
+            console.error('Failed to login:', response.statusText);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.error('Failed to fetch:', error);
+        }
+      }
+    
 
     const handleChange = (e) => {
       e.preventDefault();
