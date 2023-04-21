@@ -7,6 +7,8 @@ ruby "2.7.4"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 gem 'rspec-rails', '~> 5.0.0'
+#sending sms using safaricom 
+
 
 gem 'rspec', '~> 3.12'
 # Use the Puma web server [https://github.com/puma/puma]
@@ -44,5 +46,9 @@ gem "database_cleaner", "~> 2.0"
 gem "shoulda-matchers", "~> 5.3"
 
 gem "twilio-ruby", "~> 5.76"
-
+gem 'dotenv', '~> 2.8', '>= 2.8.1'
 gem "phonelib", "~> 0.8.1"
+
+gem "africas_talking", "~> 0.0.2"
+
+gem "africastalking", "~> 0.1.1"
