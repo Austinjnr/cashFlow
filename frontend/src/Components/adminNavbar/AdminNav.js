@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
+import { Button } from '../Button';
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
-function AdminNavbar() {
+function AdminNav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -24,13 +25,13 @@ function AdminNavbar() {
   window.addEventListener('resize', showButton);
 
   return (
-    <>
+    <section>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <h2 style={{cursor: "arrow"}} className='navbar-logo' onClick={closeMobileMenu}>
             CashFlow
             <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
-          </Link>
+          </h2>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -46,7 +47,7 @@ function AdminNavbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Wallet
+                  wallet
               </Link>
             </li>
             <li>
@@ -55,15 +56,15 @@ function AdminNavbar() {
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
-                LogOut
+                Login
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOGIN</Button>}
+          {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
         </div>
       </nav>
-    </>
+    </section>
   );
 }
 
-export default AdminNavbar;
+export default AdminNav;
