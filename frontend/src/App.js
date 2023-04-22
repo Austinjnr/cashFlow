@@ -2,7 +2,7 @@ import React from 'react';
 import CashFlow from './Components/userNavbar/CashFlow';
 import Wallet from './Components/userNavbar/Wallet';
 import Send from './Components/userNavbar/Send';
-import Withdraw from './Components/userNavbar/Withdraw';
+import Deposit from './Components/userNavbar/Deposit';
 import Transactions from './Components/userNavbar/Transactions';
 import Profile from './Components/userNavbar/Profile';
 import Navbar from './Components/userNavbar/Navbar';
@@ -25,14 +25,15 @@ import UserDetails from './Components/adminNavbar/UserDetails';
 import UpdateUser from './Components/adminNavbar/UpdateUser';
 import NotFound from './Components/NotFound';
 import Blogs from './Components/landing-page/Blogs';
+import CustomerCare from './Components/landing-page/CustomerCare';
 
 export default function App() {
     const location = useLocation();
     const path = location.pathname;
     let navbar;
-    if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "/profile-setup" ){
+    if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/customer-care" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "/profile-setup" || path === "*"){
         navbar = <LandingNavbar />;
-    } else if (path === '/user-home' || path === '/send' || path === '/withdraw' || path === '/user-transactions' || path === '/user-profile' || path === '/user-wallet'){
+    } else if (path === '/user-home' || path === '/user-wallet' || path === '/send' || path === '/top-up' || path === '/user-transactions' || path === '/user-profile' || path === "*"){
         navbar = <Navbar />;
     } else {
         navbar = <AdminNav />;
@@ -48,6 +49,7 @@ export default function App() {
                     <Route exact path="/fees" component={Fees} />
                     <Route exact path="/blogs" component={Blogs} />
                     <Route exact path="/contact-us" component={Contact} />
+                    <Route exact path='/customer-care' component={CustomerCare}/>
                     <Route exact path="/login" component={Authentication} />
                     <Route exact path="/reset-password" component={Reset} />
                     <Route exact path="/sign-up" component={SignUp} />
@@ -55,17 +57,17 @@ export default function App() {
 
                     {/*   A user navbar */}
                     <Route exact path='/user-home' component={CashFlow} />
+                    <Route exact path='/user-wallet' component={Wallet} />
                     <Route exact path='/send' component={Send} />
-                    <Route exact path='/withdraw' component={Withdraw} />
+                    <Route exact path='/top-up' component={Deposit} />
                     <Route exact path='/user-transactions' component={Transactions} />
                     <Route exact path='/user-profile' component={Profile} />
-                    <Route exact path='/user-wallet' component={Wallet} />
 
                     {/*  <AdminNav />   */}
-                    <Route exact path='/admin-home' component={AdminHome} />                 
+                    <Route exact path='/admin-home' component={AdminHome} />  
+                    <Route exact path='/details/:id' component={UserDetails} />                 
                     <Route exact path='/update-user' component={UpdateUser} />
-                    <Route exact path='/Admin-wallet' component={AdminWallet} />  
-                    <Route exact path='/details/:id' component={UserDetails} />    
+                    <Route exact path='/Admin-wallet' component={AdminWallet} />    
                     <Route exact path='/login' component={Authentication} />
                     <Route exact path="*" component={NotFound} />
                 </Switch>   
