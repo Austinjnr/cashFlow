@@ -6,7 +6,7 @@ import Deposit from './Components/userNavbar/Deposit';
 import Transactions from './Components/userNavbar/Transactions';
 import Profile from './Components/userNavbar/Profile';
 import Navbar from './Components/userNavbar/Navbar';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route , useLocation } from "react-router-dom";
 
 import LandingNavbar from './Components/landing-page/LandingpgNavbar';
 import Fees from './Components/landing-page/Fees';
@@ -18,125 +18,60 @@ import SignUp from './Components/register/SignUp';
 import ProfileSetup from './Components/register/ProfileSetup';
 
 
-// import AdminNav from "./Components/adminNavbar/AdminNav"
-// import AdminWallet from './Components/adminNavbar/AdminWallet';
-// import AdminHome from './Components/adminNavbar/AdminHome';
-// import UserDetails from './Components/adminNavbar/UserDetails';
-// import UpdateUser from './Components/adminNavbar/UpdateUser';
-// import NotFound from './Components/NotFound';
+import AdminNav from "./Components/adminNavbar/AdminNav"
+import AdminWallet from './Components/adminNavbar/AdminWallet';
+import AdminHome from './Components/adminNavbar/AdminHome';
+import UserDetails from './Components/adminNavbar/UserDetails';
+import UpdateUser from './Components/adminNavbar/UpdateUser';
+import NotFound from './Components/NotFound';
 import Blogs from './Components/landing-page/Blogs';
 import CustomerCare from './Components/landing-page/CustomerCare';
 
-function App() {
-  return (
-    <div data-testid="Navigation-1">
-    <Router> 
-                <Navbar /> 
-                {/* <AdminNav />    Admin navbar */}
-                 <LandingNavbar />   landing page navbar
+export default function App() {
+    const location = useLocation();
+    const path = location.pathname;
+    let navbar;
+    if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/customer-care" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "/profile-setup" || path === "*"){
+        navbar = <LandingNavbar />;
+    } else if (path === '/user-home' || path === '/user-wallet' || path === '/send' || path === '/top-up' || path === '/user-transactions' || path === '/user-profile' || path === "*"){
+        navbar = <Navbar />;
+    } else {
+        navbar = <AdminNav />;
+    }
+    
+    return ( 
+        <div data-testid="Navigation-1">
+            <Router>
+                {navbar}
+                <Switch>
+                    {/* landing page  <LandingNavbar />  */}
+                    <Route exact path="/" component={CashFlowLandingpg} />
+                    <Route exact path="/fees" component={Fees} />
+                    <Route exact path="/blogs" component={Blogs} />
+                    <Route exact path="/contact-us" component={Contact} />
+                    <Route exact path='/customer-care' component={CustomerCare}/>
+                    <Route exact path="/login" component={Authentication} />
+                    <Route exact path="/reset-password" component={Reset} />
+                    <Route exact path="/sign-up" component={SignUp} />
+                    <Route exact path="/profile-setup" component={ProfileSetup} />
 
-                 <Switch> 
+                    {/*   A user navbar */}
+                    <Route exact path='/user-home' component={CashFlow} />
+                    <Route exact path='/user-wallet' component={Wallet} />
+                    <Route exact path='/send' component={Send} />
+                    <Route exact path='/top-up' component={Deposit} />
+                    <Route exact path='/user-transactions' component={Transactions} />
+                    <Route exact path='/user-profile' component={Profile} />
 
-
-                   {/* the Landingpage  paths*/}
-
-                    <Route path='/' exact>
-                        <CashFlowLandingpg />
-                    </Route>
-
-                    <Route path='/fees' exact>
-                        <Fees />
-                    </Route>
-
-                    <Route path='/blogs' exact>
-                        <Blogs />
-                    </Route> 
-
-                    <Route path='/contact-us' exact>
-                        <Contact />
-                    </Route> 
-
-                    <Route path='/customer-care' exact>
-                        <CustomerCare />
-                    </Route>
-
-                    <Route path='/login' exact>
-                        <Authentication />
-                    </Route>     
-
-                    <Route path='/reset-password' exact>
-                        <Reset />
-                    </Route>
-
-                    <Route path='/sign-up' exact>
-                        <SignUp />
-                    </Route>
-
-                    <Route path='/profile-setup' exact>
-                        <ProfileSetup/>
-                    </Route>
-
-
-
-                    {/* user navbar paths */}
-
-
-
-                    <Route path='/user-home' component={CashFlow} exact>
-                        <CashFlow />
-                    </Route>
-
-                    <Route path='/user-wallet' component={Wallet} exact>
-                        <Wallet />
-                    </Route>
-
-                    <Route path='/send' component={Send} exact>
-                        <Send />
-                    </Route>
-
-                    <Route path='/top-up' component={Deposit} exact>
-                        <Deposit />
-                    </Route>
-
-                    <Route path='/user-transactions' component={Transactions} exact>
-                        <Transactions />
-                    </Route>
-
-                    <Route path='/user-profile' component={Profile} exact>
-                        <Profile />
-                    </Route>
-
-
-                    {/* Landing page paths */}
-
-
-                    {/* <Route path='/admin-home' exact>
-                        <AdminHome />
-                    </Route>
-
-                    <Route path='/details/:id' exact>
-                        <UserDetails />
-                    </Route>
-
-                    <Route path='/update-user' exact>
-                        <UpdateUser />
-                    </Route>
-
-                    <Route path='/Admin-wallet' exact>
-                        <AdminWallet />
-                    </Route>
-
-                    <Route path='/login' exact>
-                        <Authentication />
-                    </Route>
-                    <Route path='*'>
-                    <NotFound/>
-                    </Route> */}
-
-                </Switch>
+                    {/*  <AdminNav />   */}
+                    <Route exact path='/admin-home' component={AdminHome} />  
+                    <Route exact path='/details/:id' component={UserDetails} />                 
+                    <Route exact path='/update-user' component={UpdateUser} />
+                    <Route exact path='/Admin-wallet' component={AdminWallet} />    
+                    <Route exact path='/login' component={Authentication} />
+                    <Route exact path="*" component={NotFound} />
+                </Switch>   
             </Router>
-    </div>
-  );
+        </div>
+    );
 }
-
-export default App;

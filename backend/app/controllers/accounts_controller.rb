@@ -15,16 +15,17 @@ class AccountsController < ApplicationController
   end
 
 
-  # POST /accounts
-  def create
-    @account = Account.new(account_params)
-
-    if @account.save
-      render json: @account, status: :created, location: @account
-    else
-      render json: @account.errors, status: :unprocessable_entity
-    end
+# POST /accounts
+def create
+  user = User.find(params[:user_id])
+  @account = user.accounts.create(account_params)
+  if @account.valid?
+    render json: @account, status: :created, location: @account
+  else
+    render json: @account.errors, status: :unprocessable_entity
   end
+end
+
 
   # PATCH/PUT /accounts/1
   def update
@@ -48,6 +49,7 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:phone_number, :avatar_url, :id_number, :account_number)
-    end
+   
+    params.require(:account).permit(:phone_number, :avatar_url, :id_number, :account_number).merge(user_id: params[:user_id])
+end
 end

@@ -1,8 +1,9 @@
 on:
   push:
-    branches: [main, briandev, moses-d, roy-dev, testing-dev]
-  pull_request:
-    branches: [main, briandev, moses-d, roy-dev, testing-dev]
+    branches: [main, brian-dev, deploy moses-dev, roy-dev, testing-dev]
+  pull_request: 
+    branches: [main, brian-dev, deploy, moses-dev, roy-dev, testing-dev]
+
 
 jobs:
   test:
