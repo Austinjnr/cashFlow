@@ -8,14 +8,14 @@ import Profile from './Components/userNavbar/Profile';
 import Navbar from './Components/userNavbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// import LandingNavbar from './Components/landing-page/LandingpgNavbar';
-// import Fees from './Components/landing-page/Fees';
-// import Contact from './Components/landing-page/ContactUs';
-// import CashFlowLandingpg from './Components/landing-page/CashFlowHome';
-// import Authentication from './Components/register/Authentication';
-// import Reset from './Components/register/Reset';
-// import SignUp from './Components/register/SignUp';
-// import ProfileSetup from './Components/register/ProfileSetup';
+import LandingNavbar from './Components/landing-page/LandingpgNavbar';
+import Fees from './Components/landing-page/Fees';
+import Contact from './Components/landing-page/ContactUs';
+import CashFlowLandingpg from './Components/landing-page/CashFlowHome';
+import Authentication from './Components/register/Authentication';
+import Reset from './Components/register/Reset';
+import SignUp from './Components/register/SignUp';
+import ProfileSetup from './Components/register/ProfileSetup';
 
 
 // import AdminNav from "./Components/adminNavbar/AdminNav"
@@ -24,7 +24,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import UserDetails from './Components/adminNavbar/UserDetails';
 // import UpdateUser from './Components/adminNavbar/UpdateUser';
 // import NotFound from './Components/NotFound';
-// import Blogs from './Components/landing-page/Blogs';
+import Blogs from './Components/landing-page/Blogs';
+import CustomerCare from './Components/landing-page/CustomerCare';
 
 function App() {
   return (
@@ -32,14 +33,14 @@ function App() {
     <Router> 
                 <Navbar /> 
                 {/* <AdminNav />    Admin navbar */}
-                 {/* <LandingNavbar />   landing page navbar */}
+                 <LandingNavbar />   landing page navbar
 
                  <Switch> 
 
 
                    {/* the Landingpage  paths*/}
 
-                    {/* <Route path='/' exact>
+                    <Route path='/' exact>
                         <CashFlowLandingpg />
                     </Route>
 
@@ -55,6 +56,10 @@ function App() {
                         <Contact />
                     </Route> 
 
+                    <Route path='/customer-care' exact>
+                        <CustomerCare />
+                    </Route>
+
                     <Route path='/login' exact>
                         <Authentication />
                     </Route>     
@@ -69,7 +74,7 @@ function App() {
 
                     <Route path='/profile-setup' exact>
                         <ProfileSetup/>
-                    </Route> */}
+                    </Route>
 
 
 
