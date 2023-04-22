@@ -2,44 +2,44 @@ import React from 'react';
 import CashFlow from './Components/userNavbar/CashFlow';
 import Wallet from './Components/userNavbar/Wallet';
 import Send from './Components/userNavbar/Send';
-import Withdraw from './Components/userNavbar/Withdraw';
+import Deposit from './Components/userNavbar/Deposit';
 import Transactions from './Components/userNavbar/Transactions';
 import Profile from './Components/userNavbar/Profile';
 import Navbar from './Components/userNavbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import LandingNavbar from './Components/landing-page/LandingpgNavbar';
-import Fees from './Components/landing-page/Fees';
-import Contact from './Components/landing-page/ContactUs';
-import CashFlowLandingpg from './Components/landing-page/CashFlowHome';
-import Authentication from './Components/register/Authentication';
-import Reset from './Components/register/Reset';
-import SignUp from './Components/register/SignUp';
-import ProfileSetup from './Components/register/ProfileSetup';
+// import LandingNavbar from './Components/landing-page/LandingpgNavbar';
+// import Fees from './Components/landing-page/Fees';
+// import Contact from './Components/landing-page/ContactUs';
+// import CashFlowLandingpg from './Components/landing-page/CashFlowHome';
+// import Authentication from './Components/register/Authentication';
+// import Reset from './Components/register/Reset';
+// import SignUp from './Components/register/SignUp';
+// import ProfileSetup from './Components/register/ProfileSetup';
 
 
-import AdminNav from "./Components/adminNavbar/AdminNav"
-import AdminWallet from './Components/adminNavbar/AdminWallet';
-import AdminHome from './Components/adminNavbar/AdminHome';
-import UserDetails from './Components/adminNavbar/UserDetails';
-import UpdateUser from './Components/adminNavbar/UpdateUser';
-import NotFound from './Components/NotFound';
-import Blogs from './Components/landing-page/Blogs';
+// import AdminNav from "./Components/adminNavbar/AdminNav"
+// import AdminWallet from './Components/adminNavbar/AdminWallet';
+// import AdminHome from './Components/adminNavbar/AdminHome';
+// import UserDetails from './Components/adminNavbar/UserDetails';
+// import UpdateUser from './Components/adminNavbar/UpdateUser';
+// import NotFound from './Components/NotFound';
+// import Blogs from './Components/landing-page/Blogs';
 
 function App() {
   return (
     <div data-testid="Navigation-1">
     <Router> 
-                <Navbar />      {/* A user navbar */}
-                <AdminNav />    {/* Admin navbar */}
-                 <LandingNavbar />   {/* landing page navbar */}
+                <Navbar /> 
+                {/* <AdminNav />    Admin navbar */}
+                 {/* <LandingNavbar />   landing page navbar */}
 
                  <Switch> 
 
 
                    {/* the Landingpage  paths*/}
 
-                    <Route path='/' exact>
+                    {/* <Route path='/' exact>
                         <CashFlowLandingpg />
                     </Route>
 
@@ -69,7 +69,7 @@ function App() {
 
                     <Route path='/profile-setup' exact>
                         <ProfileSetup/>
-                    </Route>
+                    </Route> */}
 
 
 
@@ -89,8 +89,8 @@ function App() {
                         <Send />
                     </Route>
 
-                    <Route path='/withdraw' component={Withdraw} exact>
-                        <Withdraw />
+                    <Route path='/top-up' component={Deposit} exact>
+                        <Deposit />
                     </Route>
 
                     <Route path='/user-transactions' component={Transactions} exact>
@@ -105,7 +105,7 @@ function App() {
                     {/* Landing page paths */}
 
 
-                    <Route path='/admin-home' exact>
+                    {/* <Route path='/admin-home' exact>
                         <AdminHome />
                     </Route>
 
@@ -126,7 +126,7 @@ function App() {
                     </Route>
                     <Route path='*'>
                     <NotFound/>
-                    </Route>
+                    </Route> */}
 
                 </Switch>
             </Router>
