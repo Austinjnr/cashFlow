@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 function CashFlow() {
     return (
       <div style={{ display: "flex", alignItems: "center", position: "fixed" }}>
