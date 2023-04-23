@@ -54,7 +54,7 @@ const UpdateUser = () => {
                     type="file"
                     onChange={(e) => setProfile(e.target.files[0])} /> 
                 {!isLoading && <button>Update User</button>}
-                {isLoading && <button disabled>Updating...</button>}
+                {isLoading && <button disabled>Updating... <i className="fa-duotone fa-spinner fa-spin-pulse" style={{ '--fa-primary-color': '#000000', '--fa-secondary-color': '#000000' }}></i></button>}
             </form>
         </div>
     );

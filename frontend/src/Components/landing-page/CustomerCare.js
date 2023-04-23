@@ -1,33 +1,55 @@
 const CustomerCare = () => {
     return ( 
-        <section>
+        <section style={{ textAlign: "center", marginTop: "4rem" }}>
             <div>
                 <h1>Connect With Us</h1>
-                <p>If you're unable to login to your account or you don't have one yet, </p>
-                <ul>
-                    <li>
-                        <h2>Email option</h2>
-                        <p2>please send us an email at adminemail@gmail.com</p2>
-                    </li>
-                    <li>
-                        <h2>phone call option</h2>
-                        <p2> call: 07059ADMIN OR ADMIN247800
-                            Monday – Friday 8:30am – 5pm
-                            Saturday 8:30am - 12pm
-                            Sunday & Public holidays – Closed
-                        </p2>
-                    </li>
-                    <li>
-                        <h2>Text Option</h2>
-                        <p2>whatsapp: +1(700) 567 4394
-                            sms: ADMIN
-                        </p2>
-                    </li>
-                </ul>
-                <p>The quickest way to get in touch with us is by using any of the options above.</p>
+                <p>If you're unable to login to your account or you don't have one yet. </p>
+                <div style={{ display: "inline-block"}}>
+                    <h3>Email Option</h3>
+                    <p style={{ textAlign: "center" }}>Send us an email via: <span></span>
+                        <i>
+                        <b>adminemail@gmail.com</b>
+                        </i>
+                    </p>
+
+                    <h3>Phone Call Option</h3>
+                    <p>Call: <span></span>
+                        <i>
+                            <b>07059ADMIN OR ADMIN247800</b>
+                        </i>
+                    </p>
+                        <ol style={{ textAlign: "center" }}>
+                        <ul style={{ display: "inline-block", textAlign: "left" }}>
+                            <li>Monday to Friday 7:30am – 7pm</li>
+                            <li>Saturday, Sunday &amp; Public holidays 8:30am - 4pm</li>
+                        </ul>
+                        </ol>
+                        
+
+                    <h3>Text Option</h3>
+                    <p style={{ textAlign: "center" }}>Whatsapp: <span></span>
+                        <i>
+                            <b>+1(700) 567 4394</b>
+                        </i>
+                    </p>
+                    <p>Send your text message via: <span></span>
+                        <i>
+                        <b>ADMIN</b>
+                        </i>
+                    </p>
+                    <p />
+                </div>
+                <p>
+                The quickest way to get in touch with us is by using any of the options
+                above.
+                </p>
             </div>
         </section>
      );
 }
  
 export default CustomerCare;
+
+
+
+

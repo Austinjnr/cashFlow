@@ -26,6 +26,7 @@ import UpdateUser from './Components/adminNavbar/UpdateUser';
 import NotFound from './Components/NotFound';
 import Blogs from './Components/landing-page/Blogs';
 import CustomerCare from './Components/landing-page/CustomerCare';
+import UpdateProfile from './Components/userNavbar/UpdateProfile';
 
 export default function App() {
     const location = useLocation();
@@ -62,6 +63,7 @@ export default function App() {
                     <Route exact path='/top-up' component={Deposit} />
                     <Route exact path='/user-transactions' component={Transactions} />
                     <Route exact path='/user-profile' component={Profile} />
+                    <Route exact path='/update-profile' component={UpdateProfile} />
 
                     {/*  <AdminNav />   */}
                     <Route exact path='/admin-home' component={AdminHome} />  
