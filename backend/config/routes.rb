@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
   resources :transactions
   resources :beneficiaries
-  resources :accounts , only:[:index, :create, :update , :destroy , :show] , param: :id 
+  resources :accounts , only:[ :create, :update , :destroy , :show] , param: :id 
+  get "/userprofile/:user_id", to: "accounts#index"
   # Routes for users
   post '/accounts/:user_id' , to: "accounts#create"
   post '/login', to: "users#authenticate"

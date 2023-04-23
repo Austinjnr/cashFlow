@@ -34,7 +34,9 @@ function SignUp(props) {
     if (message) {
       setMessage(message);
       setIsRegistering(true)
+
       history.push("/login"); 
+
       window.location.reload();
     } else {
       setError(errors);
