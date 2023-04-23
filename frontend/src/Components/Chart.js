@@ -3,6 +3,7 @@ import {  Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from 'chart.js/auto';
 
 const Chart = ({PieChart}) => {
+    console.log(ChartJS);
     return (  
         <section>
             <Pie data={PieChart}/>
