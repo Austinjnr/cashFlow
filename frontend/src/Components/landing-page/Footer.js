@@ -1,9 +1,9 @@
-const Withdraw = () => {
-    return (
+const Footer = () => {
+    return ( 
         <section>
             
         </section>
      );
 }
  
-export default Withdraw;
+export default Footer;
