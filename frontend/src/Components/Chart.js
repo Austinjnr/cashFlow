@@ -1,13 +1,13 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import {  Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from 'chart.js/auto';
 
-const Graph = ({BarGraph}) => {
+const Chart = ({PieChart}) => {
     return (  
         <section>
-            <Bar data={BarGraph} />
+            <Pie data={PieChart}/>
         </section>
     );
 }
  
-export default Graph;
+export default Chart;
