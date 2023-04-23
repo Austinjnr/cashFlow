@@ -1,3 +1,47 @@
 .App {
   text-align: center;
 }
+
+.Footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: px;
+  background-color: #5b42b4;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* add this line */
+}
+
+.Footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block; /* change this line */
+  text-align: center; /* add this line */
+}
+
+.Footer ul li {
+  margin: 10px 0; /* change this line */
+  display: block; /* add this line */
+}
+
+.Footer ul li a {
+  color: white;
+}
+
+.Footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.Footer ul li a:focus {
+  outline: none;
+}
+
+.Footer ul li svg {
+  color: white;
+  font-size: 1rem; /* change this line */
+  margin-right: 5px; /* add this line to create space between icon and text */
+}
