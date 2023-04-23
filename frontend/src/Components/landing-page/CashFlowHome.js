@@ -4,10 +4,10 @@ import Page from './Page';
 
 const CashFlowLandingpg = () => {
     return ( 
-        <setion>
+        <section>
             <HeroSection />
             <Page />
-        </setion>
+        </section>
      );
 }
  
