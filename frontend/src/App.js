@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,22 +29,11 @@ import UpdateUser from "./Components/adminNavbar/UpdateUser";
 import NotFound from "./Components/NotFound";
 import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
-// import UpdateProfile from './Components/userNavbar/UpdateProfile';
 
 export default function App() {
-  const [userIds, setUserIds] = useState([]);
+  let session = sessionStorage.getItem("userId");
 
-  useEffect(() => {
-    axios
-      .get("https://cashflow-dwee.onrender.com/users")
-      .then((res) => {
-        const ids = res.data.map((user) => user.id);
-        setUserIds(ids);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  // console.log(userIds);
+  console.log(session);
   const location = useLocation();
   const path = location.pathname;
   let navbar;
@@ -59,7 +46,6 @@ export default function App() {
     path === "/login" ||
     path === "/reset-password" ||
     path === "/sign-up" ||
-    path === "/profile-setup" ||
     path === "*"
   ) {
     navbar = <LandingNavbar />;
@@ -67,6 +53,7 @@ export default function App() {
     path === "/user-home" ||
     path === "/user-wallet" ||
     path === "/send" ||
+    path === "/profile-setup" ||
     path === "/top-up" ||
     path === "/user-transactions" ||
     path === "/user-profile" ||
@@ -92,7 +79,6 @@ export default function App() {
           <Route exact path="/login" component={Authentication} />
           <Route exact path="/reset-password" component={Reset} />
           <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/profile-setup" component={ProfileSetup} />
 
           {/* NAvbar */}
 
@@ -100,12 +86,18 @@ export default function App() {
           <Route exact path="/user-wallet" component={Wallet} />
           <Route exact path="/send" component={Send} />
           <Route exact path="/top-ip" component={Deposit} />
+          <Route exact path="/profile-setup" component={ProfileSetup} />
           <Route
             exact
             path="/user-profile"
-            render={() => <Profile userId ={userIds} />}
+            render={() => <Profile userId={session} />}
           />
-          <Router exact path="/user-transactions" component={Transactions} />
+          <Router exact
+           path="/user-transactions"
+           render={() => <Transactions userId={session} />}
+           />
+
+            {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />
           <Route exact path="/details/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />

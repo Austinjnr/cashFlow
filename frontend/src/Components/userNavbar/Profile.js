@@ -5,10 +5,14 @@ import "./User.css";
 
 const Profile = ({ userId }) => {
     console.log(userId);
-  const API = `https://cashflow-dwee.onrender.com/accounts/${userId}`;
+  const API = `https://cashflow-dwee.onrender.com/userprofile/${userId}`;
+  
+
+
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     axios.get(API).then((res) => {
+
       const updateProfile = res.data.map((profile) => {
         return {
           ...profile,
