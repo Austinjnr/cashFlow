@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { FaInstagram, FaFacebookF, FaTwitter, FaWhatsapp } from 'react-icons/fa';
-
+import './Footer.css'
 
 const Footer = () => {
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
             <FaWhatsapp className="icon" />
           </a>
         </li>
-        <li>Copyright </li>
+        <li>Copyright 2023.</li>
         <li>
           <a href="/terms-of-use">Terms of Use/Service</a>
         </li>
