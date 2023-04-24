@@ -10,9 +10,10 @@ import HelpCenter from './Components/landing-page/HelpCenter'
 function App() {
   return (
     <div className="App">
+
       {/* <SignUp /> */}
       {/* <Reset />*/}
-      {/*<LoginPage /> */}
+      {/* <LoginPage /> */}
       {/* <CashFlow/> */}
       <HelpCenter />
 
