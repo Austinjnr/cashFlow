@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :wallets do
     member do
       post 'top_up'
+      post 'send_money'
     end
   end
   resources :users, only: [:index],param: :id

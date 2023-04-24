@@ -2,8 +2,32 @@ import React from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import useFetch from "./useFetch";
 import "./admin.css";
+import Graph from "../Graph";
+import { useState } from "react";
+import { UserData } from "../Data";
 
 const UserDetails = () => {
+
+  const [userData] = useState({
+    labels: UserData.map((transaction) => transaction.transaction_type),
+    datasets: [
+      {
+        label: "Amount Spent",
+        data: UserData.map((transaction) => transaction.amount),
+        backgroundColor: [
+          "rgba(75, 192, 195,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+          "#8976C7",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
+  
   const history = useHistory();
   const { id } = useParams();
   const { data: user, error, isLoading } = useFetch(
@@ -27,9 +51,10 @@ const UserDetails = () => {
       {isLoading && <div>LOADING....</div>}
       {error && <div>{error}</div>}
       {user && (
+        <>
         <section className="summary">
           <h1>{user.name} Transaction Summary</h1>
-          <div className="card mb-3" style={{ maxWidth: 540 }}>
+          <div className="card mb-3" style={{ maxWidth: 540, marginTop: "5rem", marginLeft: "2rem" }}>
             <div className="row g-0">
               <div className="col-md-4">
                 <img src={user.URL} className="img-fluid rounded-start" alt="avatar" />
@@ -57,6 +82,20 @@ const UserDetails = () => {
             </div>
           </div>
         </section>
+        <div className="container">
+        <div className="col-md-5 offset-md-10">
+            <div style={{ width: 640, marginTop: "-20rem"}}>
+            <Graph BarGraph={userData}/>
+            <h4>Latest Transaction</h4>
+            <ul>
+              <li>
+                Shopping
+              </li>
+            </ul>
+            </div>
+        </div>
+      </div>
+        </>
       )}
     </div>
   );
