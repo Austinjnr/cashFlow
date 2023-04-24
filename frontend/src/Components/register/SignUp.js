@@ -34,7 +34,9 @@ function SignUp(props) {
     if (message) {
       setMessage(message);
       setIsRegistering(true)
-      history.push("/profile-setup"); 
+
+      history.push("/login"); 
+
       window.location.reload();
     } else {
       setError(errors);
@@ -45,7 +47,7 @@ function SignUp(props) {
   return (
     <div className="container">
       <div className="image-container">
-        <img src='/video/Mobile login.mp4' alt="login"/>
+        <video src='/video/Mobile login.mp4' autoPlay muted loop></video>
       </div>
       <div className="auth-form-container">
         <h2>Join Us</h2>
