@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 //import axios from "axios";
 
 
@@ -97,9 +98,14 @@ const Send = () => {
             </button>
           </div> */}
           <div className="mb-3">
-            <button type="button" className="btn btn-primary" onClick={handleSendMoney}>
+            <Link to='/user-transactions'>
+            {<button type="button" className="btn btn-primary" onClick={handleSendMoney}>
               Send Money
-            </button>
+            </button>}
+            {<button disable>
+              Sending...
+            </button>}
+            </Link>
           </div>
         </div>
       </div>

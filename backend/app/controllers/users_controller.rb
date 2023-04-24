@@ -14,8 +14,9 @@ class UsersController < ApplicationController
       user_not_found
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
+      session[:email] = user.email
       role = user.email.include?('admin') ? 'admin' : 'user'
-      render json: { message: role }, status: :ok
+      render json: { message: role, session: session[:user_id] }, status: :ok
     else
       record_invalid("Invalid password")
     end
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       user.save!
 
       session[:user_id] = user.id
+      session[:email] = user.email
       render json: { status: :created, message: "User successfully registered", user: user }
     rescue ActiveRecord::RecordInvalid => e
       render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find(session[:user_id])
+    user = User.find(session[:user_id]) || User.find_by([session[:email]])
     render json: user
   end
 

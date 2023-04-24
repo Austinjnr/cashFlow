@@ -1,20 +1,17 @@
+// import { useState } from "react";
+
 const Transactions = () => {
+    // const [transactions,setTransactions] = useState([
+    //     { id: 1, transaction_type: "shopping", amount: 36851 },
+    //     { id: 2, transaction_type: "top_up", amount: 78072  },
+    //     { id: 3, transaction_type: "top_up", amount: 13019 },
+    //     { id: 4,transaction_type: "bills", amount: 72186 }
+    // ])
     return ( 
         <section>
-            <form className="d-flex" role="search">
-                <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                />
-            <button className="btn btn-outline-success" type="submit">
-                Search
-            </button> 
-            </form>
-            <ul>
-                <li>transaction</li>
-            </ul>
+            <ol>
+                <li>transaction:  <span></span> ksh 200</li>
+            </ol>
         </section>
      );
 }
