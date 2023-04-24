@@ -1,0 +1,308 @@
+.cashflow-heading {
+   /* Connect With Us */
+   position: absolute;
+   width: 305px;
+   height: 50px;
+   left: 711px;
+   top: 60px;
+   
+   font-family: 'Outfit';
+   font-style: normal;
+   font-weight: 700;
+   font-size: 35px;
+   line-height: 50px;
+   /* identical to box height, or 125% */
+   display: flex;
+   align-items: center;
+   text-align: center;
+   text-transform: capitalize;
+   
+   color: #000000;
+}
+
+.cashflow-paragraph {
+    /* If you're unable to login to your account or you don't have one yet, */
+
+position: absolute;
+width: 1215px;
+height: 50px;
+left: 410px;
+top: 120px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-subheading-1{
+  /* Email option */
+
+position: absolute;
+width: 236px;
+height: 50px;
+left: 740px;
+top: 180px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 600;
+font-size: 35px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-1{
+/* please send us an email at adminemail@gmail.com */
+
+position: absolute;
+width: 937px;
+height: 50px;
+left: 520px;
+top: 250px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+/* text-transform: capitalize; */
+
+color: #000000;
+
+}
+
+.cashflow-subheading-2{
+/* phone call option */
+
+position: absolute;
+width: 326px;
+height: 50px;
+left: 701px;
+top: 300px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 600;
+font-size: 35px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-2{
+/* call: 07059ADMIN OR ADMIN247800 Monday – Friday 8:30am – 5pm Saturday 8:30am - 12pm Sunday & Public holidays – Closed */
+
+position: absolute;
+width: 690px;
+height: 200px;
+left: 580px;
+top: 300px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-3{
+/* Monday – Friday 8:30am – 5pm*/
+
+position: absolute;
+width: 690px;
+height: 200px;
+left: 650px;
+top: 360px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-4{
+/* Saturday 8:30am - 12pm */
+
+position: absolute;
+width: 690px;
+height: 200px;
+left: 680px;
+top: 410px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-5{
+/* Sunday & Public holidays – Closed */
+
+position: absolute;
+width: 690px;
+height: 200px;
+left: 620px;
+top: 460px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-subheading-3{
+/* Text Option */
+
+position: absolute;
+width: 215px;
+height: 50px;
+left: 756px;
+top: 590px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 700;
+font-size: 35px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-6{
+/* whatsapp: +1(700) 567 4394 */
+
+position: absolute;
+width: 513px;
+height: 100px;
+left: 670px;
+top: 620px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-7{
+/* sms: ADMIN */
+
+position: absolute;
+width: 513px;
+height: 100px;
+left: 760px;
+top: 660px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
+
+.cashflow-paragraph-8{
+/* The quickest way to get in touch with us is by using any of the options above. */
+
+position: absolute;
+height: 50px;
+left: 350px;
+top: 750px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 50px;
+/* identical to box height, or 125% */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: capitalize;
+
+color: #000000;
+
+}
