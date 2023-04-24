@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+//import axios from "axios";
 
 
 const Send = () => {
@@ -15,13 +15,14 @@ const Send = () => {
     }, []);
   
     const fetchBeneficiaries = async () => {
-      try {
-        const response = await axios.get("/beneficiaries");
-        setBeneficiaries(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+        try {
+          const response = await fetch("");
+          const data = await response.json();
+          setBeneficiaries(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
   
     const handleAmountChange = (event) => {
       setAmount(event.target.value);
@@ -46,18 +47,25 @@ const Send = () => {
     // };
   
     const handleSendMoney = async () => {
-      try {
-        const response = await axios.post("/wallets/send_money", {
-          amount: amount,
-          beneficiary_id: selectedBeneficiary
-        });
-        alert(response.data.message);
-        setAmount("");
-        setSelectedBeneficiary("");
-      } catch (error) {
-        console.log(error);
-      }
-    };
+        try {
+          const response = await fetch("", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: amount, beneficiary_id: selectedBeneficiary })
+          });
+          const data = await response.json();
+          if (data.success) {
+            alert(data.message);
+            setAmount("");
+            setSelectedBeneficiary("");
+          } else {
+            throw new Error(data.error);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      
 
 
     return ( 
