@@ -1,32 +1,54 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./User.css";
 
 const Profile = ({ userId }) => {
-    console.log(userId);
+  console.log(userId);
   const API = `https://cashflow-dwee.onrender.com/userprofile/${userId}`;
-  
-
-
   const [profiles, setProfiles] = useState([]);
-  useEffect(() => {
-    axios.get(API).then((res) => {
+  const [error, setError] = useState(null);
 
-      const updateProfile = res.data.map((profile) => {
-        return {
-          ...profile,
-          editing: false,
-          avatar_url: profile.avatar_url || "",
-          phone_number: profile.phone_number || "",
-          username: profile.name || "",
-          id_number: profile.id_number || "",
-          account_number: profile.account_number || "",
-        };
+  useEffect(() => {
+    axios
+      .get(API)
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          const updateProfile = res.data.map((profile) => {
+            return {
+              ...profile,
+              editing: false,
+              avatar_url: profile.avatar_url || "",
+              phone_number: profile.phone_number || "",
+              username: profile.name || "",
+              id_number: profile.id_number || "",
+              account_number: profile.account_number || "",
+            };
+          });
+          setProfiles(updateProfile);
+        } else {
+          setError("Please create account");
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
       });
-      setProfiles(updateProfile);
-    });
   }, [API]);
+
+  if (error) {
+    return (
+      <center>
+      <div>
+      <p>
+      {error}
+      <Link to="/profile-setup"> Create Profile Account</Link>
+      </p>
+      </div>
+      </center>
+    )
+   
+  
+  }
 
   // Delete a profile with the specified ID
   const handleDelete = (id) => {
