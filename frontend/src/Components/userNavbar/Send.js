@@ -7,7 +7,7 @@ const Send = () => {
     const [amount, setAmount] = useState("");
     const [beneficiaries, setBeneficiaries] = useState([]);
     const [selectedBeneficiary, setSelectedBeneficiary] = useState("");
-    
+
     //const [newBeneficiary, setNewBeneficiary] = useState({ name: "", email: "", phone_number: "" });
   
     useEffect(() => {
@@ -83,11 +83,11 @@ const Send = () => {
               ))}
             </select>
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
               Add Beneficiary
             </button>
-          </div>
+          </div> */}
           <div className="mb-3">
             <button type="button" className="btn btn-primary" onClick={handleSendMoney}>
               Send Money

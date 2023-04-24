@@ -32,9 +32,9 @@ export default function App() {
     const location = useLocation();
     const path = location.pathname;
     let navbar;
-    if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/customer-care" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "/profile-setup" || path === "*"){
+    if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/customer-care" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "*"){
         navbar = <LandingNavbar />;
-    } else if (path === '/user-home' || path === '/user-wallet' || path === '/send' || path === '/top-up' || path === '/user-transactions' || path === '/user-profile' || path === "*"){
+    } else if (path === "/profile-setup" || path === '/user-home' || path === '/user-wallet' || path === '/send' || path === '/top-up' || path === '/user-transactions' || path === '/user-profile' || path === "*"){
         navbar = <Navbar />;
     } else {
         navbar = <AdminNav />;
@@ -54,7 +54,7 @@ export default function App() {
                     <Route exact path="/login" component={Authentication} />
                     <Route exact path="/reset-password" component={Reset} />
                     <Route exact path="/sign-up" component={SignUp} />
-                    <Route exact path="/profile-setup" component={ProfileSetup} />
+                   
 
                     {/*   A user navbar */}
                     <Route exact path='/user-home' component={CashFlow} />
@@ -64,6 +64,7 @@ export default function App() {
                     <Route exact path='/user-transactions' component={Transactions} />
                     <Route exact path='/user-profile' component={Profile} />
                     <Route exact path='/update-profile' component={UpdateProfile} />
+                    <Route exact path="/profile-setup" component={ProfileSetup} />
 
                     {/*  <AdminNav />   */}
                     <Route exact path='/admin-home' component={AdminHome} />  
