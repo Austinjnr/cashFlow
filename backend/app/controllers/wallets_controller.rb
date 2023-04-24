@@ -60,12 +60,6 @@ class WalletsController < ApplicationController
       return
     end
   
-    # beneficiary_wallet = beneficiary.wallet
-    # if beneficiary_wallet.nil?
-    #   render json: { success: false, error: "Beneficiary has no wallet" }
-    #   return
-    # end
-  
     if amount <= 0
       render json: { success: false, error: "Invalid amount" }
       return
