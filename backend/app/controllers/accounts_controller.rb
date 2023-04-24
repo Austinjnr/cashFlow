@@ -18,6 +18,8 @@ class AccountsController < ApplicationController
     end
   end
    
+
+  
   def user_account
     account = Account.all
     render json: account
