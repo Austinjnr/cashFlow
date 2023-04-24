@@ -35,6 +35,8 @@ const Profile = ({ userId }) => {
       });
   }, [API]);
 
+
+  
   if (error) {
     return (
       <center>
