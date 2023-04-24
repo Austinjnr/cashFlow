@@ -1,4 +1,5 @@
 import './landing.css'
+import Footer from './Footer';
 
 function Page() {
     return ( 
@@ -52,10 +53,12 @@ function Page() {
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </div>
 
         </div>
+       
       </div>
     </section>
     
