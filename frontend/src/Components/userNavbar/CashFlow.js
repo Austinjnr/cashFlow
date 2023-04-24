@@ -2,11 +2,7 @@ function CashFlow() {
     return (
       <div style={{ display: "flex", alignItems: "center", marginTop: "3rem" }}>
         <img
-<<<<<<< HEAD
           className="homepageImage"
-=======
-          classname="homepage"
->>>>>>> origin/austin-dev
           src="/images/home.png"
           alt=""
           style={{ flex: "0 0 auto", marginRight: "1rem", width : "40%"}}
