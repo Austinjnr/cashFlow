@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/userprofile/:user_id", to: "accounts#index"
   # Routes for users
   post '/accounts/:user_id' , to: "accounts#create"
+  get '/accounts', to: "accounts#user_account"
   post '/login', to: "users#authenticate"
   delete '/logout', to: "users#destroy"
   get "/user", to: "users#show"

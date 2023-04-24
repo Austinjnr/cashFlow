@@ -3,14 +3,24 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    user = User.find(params[:user_id])
+    user = User.find_by(id: params[:user_id])
+    if user.nil?
+      render json: {error: "User not found. Please create an account." }, status: 404
+      return
+    end
+    
     @accounts = user.accounts
   
     if @accounts.present?
       render json: @accounts
     else
-      render json: { message: "You do not have any accounts. Please create an account." }
+      render json: {error: "You do not have any accounts. Please create an account." }, status: 201
     end
+  end
+   
+  def user_account
+    account = Account.all
+    render json: account
   end
   
 
