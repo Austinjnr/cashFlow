@@ -3,9 +3,16 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.all
-    render json: @accounts
+    user = User.find(params[:user_id])
+    @accounts = user.accounts
+  
+    if @accounts.present?
+      render json: @accounts
+    else
+      render json: { message: "You do not have any accounts. Please create an account." }
+    end
   end
+  
 
   # GET /accounts/1
   def show
