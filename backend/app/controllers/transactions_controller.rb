@@ -1,6 +1,12 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show update destroy ]
 
+  # GET /accounts/:account_id/transactions
+  def index
+    @transactions = @account.transactions
+    render json: @transactions
+  end
+  
   # GET /transactions
   def index
     @transactions = Transaction.all

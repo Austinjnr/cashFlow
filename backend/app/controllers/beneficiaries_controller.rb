@@ -8,6 +8,19 @@ class BeneficiariesController < ApplicationController
     render json: @beneficiaries
   end
 
+  # display all beneficiaries for a given account_id
+  def index
+    @account = Account.find(params[:account_id])
+    @beneficiaries = Beneficiary.all_beneficiaries(@account.id)
+  end
+
+  # add a beneficiary for a given account_id
+  def create
+    @account = Account.find(params[:account_id])
+    beneficiary = Beneficiary.add_beneficiary(@account.id, params[:name], params[:phone_number], params[:email])
+    render json: beneficiary
+  end
+
   # GET /beneficiaries/1
   def show
     render json: @beneficiary
