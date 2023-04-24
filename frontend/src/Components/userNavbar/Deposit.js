@@ -5,7 +5,7 @@ const Deposit= () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`https://cashflow-dwee.onrender.com/wallets/:id/top_up`, {
+      fetch('', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
