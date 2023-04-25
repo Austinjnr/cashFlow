@@ -5,6 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.integer :amount
       t.string :transaction_fee
       t.references :account , foreign_key: true
+      t.references :beneficiary , foreign_key: true
       t.timestamps
     end
   end

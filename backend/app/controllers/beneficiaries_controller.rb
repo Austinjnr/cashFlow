@@ -15,13 +15,13 @@ class BeneficiariesController < ApplicationController
 
   # POST /accounts/:account_id/beneficiaries
   def create
+
     @beneficiary = @account.beneficiaries.new(beneficiary_params)
     if @beneficiary.save
       render json: @beneficiary, status: :created
     else
       render json: @beneficiary.errors, status: :unprocessable_entity
     end
-  end
 
   # PATCH/PUT /beneficiaries/1
   def update

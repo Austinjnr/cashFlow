@@ -17,12 +17,12 @@ const Fees = () => {
           <div className="col-md-4">
             <div className="card text-center mb-3" style={{ width: "100%" }}>
               <div className="card-body">
-                <h5 className="card-title">Funds withdrawal</h5>
+                <h5 className="card-title">Send money</h5>
                 <p className="card-text">
-                  You can easily withdraw funds to your local bank account in local
-                  currency at excellent rates.
+                  You can easily make payments at excellent rates in local
+                  currency.
                 </p>
-                <h3>Above 1000 Ksh up to 1.5%</h3>
+                <h3>Below 200 Ksh is Free</h3>
               </div>
             </div>
           </div>
