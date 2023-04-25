@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 
-const Deposit= () => {
+const Deposit= ({walletIds}) => {
+  console.log(walletIds);
     const [amount, setAmount] = useState("");
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch('', {
+      fetch(`https://cashflow-dwee.onrender.com/wallets/${walletIds}/top_up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          balance: amount,
+          balance: "amount",
           last_transaction: "Top Up",
         }),
       })

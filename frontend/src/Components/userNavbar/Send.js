@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 //import axios from "axios";
 
 
-const Send = () => {
+const Send = (walletIds) => {
+
+  console.log(walletIds);
 
     const [amount, setAmount] = useState("");
     const [beneficiaries, setBeneficiaries] = useState([]);
@@ -48,7 +50,7 @@ const Send = () => {
   
     const handleSendMoney = async () => {
         try {
-          const response = await fetch("", {
+          const response = await fetch( `https://cashflow-dwee.onrender.com/wallets/${walletIds}/send_money`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: amount, beneficiary_id: selectedBeneficiary })

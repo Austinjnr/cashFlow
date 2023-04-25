@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState}from 'react';
+import axios from 'axios'
 import CashFlow from './Components/userNavbar/CashFlow';
 import Wallet from './Components/userNavbar/Wallet';
 import Send from './Components/userNavbar/Send';
@@ -30,6 +31,22 @@ import UpdateProfile from './Components/userNavbar/UpdateProfile';
 
 export default function App() {
     const location = useLocation();
+    
+    const [walletIds, setWalletIds] = useState(null);
+        useEffect(() => {
+            axios.get("https://cashflow-dwee.onrender.com/wallets")
+            .then((res) => {
+            const walletIds = res.data.map((wallet) => wallet.id);
+      setWalletIds(walletIds);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
+console.log(walletIds);
+
+
     const path = location.pathname;
     let navbar;
     if (path === "/" || path === "/fees" || path === "/blogs" || path === "/contact-us" || path === "/customer-care" || path === "/login" || path=== "/reset-password" || path=== "/sign-up"|| path === "*"){
@@ -60,7 +77,9 @@ export default function App() {
                     <Route exact path='/user-home' component={CashFlow} />
                     <Route exact path='/user-wallet' component={Wallet} />
                     <Route exact path='/send' component={Send} />
-                    <Route exact path='/top-up' component={Deposit} />
+                    <Route exact path='/top-up' component={Deposit}
+                    render={()=> <Deposit walletIds={walletIds}/>}
+                    />
                     <Route exact path='/user-transactions' component={Transactions} />
                     <Route exact path='/user-profile' component={Profile} />
                     <Route exact path='/update-profile' component={UpdateProfile} />
