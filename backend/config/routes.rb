@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # Account routes
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 
   get '/userprofile/:user_id', to: 'accounts#index'
+  delete '/accounts/:user_id/:id', to: 'accounts#destroy'
   post '/accounts/:user_id', to: 'accounts#create'
   get '/accounts', to: 'accounts#user_account'
 end
