@@ -32,8 +32,7 @@ import CustomerCare from "./Components/landing-page/CustomerCare";
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
-
-  console.log(session);
+  let account = sessionStorage.getItem("AccountId");
   const location = useLocation();
   const path = location.pathname;
   let navbar;
@@ -83,21 +82,35 @@ export default function App() {
           {/* NAvbar */}
 
           <Router exact path="/user-home" component={CashFlow} />
-          <Route exact path="/user-wallet" component={Wallet} />
+          <Route
+            exact
+            path="/user-wallet"
+            render={() => <Wallet AcountId={account} />}
+          />
           <Route exact path="/send" component={Send} />
-          <Route exact path="/top-ip" component={Deposit} />
-          <Route exact path="/profile-setup" component={ProfileSetup} />
+          <Route
+            exact
+            path="/top-ip"
+            render={() => <Deposit AcountId={account} />}
+            component={Deposit}
+          />
+          <Route
+            exact
+            path="/profile-setup"
+            render={() => <ProfileSetup userId={session}  />}
+          />
           <Route
             exact
             path="/user-profile"
             render={() => <Profile userId={session} />}
           />
-          <Router exact
-           path="/user-transactions"
-           render={() => <Transactions userId={session} />}
-           />
+          <Router
+            exact
+            path="/user-transactions"
+            render={() => <Transactions AcountId={account} />}
+          />
 
-            {/* <AdminNav />    */}
+          {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />
           <Route exact path="/details/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />

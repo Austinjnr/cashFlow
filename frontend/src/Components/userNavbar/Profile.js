@@ -5,7 +5,7 @@ import "./User.css";
 
 const Profile = ({ userId }) => {
   console.log(userId);
-  const API = `https://cashflow-dwee.onrender.com/userprofile/${userId}`;
+  const API = `http://localhost:4000/userprofile/${userId}`;
   const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState(null);
 
@@ -35,6 +35,8 @@ const Profile = ({ userId }) => {
       });
   }, [API]);
 
+
+  
   if (error) {
     return (
       <center>
