@@ -15,13 +15,9 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = Transaction.create!(transaction_params)
 
-    if @transaction.save
       render json: @transaction, status: :created, location: @transaction
-    else
-      render json: @transaction.errors, status: :unprocessable_entity
-    end
   end
 
   # PATCH/PUT /transactions/1
