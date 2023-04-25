@@ -8,7 +8,6 @@ const Profile = ({ userId }) => {
   const API = `https://cashflow-dwee.onrender.com/userprofile/${userId}`;
   const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     axios
       .get(API)
