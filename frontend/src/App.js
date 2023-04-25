@@ -1,14 +1,16 @@
-
-import React from 'react';
-import CashFlow from './Components/userNavbar/CashFlow';
-import Wallet from './Components/userNavbar/Wallet';
-import Send from './Components/userNavbar/Send';
-import Deposit from './Components/userNavbar/Deposit';
-import Transactions from './Components/userNavbar/Transactions';
-import Profile from './Components/userNavbar/Profile';
-import Navbar from './Components/userNavbar/Navbar';
-import { BrowserRouter as Router, Switch, Route , useLocation } from "react-router-dom";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import CashFlow from "./Components/userNavbar/CashFlow";
+import Wallet from "./Components/userNavbar/Wallet";
+import Send from "./Components/userNavbar/Send";
+import Deposit from "./Components/userNavbar/Deposit";
+import Transactions from "./Components/userNavbar/Transactions";
+import Profile from "./Components/userNavbar/Profile";
+import Navbar from "./Components/userNavbar/Navbar";
 
 import LandingNavbar from "./Components/landing-page/LandingpgNavbar";
 import Fees from "./Components/landing-page/Fees";
@@ -29,13 +31,9 @@ import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
 
 export default function App() {
-
   let session = sessionStorage.getItem("userId");
-
-  console.log(session);
+  let account = sessionStorage.getItem("AccountId");
   const location = useLocation();
-
-
   const path = location.pathname;
   let navbar;
   if (
@@ -84,22 +82,35 @@ export default function App() {
           {/* NAvbar */}
 
           <Router exact path="/user-home" component={CashFlow} />
-          <Route exact path="/user-wallet" component={Wallet} />
+          <Route
+            exact
+            path="/user-wallet"
+            render={() => <Wallet AcountId={account} />}
+          />
           <Route exact path="/send" component={Send} />
-          <Route exact path='/top-up' component={Deposit}
-            />
-          <Route exact path="/profile-setup" component={ProfileSetup} />
+          <Route
+            exact
+            path="/top-ip"
+            render={() => <Deposit AcountId={account} />}
+            component={Deposit}
+          />
+          <Route
+            exact
+            path="/profile-setup"
+            render={() => <ProfileSetup userId={session}  />}
+          />
           <Route
             exact
             path="/user-profile"
             render={() => <Profile userId={session} />}
           />
-          <Router exact
-           path="/user-transactions"
-           render={() => <Transactions userId={session} />}
-           />
+          <Router
+            exact
+            path="/user-transactions"
+            render={() => <Transactions AcountId={account} />}
+          />
 
-            {/* <AdminNav />    */}
+          {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />
           <Route exact path="/details/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />
