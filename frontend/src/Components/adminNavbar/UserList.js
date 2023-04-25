@@ -1,35 +1,34 @@
-import { Link } from 'react-router-dom';
-import './admin.css';
+import { Link } from "react-router-dom";
+import "./admin.css";
 
-const UserList = ({users, title}) => {
+const UserList = ({ users, title }) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Identity Number</th>
+            <th scope="col">Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <th scope="row">{user.id}</th>
+              <td>{user.name}</td>
+              <td>{user.phone_number}</td>
+              <td>{user.id_number}</td>
+              <td><Link to={`/details/${user.id}`}>view</Link></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-    return ( 
-        <div className="user-list">
-            <h2>{title}</h2>
-            {users.map((user) =>(
-                <div className="card w-75 mb-3">
-                <div className="user-preview" key={user.id}>
-                    <ul>
-                        <li>
-                            Name:{user.name}
-                        </li>
-                        <li>
-                            Phone Number:{user.phoneNumber}
-                        </li>
-                        <li>
-                            Account Number: <span>{user.acNumber}</span> 
-                        </li>
-                    </ul>
-               
-                    <Link to={`/details/${user.id}`} >
-                       <h4 className="details-btn">View</h4>
-                    </Link>
-
-                </div>
-               </div>
-            ))}
-        </div>
-     );
-}
- 
 export default UserList;
