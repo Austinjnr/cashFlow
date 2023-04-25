@@ -16,7 +16,8 @@ function ProfileSetup({userId}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`https://cashflow-dwee.onrender.com/${userId}`, {
+    const res = await fetch(`https://cashflow-dwee.onrender.com/accounts/${userId}`, {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json"
