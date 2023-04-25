@@ -15,7 +15,7 @@ end
 User.all.sample(7).each do |user|
   account = Account.create!(
     name: user.username,
-    phone_number: Faker::PhoneNumber.cell_phone,
+    phone_number: ["+254784596400"],
     avatar_url: Faker::Avatar.image,
     id_number: Faker::Number.number(digits: 8),
     account_number: Faker::Number.number(digits: 8),
@@ -27,7 +27,7 @@ User.all.sample(7).each do |user|
     Beneficiary.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      phone_number: Faker::PhoneNumber.cell_phone,
+      phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254'),
       account: account
     )
   end
@@ -39,13 +39,26 @@ User.all.sample(7).each do |user|
     account: account
   )
 
-  #craete a transaction for each account
-  Transaction.create!(
-    transaction_type: ["shopping" , "bills" , "rental"].sample,
-    transaction_fee: Faker::Number.number(digits: 3),
-    amount: Faker::Number.number(digits: 5),
-    account: account
-  )
+  # Create some transactions for each account
+  4.times do
+    transaction_type = ["shopping", "bills", "rental", "Top Up", "Send Money"].sample
+    transaction_fee = Faker::Number.number(digits: 3)
+    amount = Faker::Number.number(digits: 5)
+    beneficiary = nil
+    
+    if transaction_type == "Send Money"
+      # Select a specific beneficiary who belongs to the account
+      beneficiary = account.beneficiaries.sample
+    end
+    
+    Transaction.create!(
+      transaction_type: transaction_type,
+      transaction_fee: transaction_fee,
+      amount: amount,
+      account: account,
+      beneficiary_id: beneficiary&.id
+    )
+  end
 end
 
 puts "Completed seeding"

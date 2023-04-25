@@ -5,38 +5,27 @@ class BeneficiariesController < ApplicationController
   def index
     @beneficiaries = Beneficiary.all
 
-    render json: @beneficiaries
+    render json: @beneficiaries, statu: :ok
   end
 
   # GET /beneficiaries/1
   def show
-    render json: @beneficiary
+    render json: @beneficiary, status: :ok
   end
 
   # POST /beneficiaries
   def create
-    @beneficiary = Beneficiary.new(beneficiary_params)
+    @beneficiary = Beneficiary.create!(beneficiary_params)
 
-    if @beneficiary.save
-      render json: @beneficiary, status: :created, location: @beneficiary
-    else
-      render json: @beneficiary.errors, status: :unprocessable_entity
-    end
+    render json: @beneficiary, status: :created, location: @beneficiary
   end
 
   # PATCH/PUT /beneficiaries/1
-  def update
-    if @beneficiary.update(beneficiary_params)
-      render json: @beneficiary
-    else
-      render json: @beneficiary.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /beneficiaries/1
-  def destroy
-    @beneficiary.destroy
-  end
+  
+  # # DELETE /beneficiaries/1
+  # def destroy
+  #   @beneficiary.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
