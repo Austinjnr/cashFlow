@@ -31,7 +31,7 @@ export const Login = (props) => {
         window.location.reload();
         setMessage(data.message);
       } else if (data.message === "user"){
-        history.push("/user-home")
+        history.push("/user-profile")
         setMessage(data.message);
         window.location.reload();
         
