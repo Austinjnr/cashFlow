@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Deposit= ({walletIds}) => {
   console.log(walletIds);
@@ -40,7 +41,14 @@ const Deposit= ({walletIds}) => {
                     />
                     </label>
                 <br/>
-                    <button type="submit">Deposit</button>
+                <Link to='/user-transactions'>
+            {<button>
+              Top Up
+            </button>}
+            {<button disable>
+              Depositing....
+            </button>}
+            </Link>
                 </form>
         </div>
         </div>
