@@ -5,6 +5,7 @@ import "./admin.css";
 import Graph from "../Graph";
 import { useState } from "react";
 import { UserData } from "../Data";
+import Latest from "../LatestTranaction";
 
 const UserDetails = () => {
 
@@ -87,11 +88,7 @@ const UserDetails = () => {
             <div style={{ width: 640, marginTop: "-20rem"}}>
             <Graph BarGraph={userData}/>
             <h4>Latest Transaction</h4>
-            <ul>
-              <li>
-                Shopping
-              </li>
-            </ul>
+            <Latest />
             </div>
         </div>
       </div>

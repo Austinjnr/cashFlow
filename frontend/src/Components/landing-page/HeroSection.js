@@ -4,7 +4,7 @@ import './HeroSection.css';
 function HeroSection() {
     return ( 
         <div className="hero-container">
-            <video src='/video/video-1.mp4' autoPlay loop muted />
+           {/* <img src="https://bit.ly/440b5Gp" alt="lamdingpg" className="img-fluid"/> */}
             <p>A Cutting-Edge Web Application Designed to Revolutionize 
                 your Personal and Business Financial Management.</p>
                 <div className="hero-btns">

@@ -19,7 +19,9 @@ const Profile = () => {
                                     />
                                     <div className="mt-3">
                                         <h4>User</h4>
-                                        <p className="text-secondary mb-1">Profile</p>
+                                        <Link to='/new-beneficiary'>
+                                            <button>Add Beneficiary</button>
+                                        </Link>
                                     </div>
                                     </div>
                                 </div>
