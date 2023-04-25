@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/user', to: 'users#show'
   delete '/logout', to: 'users#destroy'
   
+  
   # Transaction routes
   resources :transactions
   post "transactions/:account_id", to: "transactions#create"
