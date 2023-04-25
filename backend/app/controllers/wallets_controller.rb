@@ -91,7 +91,7 @@ class WalletsController < ApplicationController
       transaction_type: "Send Money",
       transaction_fee: transaction_fee,
       amount: amount,
-      beneficiary_id: beneficiary.id
+      beneficiary_id: beneficiary_id
     )
   
     @wallet.balance -= total_amount
