@@ -50,4 +50,5 @@ class BeneficiariesController < ApplicationController
   def beneficiary_params
     params.require(:beneficiary).permit(:name, :email, :phone_number)
   end
+  
 end
