@@ -97,7 +97,8 @@ export default function App() {
             path="/user-profile"
             render={() => <Profile userId={session} />}
           />
-          <Router exact path="/user-transactions" component={Transactions} //  render={() => <Transactions userId={session} />}
+          <Router exact path="/user-transactions" 
+           render={() => <Transactions userId={session} />}
            />
 
             {/* <AdminNav />    */}
