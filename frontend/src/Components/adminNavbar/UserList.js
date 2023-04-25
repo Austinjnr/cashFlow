@@ -20,8 +20,8 @@ const UserList = ({ users, title }) => {
             <tr key={user.id}>
               <th scope="row">{user.id}</th>
               <td>{user.name}</td>
-              <td>{user.phoneNumber}</td>
-              <td>{user.idNumber}</td>
+              <td>{user.phone_number}</td>
+              <td>{user.id_number}</td>
               <td><Link to={`/details/${user.id}`}>view</Link></td>
             </tr>
           ))}

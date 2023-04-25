@@ -4,7 +4,7 @@ import useFetch from "./useFetch";
 
 const AdminHome = () => {
 
-    const { data: users, isLoading, error} = useFetch('http://localhost:8000/users');
+    const { data: users, isLoading, error} = useFetch('https://cashflow-dwee.onrender.com/accounts');
 
     return (  
         <section>

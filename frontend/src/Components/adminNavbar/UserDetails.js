@@ -5,7 +5,7 @@ import "./admin.css";
 import Graph from "../Graph";
 import { useState } from "react";
 import { UserData } from "../Data";
-import Latest from "../LatestTranaction";
+// import Latest from "../LatestTranaction";
 
 const UserDetails = () => {
 
@@ -32,11 +32,11 @@ const UserDetails = () => {
   const history = useHistory();
   const { id } = useParams();
   const { data: user, error, isLoading } = useFetch(
-    "http://localhost:8000/users/" + id
+    "https://cashflow-dwee.onrender.com/accounts/" + id
   );
 
   const handleClick = () => {
-    fetch("http://localhost:8000/users/" + user.id, {
+    fetch("https://cashflow-dwee.onrender.com/accounts/" + user.id, {
       method: "DELETE"
     })
       .then(() => {
@@ -58,16 +58,16 @@ const UserDetails = () => {
           <div className="card mb-3" style={{ maxWidth: 540, marginTop: "5rem", marginLeft: "2rem" }}>
             <div className="row g-0">
               <div className="col-md-4">
-                <img src={user.URL} className="img-fluid rounded-start" alt="avatar" />
+                <img src={user.avatar_url} className="img-fluid rounded-start" alt="avatar" />
               </div>
               <div className="col-md-8">
                 <div className="card-body">
                   <h5 className="card-title">User Profile</h5>
                   <ul>
                     <li>Name: {user.name}</li>
-                    <li>Phone Number: {user.phoneNumber}</li>
-                    <li>Id Number: {user.idNumber}</li>
-                    <li>Account Balance: {user.bcNumber}</li>
+                    <li>Phone Number: {user.phone_number}</li>
+                    <li>Id Number: {user.id_number}</li>
+                    <li>Account Number: {user.account_number}</li>
                   </ul>
                   <Link to="/update-user">
                     <button>Update</button>
@@ -88,7 +88,7 @@ const UserDetails = () => {
             <div style={{ width: 640, marginTop: "-20rem"}}>
             <Graph BarGraph={userData}/>
             <h4>Latest Transaction</h4>
-            <Latest />
+            {/* <Latest /> */}
             </div>
         </div>
       </div>
