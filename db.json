@@ -1,0 +1,24 @@
+{
+  "transactions": [
+    {
+      "id": 1, 
+      "transaction_type": "shopping", 
+      "amount": 6851
+    },
+    {
+      "id": 2, 
+      "transaction_type": "top_up", 
+      "amount": 3681
+    },
+    {
+      "id": 3, 
+      "transaction_type": "top_up", 
+      "amount": 321851
+    },
+    {
+      "id": 4, 
+      "transaction_type": "bills", 
+      "amount": 72186 
+    }
+  ]
+}

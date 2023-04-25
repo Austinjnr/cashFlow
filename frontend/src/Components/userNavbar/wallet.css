@@ -1,10 +1,11 @@
-.container {
+.container-wallet {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 1rem;
     align-items: center;
     justify-items: center;
-    margin-left: 5rem; /* 5 columns */
+
+    margin-top: 2%;
 }
 
 .content {
@@ -18,16 +19,5 @@ h2, h3, img {
 
 button {
     margin-top: 1rem /* Add margin to the buttons */
-}
-.container-right {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); /* create a 12-column grid */
-    justify-content: center; /* center the grid horizontally */
-}
-
-.content-right {
-    grid-column-start: 6; /* start the div at the 6th column */
-    grid-column-end: 13; /* end the div at the 12th column */
-  
 }
 

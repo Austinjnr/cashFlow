@@ -41,11 +41,22 @@ User.all.sample(7).each do |user|
 
   # Create some transactions for each account
   4.times do
+    transaction_type = ["shopping", "bills", "rental", "Top Up", "Send Money"].sample
+    transaction_fee = Faker::Number.number(digits: 3)
+    amount = Faker::Number.number(digits: 5)
+    beneficiary = nil
+    
+    if transaction_type == "Send Money"
+      # Select a specific beneficiary who belongs to the account
+      beneficiary = account.beneficiaries.sample
+    end
+    
     Transaction.create!(
-      transaction_type: ["shopping" , "bills" , "rental" , "top_up"].sample,
-      transaction_fee: Faker::Number.number(digits: 3),
-      amount: Faker::Number.number(digits: 5),
-      account: account
+      transaction_type: transaction_type,
+      transaction_fee: transaction_fee,
+      amount: amount,
+      account: account,
+      beneficiary_id: beneficiary&.id
     )
   end
 end

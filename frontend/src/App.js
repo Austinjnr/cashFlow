@@ -21,14 +21,17 @@ import Reset from "./Components/register/Reset";
 import SignUp from "./Components/register/SignUp";
 import ProfileSetup from "./Components/register/ProfileSetup";
 
-import AdminNav from "./Components/adminNavbar/AdminNav";
-import AdminWallet from "./Components/adminNavbar/AdminWallet";
-import AdminHome from "./Components/adminNavbar/AdminHome";
-import UserDetails from "./Components/adminNavbar/UserDetails";
-import UpdateUser from "./Components/adminNavbar/UpdateUser";
-import NotFound from "./Components/NotFound";
-import Blogs from "./Components/landing-page/Blogs";
-import CustomerCare from "./Components/landing-page/CustomerCare";
+
+import AdminNav from "./Components/adminNavbar/AdminNav"
+import AdminWallet from './Components/adminNavbar/AdminWallet';
+import AdminHome from './Components/adminNavbar/AdminHome';
+import UserDetails from './Components/adminNavbar/UserDetails';
+import UpdateUser from './Components/adminNavbar/UpdateUser';
+import NotFound from './Components/NotFound';
+import Blogs from './Components/landing-page/Blogs';
+import CustomerCare from './Components/landing-page/CustomerCare';
+import AddBeneficiary from './Components/userNavbar/AddBeneficiaries';
+import Beneficiaries from './Components/userNavbar/Beneficiaries';
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -90,7 +93,7 @@ export default function App() {
           <Route exact path="/send" component={Send} />
           <Route
             exact
-            path="/top-ip"
+            path="/top-up"
             render={() => <Deposit AcountId={account} />}
             component={Deposit}
           />
@@ -99,6 +102,8 @@ export default function App() {
             path="/profile-setup"
             render={() => <ProfileSetup userId={session}  />}
           />
+          <Route exact path="/beneficiaries" component={Beneficiaries} />
+          <Route exact path="/new-beneficiaries" component={AddBeneficiary} />
           <Route
             exact
             path="/user-profile"
@@ -109,6 +114,7 @@ export default function App() {
             path="/user-transactions"
             render={() => <Transactions AcountId={account} />}
           />
+
 
           {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />

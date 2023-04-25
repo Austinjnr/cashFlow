@@ -47,6 +47,62 @@ class WalletsController < ApplicationController
     render :new
   end
 
+  # Creating a Functionality for Sending Money
+
+  def send_money
+    set_wallet
+    amount = params[:amount].to_i
+    beneficiary_id = params[:beneficiary_id]
+  
+    beneficiary = current_account.beneficiaries.find_by(id: beneficiary_id)
+    if beneficiary.nil?
+      render json: { success: false, error: "Beneficiary not found" }
+      return
+    end
+  
+    if amount <= 0
+      render json: { success: false, error: "Invalid amount" }
+      return
+    end
+  
+    if @wallet.balance < amount
+      render json: { success: false, error: "Insufficient balance" }
+      return
+    end
+  
+    transaction_fee = 0
+    if amount >= 10000
+      transaction_fee = amount * 0.1
+    elsif amount >= 1000
+      transaction_fee = amount * 0.05
+    elsif amount >= 200
+      transaction_fee = amount * 0.01
+    end
+  
+    total_amount = amount + transaction_fee
+  
+    if @wallet.balance < total_amount
+      render json: { success: false, error: "Insufficient balance to cover transaction fee" }
+      return
+    end
+  
+    transaction = Transaction.create!(
+      account_id: current_account.id,
+      transaction_type: "Send Money",
+      transaction_fee: transaction_fee,
+      amount: amount,
+      beneficiary_id: beneficiary.id
+    )
+  
+    @wallet.balance -= total_amount
+    @wallet.last_transaction = "Send Money"
+    if @wallet.save 
+      render json: { success: true, message: "You have successfully sent #{amount} to #{beneficiary.name}. Transaction fee is #{transaction_fee}." }
+    else
+      render json: { success: false, error: "Failed to process transaction" }
+    end
+  end
+
   private
 
     def set_wallet
