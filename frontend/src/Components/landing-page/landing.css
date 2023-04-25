@@ -28,12 +28,12 @@
     margin-bottom: 40px;
 }
 
-.row {
+/* .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
-}
+} */
 
 .col-md-4 {
     flex-basis: 33.33%;
