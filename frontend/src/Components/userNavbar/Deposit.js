@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 const Deposit= ({walletIds}) => {
-  console.log(walletIds);
+
+  //console.log(walletIds);
+
     const [amount, setAmount] = useState("");
 
     const handleSubmit = (e) => {
@@ -13,7 +15,7 @@ const Deposit= ({walletIds}) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          balance: "amount",
+          balance: amount,
           last_transaction: "Top Up",
         }),
       })
