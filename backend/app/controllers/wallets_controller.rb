@@ -1,5 +1,5 @@
 class WalletsController < ApplicationController
-  before_action :set_wallet, only: [:show, :edit, :update, :destroy, :top_up]
+  before_action :set_wallet, only: [:show, :edit, :update, :destroy, :top_up. :send_money]
 
   # GET /wallets
   def index

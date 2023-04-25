@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
-const Deposit= ({walletIds}) => {
+const Deposit= () => {
 
-  //console.log(walletIds);
-
+    
+    const [walletIds, setWalletIds] = useState(null);
+    
     const [amount, setAmount] = useState("");
+    
+                useEffect(() => {
+                    axios.get("https://cashflow-dwee.onrender.com/wallets")
+                    .then((res) => {
+                    const walletIds = res.data.map((wallet) => wallet.id);
+            setWalletIds(walletIds);
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+        }, []);
+
+        //console.log(walletIds);
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -18,6 +33,7 @@ const Deposit= ({walletIds}) => {
           balance: amount,
           last_transaction: "Top Up",
         }),
+        
       })
         .then((response) => response.json())
         .then((data) => {
@@ -47,7 +63,7 @@ const Deposit= ({walletIds}) => {
             {<button>
               Top Up
             </button>}
-            {<button disable>
+            {<button disable="true">
               Depositing....
             </button>}
             </Link>

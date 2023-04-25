@@ -7,7 +7,7 @@ function ProfileSetup() {
     const [number, setNumber] = useState ('');
     const [identity, setIdentity] = useState ('');
     const [phone, setPhone] = useState ('');
-    const [picture, setPicture] = useState ('');
+    const [picture, setPicture] = useState ('')
 
     const history = useHistory();
 
