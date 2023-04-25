@@ -38,8 +38,9 @@ class AccountsController < ApplicationController
 def create
   user = User.find(params[:user_id])
   @account = user.accounts.create(account_params)
+  session[:account_sid] = @account.id
   if @account.valid?
-    render json: @account, status: :created, location: @account
+    render json: { session: session[:account_sid]}, status: :ok
   else
     render json: @account.errors, status: :unprocessable_entity
   end
