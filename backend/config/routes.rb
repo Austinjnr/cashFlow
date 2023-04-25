@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'beneficiaries/:account_id', to: 'beneficiaries#create'
   
   # Account routes
+  
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 
   get '/userprofile/:user_id', to: 'accounts#index'
   post '/accounts/:user_id', to: 'accounts#create'
