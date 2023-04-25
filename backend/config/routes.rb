@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   resources :transactions
   post "transactions/:account_id", to: "transactions#create"
    
-
-
   # Beneficiary routes
   resources :beneficiaries
   post 'beneficiaries/:account_id', to: 'beneficiaries#create'
