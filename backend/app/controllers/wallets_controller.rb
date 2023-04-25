@@ -1,5 +1,5 @@
 class WalletsController < ApplicationController
-  before_action :set_wallet, only: [:show, :edit, :update, :destroy, :top_up]
+  before_action :set_wallet, only: [:show, :edit, :update, :destroy, :top_up. :send_money]
 
   # GET /wallets
   def index
@@ -91,7 +91,7 @@ class WalletsController < ApplicationController
       transaction_type: "Send Money",
       transaction_fee: transaction_fee,
       amount: amount,
-      beneficiary_id: beneficiary.id
+      beneficiary_id: beneficiary_id
     )
   
     @wallet.balance -= total_amount
