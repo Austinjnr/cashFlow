@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './Components/landing-page/Footer';
 import FaqPage from './Components/landing-page/FaqPage';
 import TermsOfUsePage from './Components/landing-page/TermsOfUsePage';
-
+import ReviewsCarousel from './Components/landing-page/ReviewCarousel';
 
 function App() {
   return (
@@ -16,7 +16,8 @@ function App() {
           <Route path="/faq" component={FaqPage} />
           <Route path="/terms-of-use" component={TermsOfUsePage} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
+        <ReviewsCarousel />
       </div>
     </Router>
   );
