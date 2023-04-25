@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       user_not_found
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
-      session[:email] = user.email
       role = user.email.include?('admin') ? 'admin' : 'user'
       render json: { message: role, session: session[:user_id] }, status: :ok
     else
