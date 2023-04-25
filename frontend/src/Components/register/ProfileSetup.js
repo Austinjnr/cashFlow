@@ -2,92 +2,103 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import './Register.css';
 
-function ProfileSetup() {
+function ProfileSetup({userId}) {
+  const [phone_number, setPhoneNumber] = useState('');
+  const [id_number, setIdNumber] = useState('');
+  const [account_number, setAccountNumber] = useState('');
+  const [avatar_url, setAvatarUrl] = useState('');
 
-    const [number, setNumber] = useState ('');
-    const [identity, setIdentity] = useState ('');
-    const [phone, setPhone] = useState ('');
-    const [picture, setPicture] = useState ('');
+  const [error, setError] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [message, setMessage] = useState('');
+  const history = useHistory();
 
-    const history = useHistory();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    const res = await fetch(`http://localhost:4000/accounts/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone_number,
+        avatar_url,
+        id_number,
+        account_number
+      })
+    });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('https://api.example.com/profile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add your login credentials here
-
-                    'Authorization': 'Bearer <YOUR_ACCESS_TOKEN>'
-                },
-                body: JSON.stringify({
-                    number,
-                    identity,
-                    phone,
-                    picture
-                })
-            });
-
-            if (response.ok) {
-            
-                history.push("/user-home");
-            } else {
-                // Handle error response from the API
-                console.error('Failed to create profile:', response.status);
-            }
-        } catch (error) {
-            console.error('Failed to fetch data:', error);
-        }
+    const data = await res.json();
+       sessionStorage.setItem("AccountId", data.session )
+    if (message) {
+      setMessage(message);
+      setIsRegistering(true);
+      history.push("/user-profile");
+      window.location.reload();
+    } else {
+      setError(error);
+      setIsRegistering(false);
     }
+  };
 
-    
-
-    return (  
-        <div className="container">
-             <div className="image-container">
-             <img src='/video/video-2.mp4' alt="profile" />
-             </div>
-            <div className="auth-form-container">
-            <h2>Create an Account</h2>
-            <form className="profile-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">Account Number</label>
-                <input 
-                required
-                value={number} 
-                onChange={(e) => setNumber(e.target.value)}
-                type="password" 
-                id="password" 
-                name="password" />
-                <label htmlFor="number">ID Number</label>
-                <input 
-                required
-                value={identity} 
-                onChange={(e) => setIdentity(e.target.value)}
-                type="id number" 
-                placeholder="1234567" 
-                id="identity" 
-                name="identity number" />
-                <label htmlFor="number">Phone Number</label>
-                <input 
-                required
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)}
-                type="tele" 
-                placeholder="+254"/>
-                <label htmlFor="image">Profile Picture</label>
-                <input 
-                value={picture} 
-                onChange={(e) => setPicture(e.target.value)}
-                type="file" 
-                 />
-                <button type="submit">Create Profile</button>
-            </form>
-            </div>
-        </div>
-    );
+  return (
+    <div className="container">
+      <div className="image-container">
+        <img src='/video/video-2.mp4' alt="profile" />
+      </div>
+      <div className="auth-form-container">
+        <h2>Create an Account</h2>
+        <form className="profile-form" onSubmit={handleSubmit}>
+          <label htmlFor="account_number">Account Number</label>
+          <input
+            required
+            value={account_number}
+            onChange={(e) => setAccountNumber(e.target.value)}
+            type="password"
+            id="account_number"
+            name="account_number"
+          />
+          <label htmlFor="id_number">ID Number</label>
+          <input
+            required
+            value={id_number}
+            onChange={(e) => setIdNumber(e.target.value)}
+            type="text"
+            placeholder="1234567"
+            id="id_number"
+            name="id_number"
+          />
+          <label htmlFor="phone_number">Phone Number</label>
+          <input
+            required
+            value={phone_number}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            type="tel"
+            placeholder="+254"
+            id="phone_number"
+            name="phone_number"
+          />
+          <label htmlFor="avatar_url">Profile Picture</label>
+          <input
+            value={avatar_url}
+            onChange={(e) => setAvatarUrl(e.target.value)}
+            type="file"
+            id="avatar_url"
+            name="avatar_url"
+          />
+          <div style={{ backgroundColor: "red", color: "black" }}>
+            {message && <p>{message}</p>}
+            {error && <p>{error}</p>}
+          </div>
+          <button type="submit" className="link-btn">
+            {isRegistering ? "Registering..." : "Register"}
+            create profile
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default ProfileSetup;
