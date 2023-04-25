@@ -17,7 +17,7 @@ class BeneficiariesController < ApplicationController
   def create
     @beneficiary = Beneficiary.create!(beneficiary_params)
 
-    render json: @beneficiary, status: :created, location: @book
+    render json: @beneficiary, status: :created, location: @beneficiary
   end
 
   # PATCH/PUT /beneficiaries/1

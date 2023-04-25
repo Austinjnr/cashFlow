@@ -40,16 +40,14 @@ const Profile = ({ userId }) => {
   if (error) {
     return (
       <center>
-      <div>
-      <p>
-      {error}
-      <Link to="/profile-setup"> Create Profile Account</Link>
-      </p>
-      </div>
+        <div>
+          <p>
+            {error}
+            <Link to="/profile-setup"> Create Profile Account</Link>
+          </p>
+        </div>
       </center>
-    )
-   
-  
+    );
   }
 
   // Delete a profile with the specified ID
@@ -136,7 +134,9 @@ const Profile = ({ userId }) => {
                       />
                       <div className="mt-3">
                         <h4>{profile.username}</h4>
-                        <p className="text-secondary mb-1">Profile</p>
+                        <Link to='/new-beneficiaries'>
+                            <button>New Beneficiary</button>
+                        </Link>
                       </div>
                     </div>
                   </div>
