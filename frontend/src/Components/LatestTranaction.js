@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import { useEffect } from "react";
-import { useState } from "react";
 
-const Transactions = () => {
-  const [transactions, setTransactions] = useState(null);
+const Latest = () => {
+  const [latest, setLatest] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:8000/transactions')
@@ -10,13 +10,13 @@ const Transactions = () => {
         return res.json()
     })
     .then((data => {
-        setTransactions(data)
+        setLatest(data)
     }))
   },[])
 
   return (
-    <section>
-      {transactions && <table className="table table-borderless" style={{marginLeft: "6rem"}}>
+    <>
+      {latest && <table className="table table-borderless" style={{ marginLeft: "6rem" }}>
         <thead>
           <tr>
             <th scope="col"></th>
@@ -26,7 +26,7 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction) => (
+          {latest.map((transaction) => ( 
             <tr key={transaction.id}>
               <th scope="row">{transaction.id}.</th>
               <td>{transaction.transaction_type}</td>
@@ -36,8 +36,8 @@ const Transactions = () => {
           ))}
         </tbody>
       </table>}
-    </section>
+    </>
   );
 };
 
-export default Transactions;
+export default Latest;
