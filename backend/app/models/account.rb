@@ -2,7 +2,7 @@ require 'twilio-ruby'
 require 'dotenv/load'
 
 class Account < ApplicationRecord
-  after_create :send_welcome_sms
+  # after_create :send_welcome_sms
   after_create :create_wallet
 
   belongs_to :user
