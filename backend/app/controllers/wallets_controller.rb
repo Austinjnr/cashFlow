@@ -18,7 +18,6 @@ class WalletsController < ApplicationController
   def show
   end
   
-  
   def top_up
     amount = params[:amount].to_f
     if amount <= 0
