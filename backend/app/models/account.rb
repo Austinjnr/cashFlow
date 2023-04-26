@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   # after_create :send_welcome_sms
   after_create :create_wallet
 
+  
   belongs_to :user
   has_one :wallet
   has_many :transactions
