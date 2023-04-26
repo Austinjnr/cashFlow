@@ -16,11 +16,9 @@ end
   # Transaction routes
   resources :transactions
   post "transactions/:account_id", to: "transactions#create"
-   
   # Beneficiary routes
   resources :beneficiaries
   post 'beneficiaries/:account_id', to: 'beneficiaries#create'
-  
   # Account routes
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 
   get '/userprofile/:user_id', to: 'accounts#index'
