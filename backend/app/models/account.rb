@@ -32,6 +32,5 @@ class Account < ApplicationRecord
 
   def create_wallet
     Wallet.create!(account_id: id, balance: 0)
-    session[:current_account_id] = @wallet.account_id 
   end
 end
