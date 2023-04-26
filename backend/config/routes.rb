@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
 #wallet 
-  resources :wallets do
-    member do
-      post 'top_up'
-      post 'send_money'
-    end
-  end
- 
+resources :wallets do
+  post '/top-up', to: 'wallets#top_up'
+  post '/send-money', to: 'wallets#send_money'
+end
+
   # User routes
   resources :users, only: [:index], param: :id
   post '/register', to: 'users#create'
@@ -27,6 +25,7 @@ Rails.application.routes.draw do
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 
   get '/userprofile/:user_id', to: 'accounts#index'
   delete '/accounts/:user_id/:id', to: 'accounts#destroy'
+  post  'send-money/account_id', to: 'wallets#send-money'
   post '/accounts/:user_id', to: 'accounts#create'
   get '/accounts', to: 'accounts#user_account'
 end

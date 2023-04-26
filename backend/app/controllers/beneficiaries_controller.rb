@@ -42,3 +42,7 @@ class BeneficiariesController < ApplicationController
     params.require(:beneficiary).permit(:name, :email, :phone_number)
   end
 end
+
+
+
+export default 
