@@ -1,4 +1,6 @@
-function CashFlow() {
+import React from "react";
+
+function Cashflow() {
     return (
       <div style={{ display: "flex", alignItems: "center", marginTop: "3rem" }}>
         <img
@@ -26,4 +28,4 @@ function CashFlow() {
   }
   
 
-export default CashFlow;
+export default Cashflow;
