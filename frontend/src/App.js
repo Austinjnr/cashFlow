@@ -51,7 +51,7 @@ export default function App() {
   ) {
     navbar = <LandingNavbar />;
   } else if (
-    path === "/user-home" ||
+    path === "/home" ||
     path === "/user-wallet" ||
     path === "/send" ||
     path === "/profile-setup" ||
@@ -84,7 +84,6 @@ export default function App() {
           <Route exact path="/sign-up" component={SignUp} />
 
           {/* NAvbar */}
-          <Router exact path="/home" component={Cashflow} />
           <Route
             exact
             path="/user-wallet"
@@ -115,6 +114,7 @@ export default function App() {
           render={() => <AddBeneficiary AcountId={account} />}/>
           <Route exact path="/beneficaries" 
           render={() => <Beneficiaries AcountId={account}/>}/> 
+          <Router exact path="/home" component={Cashflow} />
           <Route exact path="/user-transaction" component={Transaction} />
 
           {/* <AdminNav />    */}

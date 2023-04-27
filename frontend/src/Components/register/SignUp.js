@@ -16,7 +16,7 @@ function SignUp(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://cashflow-dwee.onrender.com/register", {
+    const response = await fetch("https://cashflow-1rf2.onrender.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

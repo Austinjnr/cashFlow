@@ -6,7 +6,7 @@ import "./User.css";
 const Profile = ({ userId }) => {
   console.log(userId);
 
-  const API = `https://cashflow-dwee.onrender.com/userprofile/${userId}`;
+  const API = `https://cashflow-1rf2.onrender.com/userprofile/${userId}`;
 
   const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState(null);

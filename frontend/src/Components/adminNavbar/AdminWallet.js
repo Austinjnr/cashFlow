@@ -5,7 +5,7 @@ const AdminWallet = () => {
   const [transaction, setTransaction] = useState(null);
 
   useEffect(() => {
-    fetch("https://cashflow-dwee.onrender.com/transactions")
+    fetch("https://cashflow-1rf2.onrender.com/transactions")
       .then((res) => {
         return res.json();
       })

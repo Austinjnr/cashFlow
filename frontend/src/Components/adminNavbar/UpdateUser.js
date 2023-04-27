@@ -16,7 +16,7 @@ const UpdateUser = () => {
         setIsLoading(true); 
 
         const user = { name, email, phone, profile };
-        fetch(`https://cashflow-dwee.onrender.com/accounts/${user}`, {
+        fetch(`https://cashflow-1rf2.onrender.com/accounts/${user}`, {
             method: 'PUT', 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

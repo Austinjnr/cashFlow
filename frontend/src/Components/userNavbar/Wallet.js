@@ -28,7 +28,7 @@ const Wallet = () => {
   });
 
   useEffect(() => {
-    fetch("https://cashflow-dwee.onrender.com/wallets/")
+    fetch("https://cashflow-1rf2.onrender.com/wallets/")
       .then((res) => res.json())
       .then((data) => {
         setDetails(data[0]);

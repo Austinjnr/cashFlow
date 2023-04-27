@@ -43,7 +43,7 @@ const UserDetails = () => {
   }, [id]);
 
   const handleClick = () => {
-    fetch(`https://cashflow-dwee.onrender.com/accounts/${details.id}`, {
+    fetch(`https://cashflow-1rf2.onrender.comaccounts/${details.id}`, {
       method: "DELETE",
     })
       .then(() => {

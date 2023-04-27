@@ -4,7 +4,7 @@ const Beneficiaries = ({AccountId}) => {
   const [beneficiaries, setBeneficiaries] = useState([]);
 
   useEffect(() => {
-    fetch(`https://cashflow-dwee.onrender.com/beneficiaries/${AccountId}`)
+    fetch(`https://cashflow-1rf2.onrender.com/beneficiaries/`)
       .then(response => 
         response.json())
       .then(data => 
