@@ -33,7 +33,7 @@ function Navbar() {
     <section>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/user-home' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/home' className='navbar-logo' onClick={closeMobileMenu}>
             CashFlow
             <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
           </Link>
@@ -48,8 +48,8 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/user-transactions'
-                className='nav-links's
+                to='/user-transaction'
+                className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Transactions
