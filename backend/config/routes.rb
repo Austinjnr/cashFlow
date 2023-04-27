@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :wallets 
   
     post "deposit/:account_id", to: "wallets#deposit"
-    post "send/:sender_account_id", to: "wallets#send_money"
+    post "send/:receiver_account_id/:sender_account_id", to: "wallets#send_money"
  
   # User routes
   resources :users, only: [:index], param: :id
