@@ -2,7 +2,7 @@ require 'twilio-ruby'
 require 'dotenv/load'
 
 class Account < ApplicationRecord
-  after_create :send_welcome_sms
+  # after_create :send_welcome_sms
   after_create :create_wallet
 
   belongs_to :user
@@ -11,6 +11,7 @@ class Account < ApplicationRecord
   has_many :beneficiaries
 
   validates :user_id, uniqueness: true
+
 
   def send_welcome_sms
     puts "Sending welcome SMS..."
@@ -31,6 +32,5 @@ class Account < ApplicationRecord
 
   def create_wallet
     Wallet.create!(account_id: id, balance: 0)
-    session[:current_account_id] = @wallet.account_id 
   end
 end
