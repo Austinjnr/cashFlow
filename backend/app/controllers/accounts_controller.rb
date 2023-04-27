@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   def show
     render json: {
-      account: @account.as_json(include: [:beneficiaries, :wallets, :transactions])
+      account: @account.as_json(include: [:beneficiaries, :wallet, :transactions])
     }
   end
 
@@ -38,6 +38,7 @@ class AccountsController < ApplicationController
 def create
   user = User.find(params[:user_id])
   @account = user.accounts.create(account_params)
+  session[:current_account_id] = @account.id
   session[:account_sid] = @account.id
   if @account.valid?
     render json: { session: session[:account_sid]}, status: :ok
