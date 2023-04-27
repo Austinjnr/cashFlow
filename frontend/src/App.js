@@ -35,6 +35,7 @@ import Cashflow from "./Components/userNavbar/Cashflow";
 export default function App() {
   let session = sessionStorage.getItem("userId");
   let account = sessionStorage.getItem("AccountId");
+  console.log(account);
   const location = useLocation();
   const path = location.pathname;
   let navbar;
@@ -87,13 +88,13 @@ export default function App() {
           <Route
             exact
             path="/user-wallet"
-            render={() => <Wallet AcountId={account} />}
+            render={() => <Wallet AccountId={account} />}
           />
           <Route exact path="/send" component={Send} />
           <Route
             exact
             path="/top-up"
-            render={() => <Deposit AcountId={account} />}
+            render={() => <Deposit AccountId={account} />}
             component={Deposit}
           />
           <Route
@@ -111,9 +112,9 @@ export default function App() {
             path="/user-transactions"
           />
           <Route exact path="/new-beneficary" 
-          render={() => <AddBeneficiary AcountId={account} />}/>
+          render={() => <AddBeneficiary AccountId={account} />}/>
           <Route exact path="/beneficaries" 
-          render={() => <Beneficiaries AcountId={account}/>}/> 
+          render={() => <Beneficiaries AccountId={account}/>}/> 
           <Router exact path="/home" component={Cashflow} />
           <Route exact path="/user-transaction" component={Transaction} />
 

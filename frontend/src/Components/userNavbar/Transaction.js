@@ -4,7 +4,7 @@ const Transaction = () => {
   const [transactions, setTransactions] = useState(null);
 
   useEffect(() => {
-    fetch('https://cashflow-1rf2.onrender.com/transactions/')
+    fetch('https://cashflow-1rf2.onrender.com/transactions')
       .then(res => res.json())
       .then(data => {
         // Assuming the transactions are sorted by date in descending order
