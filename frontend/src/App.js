@@ -4,12 +4,13 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import CashFlow from "./Components/userNavbar/CashFlow";
 import Wallet from "./Components/userNavbar/Wallet";
 import Send from "./Components/userNavbar/Send";
 import Deposit from "./Components/userNavbar/Deposit";
-import Transactions from "./Components/userNavbar/Transactions";
+import Transaction from "./Components/userNavbar/Transaction";
 import Profile from "./Components/userNavbar/Profile";
+import AddBeneficiary from "./Components/userNavbar/AddBeneficiaries";
+import Beneficiaries from "./Components/userNavbar/Beneficiaries";
 import Navbar from "./Components/userNavbar/Navbar";
 
 import LandingNavbar from "./Components/landing-page/LandingpgNavbar";
@@ -29,6 +30,7 @@ import UpdateUser from "./Components/adminNavbar/UpdateUser";
 import NotFound from "./Components/NotFound";
 import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
+import Cashflow from "./Components/userNavbar/Cashflow";
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -49,13 +51,15 @@ export default function App() {
   ) {
     navbar = <LandingNavbar />;
   } else if (
-    path === "/user-home" ||
+    path === "/home" ||
     path === "/user-wallet" ||
     path === "/send" ||
     path === "/profile-setup" ||
     path === "/top-up" ||
     path === "/user-transactions" ||
     path === "/user-profile" ||
+    path === "/new-beneficary" ||
+    path === "/beneficaries" ||
     path === "/update-profile" ||
     path === "*"
   ) {
@@ -80,8 +84,6 @@ export default function App() {
           <Route exact path="/sign-up" component={SignUp} />
 
           {/* NAvbar */}
-
-          <Router exact path="/user-home" component={CashFlow} />
           <Route
             exact
             path="/user-wallet"
@@ -90,7 +92,7 @@ export default function App() {
           <Route exact path="/send" component={Send} />
           <Route
             exact
-            path="/top-ip"
+            path="/top-up"
             render={() => <Deposit AcountId={account} />}
             component={Deposit}
           />
@@ -107,8 +109,13 @@ export default function App() {
           <Router
             exact
             path="/user-transactions"
-            render={() => <Transactions AcountId={account} />}
           />
+          <Route exact path="/new-beneficary" 
+          render={() => <AddBeneficiary AcountId={account} />}/>
+          <Route exact path="/beneficaries" 
+          render={() => <Beneficiaries AcountId={account}/>}/> 
+          <Router exact path="/home" component={Cashflow} />
+          <Route exact path="/user-transaction" component={Transaction} />
 
           {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />

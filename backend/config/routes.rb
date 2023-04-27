@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  # resources :accounts do
-  #   resources :wallets, only: [:new, :create, :show] do
-  #     post :top_up
-  #     post :send_money
-  #   end
-  # end
+#wallet 
+  resources :wallets 
   
-  post '/accounts/:account_id/wallet/top_up', to: 'wallets#top_up'
-
+    post "deposit/:account_id", to: "wallets#deposit"
+    post "send/:sender_account_id", to: "wallets#send_money"
+ 
   # User routes
   resources :users, only: [:index], param: :id
   post '/register', to: 'users#create'

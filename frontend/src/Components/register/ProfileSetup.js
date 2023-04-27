@@ -16,31 +16,32 @@ function ProfileSetup({userId}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    const res = await fetch(`https://cashflow-dwee.onrender.com/accounts/${userId}`, {
-
-
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        phone_number,
-        avatar_url,
-        id_number,
-        account_number
-      })
-    });
-
-    const data = await res.json();
-       sessionStorage.setItem("AccountId", data.session )
-    if (message) {
-      setMessage(message);
+    try {
       setIsRegistering(true);
+      setError("");
+      setMessage("");
+
+      const res = await fetch(`https://cashflow-1rf2.onrender.com/accounts/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          phone_number,
+          avatar_url,
+          id_number,
+          account_number
+        })
+      });
+
+      const data = await res.json();
+      sessionStorage.setItem("AccountId", data.session );
+      setMessage("Profile created successfully!");
       history.push("/user-profile");
       window.location.reload();
-    } else {
-      setError(error);
+    } catch (error) {
+      setError(error.message);
+      setMessage("");
       setIsRegistering(false);
     }
   };
@@ -96,7 +97,6 @@ function ProfileSetup({userId}) {
           </div>
           <button type="submit" className="link-btn">
             {isRegistering ? "Registering..." : "Register"}
-            create profile
           </button>
         </form>
       </div>

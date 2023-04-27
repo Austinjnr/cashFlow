@@ -10,7 +10,7 @@ const Deposit= () => {
     const [amount, setAmount] = useState("");
     
                 useEffect(() => {
-                    axios.get("https://cashflow-dwee.onrender.com/wallets")
+                    axios.get("https://cashflow-1rf2.onrender.com/wallets")
                     .then((res) => {
                     const walletIds = res.data.map((wallet) => wallet.id);
             setWalletIds(walletIds);

@@ -14,7 +14,7 @@ export const Login = (props) => {
     const handleLogin = async (e) => {
       e.preventDefault();
       setIsLoggingIn(true);
-      const res = await fetch("https://cashflow-dwee.onrender.com/login", {
+      const res = await fetch("https://cashflow-1rf2.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
