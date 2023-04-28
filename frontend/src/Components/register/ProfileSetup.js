@@ -7,6 +7,7 @@ function ProfileSetup({userId}) {
   const [id_number, setIdNumber] = useState('');
   const [account_number, setAccountNumber] = useState('');
   const [avatar_url, setAvatarUrl] = useState('');
+  const [username, setUsername]=useState('')
 
   const [error, setError] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
@@ -30,7 +31,8 @@ function ProfileSetup({userId}) {
           phone_number,
           avatar_url,
           id_number,
-          account_number
+          account_number,
+          username
         })
       });
 
@@ -38,7 +40,7 @@ function ProfileSetup({userId}) {
       sessionStorage.setItem("AccountId", data.session );
       setMessage("Profile created successfully!");
       history.push("/user-profile");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       setError(error.message);
       setMessage("");
@@ -54,6 +56,15 @@ function ProfileSetup({userId}) {
       <div className="auth-form-container">
         <h2>Create an Account</h2>
         <form className="profile-form" onSubmit={handleSubmit}>
+        <label htmlFor="account_number">Full Name</label>
+          <input
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            id="username"
+            name="username"
+          />
           <label htmlFor="account_number">Account Number</label>
           <input
             required

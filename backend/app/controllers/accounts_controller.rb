@@ -36,10 +36,10 @@ class AccountsController < ApplicationController
     user = User.find(params[:user_id])
     @account = user.accounts.create(account_params)
     @wallet = @account.create_wallet(balance: 0)
-    session[:current_account_id] = @account.id
+    # session[:current_account_id] = @account.id
     session[:account_sid] = @account.id
     if @account.valid? && @wallet.valid?
-      render json: { sessionAccount: session[:account_sid]}, status: :ok
+      render json: { session: session[:account_sid]}, status: :ok
     else
       render json: { errors: @account.errors.merge(@wallet.errors) }, status: :unprocessable_entity
     end

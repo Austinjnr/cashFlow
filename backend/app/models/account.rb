@@ -4,10 +4,9 @@ require 'dotenv/load'
 class Account < ApplicationRecord
   # after_create :send_welcome_sms
   belongs_to :user
-  has_many :beneficiaries
-  has_many :transactions
-  has_one :wallet
- 
+  has_many :beneficiaries, dependent: :destroy
+  has_many :transactions, dependent: :destroy
+  has_one :wallet, dependent: :destroy
   validates :user_id, uniqueness: true
   def send_welcome_sms
     puts "Sending welcome SMS..."

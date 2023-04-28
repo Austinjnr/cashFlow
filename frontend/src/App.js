@@ -95,7 +95,6 @@ export default function App() {
             exact
             path="/top-up"
             render={() => <Deposit AccountId={account} />}
-            component={Deposit}
           />
           <Route
             exact
