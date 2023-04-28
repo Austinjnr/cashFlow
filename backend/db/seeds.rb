@@ -27,7 +27,7 @@ User.all.sample(7).each do |user|
     Beneficiary.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254'),
+      phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254').slice(0..11),
       account: account
     )
   end

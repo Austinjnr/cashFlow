@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
   def deposit
-    account_id = params[:account_id]
+    account_id = session[:current_account_id]
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
 
@@ -20,7 +20,7 @@ class WalletsController < ApplicationController
   end
 
   def send_money
-    sender_wallet = Wallet.find_by(account_id: params[:sender_account_id])
+    sender_wallet = Wallet.find_by(account_id: session[:current_account_id])
     receiver_wallet = Wallet.find_by(account_id: params[:receiver_account_id])
 
     if sender_wallet.nil? || receiver_wallet.nil?
@@ -54,6 +54,49 @@ class WalletsController < ApplicationController
 
     render json: { message: "Send successful", transaction: transaction }, status: :ok
   end
+
+
+  def wallet_statistics
+    stats = {
+      daily: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee)
+      },
+      weekly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee)
+      },
+      monthly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee)
+      },
+      yearly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee)
+      }
+    }
+  
+    data = {
+      columns: ['Statistic', 'Daily', 'Weekly', 'Monthly', 'Yearly'],
+      rows: [
+        ['Total Transactions', stats[:daily][:transactions], stats[:weekly][:transactions], stats[:monthly][:transactions], stats[:yearly][:transactions]],
+        ['Total Amount', stats[:daily][:amount], stats[:weekly][:amount], stats[:monthly][:amount], stats[:yearly][:amount]],
+        ['Total Transaction Fee', stats[:daily][:transaction_fee], stats[:weekly][:transaction_fee], stats[:monthly][:transaction_fee], stats[:yearly][:transaction_fee]],
+        ['Company Income', stats[:daily][:company_income], stats[:weekly][:company_income], stats[:monthly][:company_income], stats[:yearly][:company_income]]
+      ]
+    }
+  
+    render json: data
+  end
+  
 
   private
 
