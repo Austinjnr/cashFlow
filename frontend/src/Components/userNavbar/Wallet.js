@@ -29,7 +29,7 @@ const Wallet = ({userId}) => {
   });
 
   useEffect(()=>{
-    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
+    axios.get(`https://cashflow-1rf2.onrender.com//userprofile/${userId}`)
     .then((res)=>{
       setDetails(res.data.map((data)=>{
         return (
