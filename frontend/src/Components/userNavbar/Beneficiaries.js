@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Beneficiaries = ({AccountId}) => {
+const Beneficiaries = ({userId}) => {
   const [beneficiaries, setBeneficiaries] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:4000/beneficiaries/`)
-      .then(response => 
-        response.json())
-      .then(data => 
-        setBeneficiaries(data))
-      .catch(error => 
-        console.error(error));
-  });
-
+  useEffect(()=>{
+    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
+    .then((res)=>{
+      setBeneficiaries(res.data.map((data)=>{
+        return (
+          data.beneficiaries
+        )
+      }))
+    })
+  },[userId])
+ console.log(beneficiaries[0])
   return (
     <>
       <h1 style={{ marginTop: "2rem" }}>My Beneficiaries</h1>
       <div className="row" style={{ marginLeft: "2rem" }}>
-        {beneficiaries.map(beneficiary => (
+        {beneficiaries[0].map(beneficiary => (
           <div key={beneficiary.id} className="col-sm-6">
             <div className="card">
               <div className="card-body">

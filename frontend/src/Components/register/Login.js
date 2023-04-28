@@ -14,7 +14,7 @@ export const Login = (props) => {
     const handleLogin = async (e) => {
       e.preventDefault();
       setIsLoggingIn(true);
-      const res = await fetch("http://localhost:4000/login", {
+      const res = await fetch("https://cashflow-1rf2.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const Login = (props) => {
           password,
         }),
       });
-      
+      console.log(res.json());
       const data = await res.json();
       sessionStorage.setItem("userId", data.session)
       if (data.message === "admin") {

@@ -27,13 +27,13 @@ const Profile = ({ userId }) => {
             };
           });
           setProfiles(updateProfile);
-          // sessionStorage.setItem("AccountId", res.data.session );
+          //  sessionStorage.setItem("AccountId", res.data.session );
         } else {
           setError("Please create account");
         }
       })
       .catch((error) => {
-        setError(error.message);
+        setError("Please create account");
       });
   }, [API]);
 
