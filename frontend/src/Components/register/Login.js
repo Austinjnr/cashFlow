@@ -24,7 +24,7 @@ export const Login = (props) => {
           password,
         }),
       });
-      console.log(res.json());
+      
       const data = await res.json();
       sessionStorage.setItem("userId", data.session)
       if (data.message === "admin") {

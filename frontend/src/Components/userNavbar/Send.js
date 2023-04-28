@@ -51,7 +51,7 @@ const Send = (walletIds) => {
   
     const handleSendMoney = async () => {
         try {
-          const response = await fetch( `https://cashflow-dwee.onrender.com/wallets/${walletIds}/send_money`, {
+          const response = await fetch( `https://cashflow-1rf2.onrender.com/wallets/${walletIds}/send_money`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: amount, beneficiary_id: selectedBeneficiary })

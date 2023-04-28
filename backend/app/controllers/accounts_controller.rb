@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
     @accounts = user.accounts
     if @accounts.present?
       session[:account_sid] = @accounts.first.id
-      render json: { data: @accounts.as_json(include: [:beneficiaries, :wallet, :transactions]), message: session[:account_sid] }, status: :ok
+      render json:  @accounts.as_json(include: [:beneficiaries, :wallet, :transactions]), status: :ok
     else
       render json: { error: "You do not have any accounts. Please create an account." }, status: :no_content
     end
@@ -28,18 +28,15 @@ class AccountsController < ApplicationController
 
   # POST /users/:user_id/accounts
   def create
-    user = User.find_by(id: params[:user_id])
-    if user.nil?
-      render json: { error: "User not found. Please create an account." }, status: :not_found
-      return
-    end
-
-    @account = user.accounts.build(account_params)
-    if @account.save
-      session[:account_sid] = @account.id
-      render json: { session: session[:account_sid] }, status: :created
+    user = User.find(params[:user_id])
+    @account = user.accounts.create(account_params)
+    @wallet = @account.create_wallet(balance: 0)
+    session[:current_account_id] = @account.id
+    session[:account_sid] = @account.id
+    if @account.valid? && @wallet.valid?
+      render json: { sessionAccount: session[:account_sid]}, status: :ok
     else
-      render json: { error: @account.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      render json: { errors: @account.errors.merge(@wallet.errors) }, status: :unprocessable_entity
     end
   end
 

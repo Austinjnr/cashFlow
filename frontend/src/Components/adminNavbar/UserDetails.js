@@ -33,7 +33,7 @@ const UserDetails = () => {
   const { error, isLoading } = useFetch("");
 
   useEffect(() => {
-    fetch(`https://cashflow-dwee.onrender.com/accounts/${id}`)
+    fetch(`https://cashflow-1rf2.onrender.com/accounts/${id}`)
       .then((res) => {
         return res.json();
       })
