@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     post "/deposit", to: "wallets#deposit"
     post "send/:receiver_account_id", to: "wallets#send_money"
+    #post "send/:current_account_id", to: "wallets#send_money"
  
   # User routes
   resources :users, only: [:index], param: :id
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   # Beneficiary routes
   resources :beneficiaries
   post 'beneficiaries/:account_id', to: 'beneficiaries#create'
+  #get 'beneficiaries/:account_id', to: 'beneficiaries#show'
   # Account routes
   
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 

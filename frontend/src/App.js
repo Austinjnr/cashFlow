@@ -57,7 +57,7 @@ export default function App() {
     path === "/send" ||
     path === "/profile-setup" ||
     path === "/top-up" ||
-    path === "/user-transactions" ||
+    path === "/user-transaction" ||
     path === "/user-profile" ||
     path === "/new-beneficary" ||
     path === "/beneficaries" ||

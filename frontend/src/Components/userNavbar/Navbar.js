@@ -59,8 +59,7 @@ function Navbar() {
               <Link
                 to='/user-profile'
                 className='nav-links's
-                onClick={closeMobileMenu}
-              >
+                onClick={closeMobileMenu} >
                 Profile
               </Link>
             </li>
