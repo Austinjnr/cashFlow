@@ -5,18 +5,19 @@ class AccountsController < ApplicationController
   def index
     user = User.find_by(id: params[:user_id])
     if user.nil?
-      render json: {error: "User not found. Please create an account." }, status: 404
+      render json: { error: "User not found. Please create an account." }, status: :not_found
       return
     end
     
-    @accounts = user.accounts
-  
-    if @accounts.present?
-      render json: @accounts
+    accounts = user.accounts.includes(:beneficiaries, :wallet, :transactions)
+    
+    if accounts.any?
+      render json: accounts.as_json(include: [:beneficiaries, :wallet, :transactions])
     else
-      render json: {error: "You do not have any accounts. Please create an account." }, status: 201
+      render json: { error: "You do not have any accounts. Please create an account." }, status: :unprocessable_entity
     end
   end
+  
    
   # GET /accounts
   def user_account
