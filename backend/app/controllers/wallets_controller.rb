@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
   def deposit
-    account_id = session[:current_account_id]
+    account_id = params[:account_id]
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
 
@@ -19,8 +19,13 @@ class WalletsController < ApplicationController
     render json: { message: "Deposit successful" }, status: :ok
   end
 
+  def index
+    wallet = Wallet.all 
+    render json: { wallets: wallet }
+  end
+
   def send_money
-    sender_wallet = Wallet.find_by(account_id: session[:current_account_id])
+    sender_wallet = Wallet.find_by(account_id: params[:sender_account_id])
     receiver_wallet = Wallet.find_by(account_id: params[:receiver_account_id])
 
     if sender_wallet.nil? || receiver_wallet.nil?

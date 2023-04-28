@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   get '/statistics', to: 'wallets#wallet_statistics'
 
-    post "/deposit", to: "wallets#deposit"
-    post "send/:receiver_account_id", to: "wallets#send_money"
+    post "deposit/:account_id", to: "wallets#deposit"
+    post "send/:receiver_account_id/:sender_account_id", to: "wallets#send_money"
  
   # User routes
   resources :users, only: [:index], param: :id
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   
   resources :accounts, only: [:create, :update, :destroy, :show], param: :id 
   get '/userprofile/:user_id', to: 'accounts#index'
+  put '/userprofile/:user_id/:id', to: 'accounts#update'
   delete '/accounts/:user_id/:id', to: 'accounts#destroy'
   post '/accounts/:user_id', to: 'accounts#create'
   delete '/userprofile/:user_id/:id', to: 'accounts#destroy'
