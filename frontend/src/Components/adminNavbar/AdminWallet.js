@@ -6,7 +6,7 @@ const AdminWallet = () => {
   // const [transaction, setTransaction] = useState(null);
 
   // useEffect(() => {
-  //   fetch("https://cashflow-1rf2.onrender.com/transactions")
+  //   fetch("http://localhost:4000/transactions")
   //     .then((res) => {
   //       return res.json();
   //     })
