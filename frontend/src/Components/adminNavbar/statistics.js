@@ -5,7 +5,7 @@ const WalletStatistics = () => {
 
   useEffect(() => {
     const fetchStatistics = async () => {
-      const response = await fetch('https://cashflow-1rf2.onrender.com/statistics');
+      const response = await fetch('http://localhost:4000/statistics');
       const data = await response.json();
       setStatistics(data);
     };

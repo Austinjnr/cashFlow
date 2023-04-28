@@ -27,6 +27,7 @@ const Profile = ({ userId }) => {
             };
           });
           setProfiles(updateProfile);
+          // sessionStorage.setItem("AccountId", res.data.session );
         } else {
           setError("Please create account");
         }

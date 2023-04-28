@@ -88,7 +88,9 @@ export default function App() {
           <Route
             exact
             path="/user-wallet"
-            render={() => <Wallet AccountId={account} />}
+            render={() => <Wallet AccountId={account} 
+            userId={session}
+            />}
           />
           <Route exact path="/send" component={Send} />
           <Route

@@ -4,7 +4,7 @@ const Beneficiaries = ({AccountId}) => {
   const [beneficiaries, setBeneficiaries] = useState([]);
 
   useEffect(() => {
-    fetch(`https://cashflow-1rf2.onrender.com/beneficiaries/`)
+    fetch(`http://localhost:4000/beneficiaries/`)
       .then(response => 
         response.json())
       .then(data => 
