@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_054419) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,11 +39,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_054419) do
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_type"
     t.integer "amount"
-    t.string "transaction_fee"
+    t.decimal "transaction_fee", precision: 8, scale: 2
     t.bigint "account_id"
+    t.bigint "beneficiary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["beneficiary_id"], name: "index_transactions_on_beneficiary_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,11 +62,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_054419) do
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_transactions_per_day"
+    t.integer "total_transactions_per_week"
+    t.integer "total_transactions_per_month"
+    t.integer "total_transactions_per_year"
+    t.decimal "total_amount_per_day"
+    t.decimal "total_amount_per_week"
+    t.decimal "total_amount_per_month"
+    t.decimal "total_amount_per_year"
+    t.decimal "total_transaction_fee_per_day"
+    t.decimal "total_transaction_fee_per_week"
+    t.decimal "total_transaction_fee_per_month"
+    t.decimal "total_transaction_fee_per_year"
+    t.decimal "company_income_per_day"
+    t.decimal "company_income_per_week"
+    t.decimal "company_income_per_month"
+    t.decimal "company_income_per_year"
     t.index ["account_id"], name: "index_wallets_on_account_id"
   end
 
   add_foreign_key "accounts", "users"
   add_foreign_key "beneficiaries", "accounts"
   add_foreign_key "transactions", "accounts"
+  add_foreign_key "transactions", "beneficiaries"
   add_foreign_key "wallets", "accounts"
 end

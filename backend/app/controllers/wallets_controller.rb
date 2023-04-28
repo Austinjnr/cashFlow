@@ -1,142 +1,123 @@
 class WalletsController < ApplicationController
-  before_action :set_wallet, only: [:show, :edit, :update, :destroy, :top_up. :send_money]
-
-  # GET /wallets
-  def index
-    @wallets = Wallet.all
-
-    render json: @wallets, status: :ok
-  end
-
-  # GET /wallets/1
-  def show
-    render json: @wallet, status: :ok
-  end
-
-  # POST /wallets
-  def create
-    @wallet = Wallet.new(wallet_params)
-
-    if @wallet.save
-      render json: @wallet, status: :created, location: @wallet
-    else
-      render json: @wallet.errors, status: :unprocessable_entity
-    end
-  end
-
-  # Top Up functionality 
-
-  def top_up
+  def deposit
+    account_id = session[:current_account_id]
     amount = params[:amount].to_i
+    transaction_fee = calculate_transaction_fee(amount)
 
-    if amount <= 0
-      render json: { success: false, error: "Invalid amount" }
-      return
-    end
+    wallet = Wallet.find_by(account_id: account_id)
+    wallet.balance += amount - transaction_fee
+    wallet.last_transaction = "deposit"
+    wallet.save!
 
-    transaction = create_top_up_transaction(amount)
-    if transaction.persisted?
-      update_wallet_balance(amount)
-      render json: { success: true, message: "Your account has been topped up by #{amount}." }
-      return
-    else
-      render json: { success: false, error: "Failed to process top-up request." }
-      return
-    end
+    Transaction.create!(
+      transaction_type: "deposit",
+      amount: amount,
+      transaction_fee: transaction_fee,
+      account_id: account_id
+    )
 
-    render :new
+    render json: { message: "Deposit successful" }, status: :ok
   end
-
-  # Creating a Functionality for Sending Money
 
   def send_money
-    set_wallet
+    sender_wallet = Wallet.find_by(account_id: session[:current_account_id])
+    receiver_wallet = Wallet.find_by(account_id: params[:receiver_account_id])
+
+    if sender_wallet.nil? || receiver_wallet.nil?
+      render json: { message: "Invalid account ID" }, status: :bad_request
+      return
+    end
+
     amount = params[:amount].to_i
-    beneficiary_id = params[:beneficiary_id]
-  
-    beneficiary = current_account.beneficiaries.find_by(id: beneficiary_id)
-    if beneficiary.nil?
-      render json: { success: false, error: "Beneficiary not found" }
+    transaction_fee = calculate_transaction_fee(amount)
+
+    if sender_wallet.balance < amount + transaction_fee
+      render json: { message: "Insufficient funds" }, status: :bad_request
       return
     end
-  
-    if amount <= 0
-      render json: { success: false, error: "Invalid amount" }
-      return
-    end
-  
-    if @wallet.balance < amount
-      render json: { success: false, error: "Insufficient balance" }
-      return
-    end
-  
-    transaction_fee = 0
-    if amount >= 10000
-      transaction_fee = amount * 0.1
-    elsif amount >= 1000
-      transaction_fee = amount * 0.05
-    elsif amount >= 200
-      transaction_fee = amount * 0.01
-    end
-  
-    total_amount = amount + transaction_fee
-  
-    if @wallet.balance < total_amount
-      render json: { success: false, error: "Insufficient balance to cover transaction fee" }
-      return
-    end
-  
+
+    sender_wallet.balance -= amount + transaction_fee
+    sender_wallet.last_transaction = "send"
+    sender_wallet.save!
+
+    receiver_wallet.balance += amount
+    receiver_wallet.last_transaction = "receive"
+    receiver_wallet.save!
+
     transaction = Transaction.create!(
-      account_id: current_account.id,
-      transaction_type: "Send Money",
-      transaction_fee: transaction_fee,
+      transaction_type: "send",
       amount: amount,
-      beneficiary_id: beneficiary_id
+      transaction_fee: transaction_fee,
+      account_id: sender_wallet.account_id,
+      beneficiary_id: receiver_wallet.account_id
     )
-  
-    @wallet.balance -= total_amount
-    @wallet.last_transaction = "Send Money"
-    if @wallet.save 
-      render json: { success: true, message: "You have successfully sent #{amount} to #{beneficiary.name}. Transaction fee is #{transaction_fee}." }
-    else
-      render json: { success: false, error: "Failed to process transaction" }
-    end
+
+    render json: { message: "Send successful", transaction: transaction }, status: :ok
   end
+
+
+  def wallet_statistics
+    stats = {
+      daily: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee)
+      },
+      weekly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee)
+      },
+      monthly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee)
+      },
+      yearly: {
+        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).count,
+        amount: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee)
+      }
+    }
+  
+    data = {
+      columns: ['Statistic', 'Daily', 'Weekly', 'Monthly', 'Yearly'],
+      rows: [
+        ['Total Transactions', stats[:daily][:transactions], stats[:weekly][:transactions], stats[:monthly][:transactions], stats[:yearly][:transactions]],
+        ['Total Amount', stats[:daily][:amount], stats[:weekly][:amount], stats[:monthly][:amount], stats[:yearly][:amount]],
+        ['Total Transaction Fee', stats[:daily][:transaction_fee], stats[:weekly][:transaction_fee], stats[:monthly][:transaction_fee], stats[:yearly][:transaction_fee]],
+        ['Company Income', stats[:daily][:company_income], stats[:weekly][:company_income], stats[:monthly][:company_income], stats[:yearly][:company_income]]
+      ]
+    }
+  
+    render json: data
+  end
+  
 
   private
 
-    def set_wallet
-      @wallet = Wallet.find(params[:id])
+  def calculate_transaction_fee(amount)
+    case amount
+    when 0...200
+      0
+    when 200...500
+      3
+    when 500...1000
+      6
+    when 1000...5000
+      11
+    when 5000...10000
+      15
+    when 10000...20000
+      20
+    when 20000...40000
+      25
+    else
+      30
     end
-
-    # creating a transaction to top up
-
-    def create_top_up_transaction(amount)
-      Transaction.create(
-        account_id: current_account.id,
-        transaction_type: "Top-Up",
-        transaction_fee: 0,
-        amount: amount,
-      
-      )
-    end
-
-    # updating the balance in the wallet when topping up 
-
-    def update_wallet_balance(amount)
-      @wallet.balance += amount
-      @wallet.last_transaction = "Top-Up"
-      @wallet.save!
-    end
-
-    #setting current account to coorespond to a specific wallet :id
-    def current_account
-      @current_account ||= Account.find_by(id: @wallet.account_id)
-    end
-
-    # Only allow a list of trusted parameters through.
-    def wallet_params
-      params.require(:wallet).permit(:balance, :last_transaction)
-    end
-
+  end
 end

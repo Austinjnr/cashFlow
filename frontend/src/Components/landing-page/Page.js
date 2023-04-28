@@ -1,5 +1,4 @@
 import "./landing.css";
-import Footer from "./Footer";
 
 function Page() {
   return (

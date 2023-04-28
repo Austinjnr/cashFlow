@@ -6,8 +6,9 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :beneficiaries
   has_many :transactions
-  has_many :wallets
-
+  has_one :wallet
+ 
+  validates :user_id, uniqueness: true
   def send_welcome_sms
     puts "Sending welcome SMS..."
     account_sid = ENV['TWILIO_ACCOUNT_SID']

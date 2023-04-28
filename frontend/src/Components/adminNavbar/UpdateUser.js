@@ -13,11 +13,11 @@ const UpdateUser = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true); // Set isLoading to true before making fetch request
+        setIsLoading(true); 
 
         const user = { name, email, phone, profile };
-        fetch(`http://localhost:8000/users/${user}`, { // Replace `userId` with the ID of the user you want to update
-            method: 'PATCH', 
+        fetch(`https://cashflow-1rf2.onrender.com/accounts/${user}`, {
+            method: 'PUT', 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
         }).then(() => {
@@ -54,7 +54,7 @@ const UpdateUser = () => {
                     type="file"
                     onChange={(e) => setProfile(e.target.files[0])} /> 
                 {!isLoading && <button>Update User</button>}
-                {isLoading && <button disabled>Updating... <i className="fa-duotone fa-spinner fa-spin-pulse" style={{ '--fa-primary-color': '#000000', '--fa-secondary-color': '#000000' }}></i></button>}
+                {isLoading && <button disabled>Updating...</button>}
             </form>
         </div>
     );
