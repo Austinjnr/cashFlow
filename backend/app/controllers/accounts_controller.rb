@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show update destroy ]
 
-  # GET /accounts
+  # GET /users/:user_id/accounts
   def index
     user = User.find_by(id: params[:user_id])
     if user.nil?
@@ -18,37 +18,34 @@ class AccountsController < ApplicationController
     end
   end
    
-
-  
+  # GET /accounts
   def user_account
-    account = Account.all
-    render json: account
+    @accounts = Account.all
+    render json: @accounts
   end
-  
 
-  # GET /accounts/1
+  # GET /users/:user_id/accounts/:id
   def show
     render json: {
       account: @account.as_json(include: [:beneficiaries, :wallet, :transactions])
     }
   end
 
-
-# POST /accounts
-def create
-  user = User.find(params[:user_id])
-  @account = user.accounts.create(account_params)
-  session[:current_account_id] = @account.id
-  session[:account_sid] = @account.id
-  if @account.valid?
-    render json: { session: session[:account_sid]}, status: :ok
-  else
-    render json: @account.errors, status: :unprocessable_entity
+  # POST /users/:user_id/accounts
+  def create
+    user = User.find(params[:user_id])
+    @account = user.accounts.create(account_params)
+    @wallet = @account.create_wallet(balance: 0)
+    session[:current_account_id] = @account.id
+    session[:account_sid] = @account.id
+    if @account.valid? && @wallet.valid?
+      render json: { sessionAccount: session[:account_sid]}, status: :ok
+    else
+      render json: { errors: @account.errors.merge(@wallet.errors) }, status: :unprocessable_entity
+    end
   end
-end
 
-
-  # PATCH/PUT /accounts/1
+  # PATCH/PUT /users/:user_id/accounts/:id
   def update
     if @account.update(account_params)
       render json: @account
@@ -57,7 +54,7 @@ end
     end
   end
 
-  # DELETE /accounts/1
+  # DELETE /users/:user_id/accounts/:id
   def destroy
     @account.destroy
   end
@@ -70,7 +67,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def account_params
-   
-    params.require(:account).permit(:phone_number, :avatar_url, :id_number, :account_number).merge(user_id: params[:user_id])
-end
+      params.require(:account).permit(:phone_number, :avatar_url, :id_number, :account_number).merge(user_id: params[:user_id])
+    end
 end

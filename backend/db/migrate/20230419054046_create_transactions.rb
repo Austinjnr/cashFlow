@@ -3,7 +3,7 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
     create_table :transactions do |t|
       t.string :transaction_type
       t.integer :amount
-      t.string :transaction_fee
+      t.decimal :transaction_fee, precision: 8, scale: 2
       t.references :account , foreign_key: true
       t.references :beneficiary , foreign_key: true
       t.timestamps

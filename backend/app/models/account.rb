@@ -8,7 +8,6 @@ class Account < ApplicationRecord
   has_many :transactions
   has_one :wallet
  
-
   validates :user_id, uniqueness: true
   def send_welcome_sms
     puts "Sending welcome SMS..."

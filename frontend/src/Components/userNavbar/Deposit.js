@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Deposit = ({AccountId}) => {
+const Deposit = () => {
   const [amount, setAmount] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-   console.log(AccountId);
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    axios.post(`https://cashflow-1rf2.onrender.com/deposit/${AccountId}`, {
+    axios.post(`https://cashflow-1rf2.onrender.com/deposit`, {
       amount: amount,
     })
     .then((response) => {
