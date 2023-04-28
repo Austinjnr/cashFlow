@@ -57,7 +57,7 @@ export default function App() {
     path === "/send" ||
     path === "/profile-setup" ||
     path === "/top-up" ||
-    path === "/user-transactions" ||
+    path === "/user-transaction" ||
     path === "/user-profile" ||
     path === "/new-beneficary" ||
     path === "/beneficaries" ||
@@ -115,9 +115,11 @@ export default function App() {
           <Route exact path="/new-beneficary" 
           render={() => <AddBeneficiary AccountId={account} />}/>
           <Route exact path="/beneficaries" 
-          render={() => <Beneficiaries AccountId={account}/>}/> 
+          render={() => <Beneficiaries userId={session}/>}/> 
           <Router exact path="/home" component={Cashflow} />
-          <Route exact path="/user-transaction" component={Transaction} />
+          <Route exact path="/user-transaction" 
+           render={() => <Transaction userId={session} />}
+           />
 
           {/* <AdminNav />    */}
           <Route exact path="/admin-home" component={AdminHome} />

@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 const Wallet = ({userId}) => {
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState('');
 
   const [userData] = useState({
     labels: UserData.map((transaction) => transaction.transaction_type),
@@ -29,16 +29,16 @@ const Wallet = ({userId}) => {
   });
 
   useEffect(()=>{
-    axios.get(`https://cashflow-1rf2.onrender.com/accounts/${userId}`)
+    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
     .then((res)=>{
-      res.data.account.map((acount)=>{
-        return(
-          setDetails(acount)
+      setDetails(res.data.map((data)=>{
+        return (
+          data = data.wallet.balance
         )
-      })
+      }))
     })
-  })
-  console.log(details);
+  },[userId])
+  // console.log(details);
   // useEffect(() => {
   //   fetch(")
   //     .then((res) => res.json())
@@ -62,7 +62,7 @@ const Wallet = ({userId}) => {
         >
           <div>
             <h2>Your CashFlow Balance is:</h2>
-            {details && <h3>ksh {details.balance}</h3>}
+            {details && <h3>ksh {details}</h3>}
           </div>
           <div></div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 //import axios from "axios";
 
 
@@ -94,20 +94,21 @@ const Send = (walletIds) => {
               ))}
             </select>
           </div>
+          <button type="button" className="btn btn-primary" onClick={handleSendMoney}></button>
           {/* <div className="mb-3">
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
               Add Beneficiary
             </button>
           </div> */}
           <div className="mb-3">
-            <Link to='/user-transactions'>
-            {<button type="button" className="btn btn-primary" onClick={handleSendMoney}>
+            {/* <Link to='/user-transactions'>
+            {
               Send Money
             </button>}
-            {<button disable>
+            {<button disable={true}>
               Sending...
             </button>}
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

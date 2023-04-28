@@ -14,7 +14,7 @@ const AddBeneficiary = ({AccountId}) => {
     setIsLoading(true)
   
     const beneficiary = {name, phone, email}
-    fetch(`http://localhost:4000/beneficiaries/${AccountId}`, {
+    fetch(`https://cashflow-1rf2.onrender.com/beneficiaries/${AccountId}`, {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(beneficiary)
