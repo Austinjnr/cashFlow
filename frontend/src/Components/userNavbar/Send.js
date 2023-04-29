@@ -1,120 +1,109 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from 'react-router-dom';
-//import axios from "axios";
 
+export default function Send() {
+  const [isBeneficiarySelected, setIsBeneficiarySelected] = useState(false);
+  const [beneficiaries, setBeneficiaries] = useState([]);
+  const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
+  const [accountNumber, setAccountNumber] = useState("");
+  const [amount, setAmount] = useState("");
 
-const Send = (walletIds) => {
+  useEffect(() => {
+    // Fetch beneficiaries from backend and set to the state
+    fetch("/beneficiaries")
+      .then((response) => response.json())
+      .then((data) => setBeneficiaries(data))
+      .catch((error) => console.error(error));
+  }, []);
 
-  console.log(walletIds);
+  const handleBeneficiaryChange = (event) => {
+    const beneficiaryId = event.target.value;
+    if (beneficiaryId === "other") {
+      setIsBeneficiarySelected(false);
+      setSelectedBeneficiary(null);
+    } else {
+      const selectedBeneficiary = beneficiaries.find(
+        (beneficiary) => beneficiary.id === beneficiaryId
+      );
+      setSelectedBeneficiary(selectedBeneficiary);
+      setIsBeneficiarySelected(true);
+    }
+  };
 
-    const [amount, setAmount] = useState("");
-    const [beneficiaries, setBeneficiaries] = useState([]);
-    const [selectedBeneficiary, setSelectedBeneficiary] = useState("");
-
-    //const [newBeneficiary, setNewBeneficiary] = useState({ name: "", email: "", phone_number: "" });
-  
-    useEffect(() => {
-      fetchBeneficiaries();
-    }, []);
-  
-    const fetchBeneficiaries = async () => {
-        try {
-          const response = await fetch("");
-          const data = await response.json();
-          setBeneficiaries(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-  
-    const handleAmountChange = (event) => {
-      setAmount(event.target.value);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Send form data to backend
+    const formData = {
+      accountNumber: isBeneficiarySelected
+        ? selectedBeneficiary.accountNumber
+        : accountNumber,
+      amount: amount,
     };
-  
-    const handleBeneficiaryChange = (event) => {
-      setSelectedBeneficiary(event.target.value);
-    };
-  
-    // const handleNewBeneficiaryChange = (event) => {
-    //   setNewBeneficiary({ ...newBeneficiary, [event.target.name]: event.target.value });
-    // };
-  
-    // const handleAddBeneficiary = async () => {
-    //   try {
-    //     const response = await axios.post("/beneficiaries", { beneficiary: newBeneficiary });
-    //     setBeneficiaries([...beneficiaries, response.data]);
-    //     setNewBeneficiary({ name: "", email: "", phone_number: "" });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-  
-    const handleSendMoney = async () => {
-        try {
-          const response = await fetch( `https://cashflow-1rf2.onrender.com/wallets/${walletIds}/send_money`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: amount, beneficiary_id: selectedBeneficiary })
-          });
-          const data = await response.json();
-          if (data.success) {
-            alert(data.message);
-            setAmount("");
-            setSelectedBeneficiary("");
-          } else {
-            throw new Error(data.error);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      
+    fetch("/send-money", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // Display success message
+        alert(
+          `Money sent successfully to ${
+            selectedBeneficiary ? selectedBeneficiary.name : accountNumber
+          }`
+        );
+      })
+      .catch((error) => console.error(error));
+  };
 
-
-    return ( 
-        <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="w-50">
-          <h2 className="text-center mb-4">Send Money</h2>
-          <div className="mb-3">
-            <label htmlFor="amount" className="form-label">
-              Amount
-            </label>
-            <input type="number" className="form-control" id="amount" value={amount} onChange={handleAmountChange} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="beneficiary" className="form-label">
-              Beneficiary
-            </label>
-            <select className="form-select" id="beneficiary" value={selectedBeneficiary} onChange={handleBeneficiaryChange}>
-              <option value="">Select beneficiary</option>
-              {beneficiaries.map((beneficiary) => (
-                <option key={beneficiary.id} value={beneficiary.id}>
-                  {beneficiary.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button type="button" className="btn btn-primary" onClick={handleSendMoney}></button>
-          {/* <div className="mb-3">
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
-              Add Beneficiary
-            </button>
-          </div> */}
-          <div className="mb-3">
-            {/* <Link to='/user-transactions'>
-            {
-              Send Money
-            </button>}
-            {<button disable={true}>
-              Sending...
-            </button>}
-            </Link> */}
-          </div>
-        </div>
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="beneficiary">Beneficiary:</label>
+        <select id="beneficiary" onChange={handleBeneficiaryChange}>
+          <option value="other">Other</option>
+          {beneficiaries.map((beneficiary) => (
+            <option key={beneficiary.id} value={beneficiary.id}>
+              {beneficiary.name} ({beneficiary.accountNumber})
+            </option>
+          ))}
+        </select>
       </div>
-          
-    
-     );
+      {isBeneficiarySelected ? (
+        <div>
+          <p>
+            Send money to {selectedBeneficiary.name} (
+            {selectedBeneficiary.accountNumber})
+          </p>
+          <label htmlFor="amount">Amount:</label>
+          <input
+            id="amount"
+            type="number"
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
+        </div>
+      ) : (
+        <div>
+          <label htmlFor="accountNumber">Account Number:</label>
+          <input
+            id="accountNumber"
+            type="text"
+            value={accountNumber}
+            onChange={(event) => setAccountNumber(event.target.value)}
+          />
+          <label htmlFor="amount">Amount:</label>
+          <input
+            id="amount"
+            type="number"
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
+        </div>
+      )}
+      <button type="submit">Send</button>
+    </form>
+  );
 }
- 
-export default Send;

@@ -35,10 +35,9 @@ class AccountsController < ApplicationController
   # POST /users/:user_id/accounts
   def create
     user = User.find(params[:user_id])
-    @account = user.accounts.create(account_params)
-    @wallet = @account.create_wallet(balance: 0)
-    @account.account_number = generate_account_number
-    create_wallet(account_number: @account.account_number, balance: 0)
+    account_number = generate_account_number(user)
+    @account = user.accounts.create(account_params.merge(account_number: account_number))
+    @wallet = @account.create_wallet(balance: 0, account_number: account_number)
     session[:current_account_id] = @account.id
     session[:account_sid] = @account.id
     if @account.valid? && @wallet.valid?
@@ -77,9 +76,10 @@ class AccountsController < ApplicationController
           .merge(user_id: params[:user_id])
   end
 
-  def generate_account_number
+  def generate_account_number(user)
+    counter = user.accounts.count + 1
     loop do
-      account_number = rand(10 ** 6)
+      account_number = "ACC#{counter.to_s.rjust(6, '0')}#{SecureRandom.hex(2).upcase}"
       break account_number unless Account.exists?(account_number: account_number)
     end
   end
