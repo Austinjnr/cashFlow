@@ -23,32 +23,37 @@ class WalletsController < ApplicationController
     wallets = Wallet.all 
     render json: { wallets: wallets }
   end
+  def wallet
+    receiver_wallet = Wallet.find_by_account_number(params[:receiver_account_number])
+    render json: { receiver_wallet: receiver_wallet }
+  end
 
   def send_money
     sender_wallet = Wallet.find_by(account_id: params[:sender_account_id])
-    receiver_wallet = Wallet.find_by(account_id: params[:receiver_account_id])
+    receiver_wallet = Wallet.find_by_account_number(params[:receiver_account_number])
 
+  
     if sender_wallet.nil? || receiver_wallet.nil?
-      render json: { message: "Invalid account ID" }, status: :bad_request
+      render json: { message: "Invalid account ID or account number" }, status: :bad_request
       return
     end
-
+  
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
-
+  
     if sender_wallet.balance < amount + transaction_fee
       render json: { message: "Insufficient funds" }, status: :bad_request
       return
     end
-
+  
     sender_wallet.balance -= amount + transaction_fee
     sender_wallet.last_transaction = "send"
     sender_wallet.save!
-
+  
     receiver_wallet.balance += amount
     receiver_wallet.last_transaction = "receive"
     receiver_wallet.save!
-
+  
     transaction = Transaction.create!(
       transaction_type: "send",
       amount: amount,
@@ -56,10 +61,12 @@ class WalletsController < ApplicationController
       account_id: sender_wallet.account_id,
       beneficiary_id: receiver_wallet.account_id
     )
-
+  
     render json: { message: "Send successful", transaction: transaction }, status: :ok
   end
-
+  
+  
+  
   def wallet_statistics
     stats = {
       daily: {

@@ -9,7 +9,7 @@ ruby "2.7.4"
 gem "pg", "~> 1.1"
 gem 'rspec-rails', '~> 5.0.0'
 #sending sms using safaricom 
-
+# gem 'shortuuid-rails'
 
 gem 'rspec', '~> 3.12'
 # Use the Puma web server [https://github.com/puma/puma]

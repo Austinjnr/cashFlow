@@ -32,12 +32,15 @@ User.all.sample(7).each do |user|
     )
   end
 
-  # Create a wallet for each account
-  Wallet.create!(
-    balance: Faker::Number.number(digits: 6),
-    last_transaction: "Deposit",
-    account: account
-  )
+  # Create a wallet for each account, only if it doesn't already exist
+  unless account.wallet.present?
+    Wallet.create!(
+      balance: Faker::Number.number(digits: 6),
+      last_transaction: ["deposit", "rent" , "rent", "fee"].sample,
+      account_number: account.account_number,
+      account: account
+    )
+  end
 
   # Create some transactions for each account
   4.times do
