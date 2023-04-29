@@ -31,6 +31,7 @@ import NotFound from "./Components/NotFound";
 import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
 import Cashflow from "./Components/userNavbar/Cashflow";
+import Dashboard from "./Components/adminNavbar/Dashboard";
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -119,6 +120,7 @@ export default function App() {
           <Route exact path="/user-transaction" component={Transaction} />
 
           {/* <AdminNav />    */}
+          <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path="/admin-home" component={AdminHome} />
           <Route exact path="/details/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />
