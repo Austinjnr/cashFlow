@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Wallet = ({userId}) => {
   const [details, setDetails] = useState('');
-
+ console.log(userId);
   const [userData] = useState({
     labels: UserData.map((transaction) => transaction.transaction_type),
     datasets: [
