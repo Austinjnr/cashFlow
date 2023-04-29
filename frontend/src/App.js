@@ -60,7 +60,7 @@ export default function App() {
     path === "/user-transaction" ||
     path === "/user-profile" ||
     path === "/new-beneficary" ||
-    path === "/beneficaries" ||
+    path === "/beneficiaries" ||
     path === "/update-profile" ||
     path === "*"
   ) {
@@ -114,7 +114,8 @@ export default function App() {
           />
           <Route exact path="/new-beneficary" 
           render={() => <AddBeneficiary AccountId={account} />}/>
-          <Route exact path="/beneficaries" 
+          <Route exact 
+          path="/beneficiaries" 
           render={() => <Beneficiaries userId={session}/>}/> 
           <Router exact path="/home" component={Cashflow} />
           <Route exact path="/user-transaction" 
