@@ -30,6 +30,6 @@ Rails.application.routes.draw do
   post  'send-money/account_id', to: 'wallets#send-money'
   post '/accounts/:user_id', to: 'accounts#create'
   delete '/userprofile/:user_id/:id', to: 'accounts#destroy'
+  get '/accounts', to: 'accounts#account'
 
-  get '/accounts', to: 'accounts#user_account'
 end
