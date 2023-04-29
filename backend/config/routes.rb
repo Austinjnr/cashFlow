@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   resources :wallets , only: [:index], param: :id
 
   get '/statistics', to: 'wallets#wallet_statistics'
-
     post "deposit/:account_id", to: "wallets#deposit"
-    post "send/:receiver_account_id/:sender_account_id", to: "wallets#send_money"
+    post "send/:receiver_account_number/:sender_account_id", to: "wallets#send_money"
  
   # User routes
   resources :users, only: [:index], param: :id

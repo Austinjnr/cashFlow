@@ -16,5 +16,6 @@ class AddWalletStatisticsToWallets < ActiveRecord::Migration[7.0]
     add_column :wallets, :company_income_per_week, :decimal
     add_column :wallets, :company_income_per_month, :decimal
     add_column :wallets, :company_income_per_year, :decimal
+    add_column :beneficiaries, :account_number, :integer
   end
 end
