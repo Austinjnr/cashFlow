@@ -17,7 +17,12 @@ class AccountsController < ApplicationController
       render json: { error: "You do not have any accounts. Please create an account." }, status: :no_content
     end
   end
-  
+   
+  # GET accounts
+  def account
+    @account =Account.all
+    render json: @account
+  end
 
   # GET /accounts/:id
   def show

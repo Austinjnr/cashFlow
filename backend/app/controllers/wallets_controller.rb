@@ -20,8 +20,8 @@ class WalletsController < ApplicationController
   end
 
   def index
-    wallet = Wallet.all 
-    render json: { wallets: wallet }
+    wallets = Wallet.all 
+    render json: { wallets: wallets }
   end
 
   def send_money
@@ -60,34 +60,35 @@ class WalletsController < ApplicationController
     render json: { message: "Send successful", transaction: transaction }, status: :ok
   end
 
-
   def wallet_statistics
     stats = {
       daily: {
-        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count,
-        amount: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:amount),
-        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee),
-        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).sum(:transaction_fee)
+        transactions: Transaction.where(created_at: Time.zone.now.all_day).count,
+        amount: Transaction.where(created_at: Time.zone.now.all_day).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.all_day).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.all_day).sum(:transaction_fee)-Transaction.where(created_at: Time.zone.now.all_day).sum(:transaction_fee) * 0.05 
       },
       weekly: {
-        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).count,
-        amount: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:amount),
-        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee),
-        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).sum(:transaction_fee)
+        transactions: Transaction.where(created_at: Time.zone.now.all_week).count,
+        amount: Transaction.where(created_at: Time.zone.now.all_week).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.all_week).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.all_week).sum(:transaction_fee) - Transaction.where(created_at: Time.zone.now.all_week).sum(:transaction_fee) * 0.1
       },
       monthly: {
-        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).count,
-        amount: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:amount),
-        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee),
-        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).sum(:transaction_fee)
+        transactions: Transaction.where(created_at: Time.zone.now.all_month).count,
+        amount: Transaction.where(created_at: Time.zone.now.all_month).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.all_month).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.all_month).sum(:transaction_fee) - Transaction.where(created_at: Time.zone.now.all_month).sum(:transaction_fee) * 0.15
       },
       yearly: {
-        transactions: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).count,
-        amount: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:amount),
-        transaction_fee: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee),
-        company_income: Transaction.where(created_at: Time.zone.now.beginning_of_year..Time.zone.now.end_of_year).sum(:transaction_fee)
+        transactions: Transaction.where(created_at: Time.zone.now.all_year).count,
+        amount: Transaction.where(created_at: Time.zone.now.all_year).sum(:amount),
+        transaction_fee: Transaction.where(created_at: Time.zone.now.all_year).sum(:transaction_fee),
+        company_income: Transaction.where(created_at: Time.zone.now.all_year).sum(:transaction_fee)- Transaction.where(created_at: Time.zone.now.all_year).sum(:transaction_fee) * 0.88
       }
     }
+
+
   
     data = {
       columns: ['Statistic', 'Daily', 'Weekly', 'Monthly', 'Yearly'],

@@ -30,5 +30,5 @@ Rails.application.routes.draw do
   delete '/accounts/:user_id/:id', to: 'accounts#destroy'
   post '/accounts/:user_id', to: 'accounts#create'
   delete '/userprofile/:user_id/:id', to: 'accounts#destroy'
-  get '/accounts', to: 'accounts#user_account'
+  get '/accounts', to: 'accounts#account'
 end
