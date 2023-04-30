@@ -121,10 +121,10 @@ export default function App() {
 
           {/* <AdminNav />    */}
           <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path="/admin-home" component={AdminHome} />
-          <Route exact path="/details/:id" component={UserDetails} />
+          <Route exact path="/all-users" component={AdminHome} />
+          <Route exact path="/user/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />
-          <Route exact path="/Admin-wallet" component={AdminWallet} />
+          <Route exact path="/company-wallet" component={AdminWallet} />
           <Route exact path="/login" component={Authentication} />
           <Route exact path="*" component={NotFound} />
         </Switch>

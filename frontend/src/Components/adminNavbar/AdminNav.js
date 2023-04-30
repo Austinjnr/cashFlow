@@ -42,13 +42,13 @@ function AdminNav() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/admin-home' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/all-users' className='nav-links' onClick={closeMobileMenu}>
                 Users
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/admin-wallet'
+                to='/company-wallet'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >

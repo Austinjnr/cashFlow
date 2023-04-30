@@ -61,10 +61,10 @@ const AdminWallet = () => {
   }, []);
 
   return (
-    <>
+    <section className="col-md-12">
     <div className="row mt-5">
 
-      <div className="col-md-8">
+      <div className="col-md-7">
         <div className="card mb-3">
           <div className="card-body">
             <h5 className="text-center">This Week Transactions</h5>
@@ -112,7 +112,7 @@ const AdminWallet = () => {
         </tbody>
       </table>
     )}
-  </>
+  </section>
   );
 };
 
