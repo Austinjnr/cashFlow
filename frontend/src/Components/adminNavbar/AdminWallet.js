@@ -1,8 +1,5 @@
-
-import React from "react";
 import WalletStatistics from "./statistics";
-import React, { useState, useEffect } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Line } from 'react-chartjs-2';
 import { 
     Chart as ChartJS,
