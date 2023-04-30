@@ -22,7 +22,7 @@ ChartJS.register(
 )
 
 const AdminWallet = () => {
-  // const [transaction, setTransaction] = useState(null);
+  const [transaction, setTransaction] = useState(null);
   const line = {
         labels: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
         datasets: [{
