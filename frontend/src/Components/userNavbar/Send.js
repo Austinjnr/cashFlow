@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import BeneficiariesContext from "./BeneficiariesContext";
 
-export default function Send() {
+const Send = ({ AccountId }) => {
   const [isBeneficiarySelected, setIsBeneficiarySelected] = useState(false);
-  const [beneficiaries, setBeneficiaries] = useState([]);
   const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
   const [accountNumber, setAccountNumber] = useState("");
+  const [message, setMessage] = useState("");
   const [amount, setAmount] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    // Fetch beneficiaries from backend and set to the state
-    fetch("/beneficiaries")
-      .then((response) => response.json())
-      .then((data) => setBeneficiaries(data))
-      .catch((error) => console.error(error));
-  }, []);
+  // Get beneficiaries from context
+  const beneficiaries = useContext(BeneficiariesContext);
 
   const handleBeneficiaryChange = (event) => {
     const beneficiaryId = event.target.value;
@@ -21,89 +19,93 @@ export default function Send() {
       setIsBeneficiarySelected(false);
       setSelectedBeneficiary(null);
     } else {
-      const selectedBeneficiary = beneficiaries.find(
-        (beneficiary) => beneficiary.id === beneficiaryId
-      );
-      setSelectedBeneficiary(selectedBeneficiary);
-      setIsBeneficiarySelected(true);
+      const filteredBeneficiary = beneficiaries.filter((beneficiary) => beneficiary.id === beneficiaryId);
+      if (filteredBeneficiary) {
+        setSelectedBeneficiary(filteredBeneficiary);
+        setIsBeneficiarySelected(true);
+        setAccountNumber(filteredBeneficiary.account_number);
+      }
+      console.log(filteredBeneficiary);
+    }
+  };
+  
+
+  const handleAccountNumberChange = (event) => {
+    setAccountNumber(event.target.value);
+    setIsBeneficiarySelected(false);
+    setSelectedBeneficiary(null);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`/send/${accountNumber}/${AccountId}`, {
+        amount,
+        beneficiary_id: selectedBeneficiary ? selectedBeneficiary.account_number : null,
+        message,
+      });
+      console.log(response.data);
+      setAmount("");
+      setMessage("");
+      setIsBeneficiarySelected(false);
+      setSelectedBeneficiary(null);
+      setErrorMessage("");
+    } catch (error) {
+      console.error(error.response.data);
+      setErrorMessage(error.response.data);
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Send form data to backend
-    const formData = {
-      accountNumber: isBeneficiarySelected
-        ? selectedBeneficiary.accountNumber
-        : accountNumber,
-      amount: amount,
-    };
-    fetch("/send-money", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // Display success message
-        alert(
-          `Money sent successfully to ${
-            selectedBeneficiary ? selectedBeneficiary.name : accountNumber
-          }`
-        );
-      })
-      .catch((error) => console.error(error));
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="beneficiary">Beneficiary:</label>
-        <select id="beneficiary" onChange={handleBeneficiaryChange}>
-          <option value="other">Other</option>
-          {beneficiaries.map((beneficiary) => (
-            <option key={beneficiary.id} value={beneficiary.id}>
-              {beneficiary.name} ({beneficiary.accountNumber})
-            </option>
-          ))}
-        </select>
-      </div>
-      {isBeneficiarySelected ? (
-        <div>
-          <p>
-            Send money to {selectedBeneficiary.name} (
-            {selectedBeneficiary.accountNumber})
-          </p>
-          <label htmlFor="amount">Amount:</label>
-          <input
-            id="amount"
-            type="number"
-            value={amount}
-            onChange={(event) => setAmount(event.target.value)}
-          />
-        </div>
-      ) : (
+    <div>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="accountNumber">Account Number:</label>
           <input
-            id="accountNumber"
             type="text"
+            id="accountNumber"
             value={accountNumber}
-            onChange={(event) => setAccountNumber(event.target.value)}
+            onChange={handleAccountNumberChange}
           />
+        </div>
+        <div>
           <label htmlFor="amount">Amount:</label>
           <input
-            id="amount"
             type="number"
+            id="amount"
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
           />
         </div>
-      )}
-      <button type="submit">Send</button>
-    </form>
+        <div>
+          <label htmlFor="message">Message:</label>
+          <input
+            type="text"
+            id="message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="beneficiary">Beneficiary:</label>
+          <select
+            id="beneficiary"
+            value={isBeneficiarySelected ? selectedBeneficiary.id : "other"}
+            onChange={handleBeneficiaryChange}
+          >
+            <option value="other">Other</option>
+            {beneficiaries.map((beneficiary) => (
+              <option key={beneficiary.id} value={beneficiary.id}>
+                {beneficiary.name} ({beneficiary.id})
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="submit">Send</button>
+      </form>
+      {errorMessage && <p>{errorMessage}</p>}
+    </div>
   );
-}
+};
+
+export default Send;
