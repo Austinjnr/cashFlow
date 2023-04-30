@@ -38,7 +38,7 @@ class AccountsController < ApplicationController
     account_number = params[:id].to_s + rand(1000000..9999999).to_s
     @account = user.accounts.create(account_params.merge(account_number: account_number))
     @wallet = @account.create_wallet(balance: 0, account_number: account_number)
-    # session[:current_account_id] = @account.id
+    session[:current_account_id] = @account.id
     session[:account_sid] = @account.id
     if @account.valid? && @wallet.valid?
       render json: { session: session[:account_sid] }, status: :ok
