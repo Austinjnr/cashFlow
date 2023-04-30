@@ -38,10 +38,10 @@ class AccountsController < ApplicationController
     account_number = params[:id].to_s + rand(1000000..9999999).to_s
     @account = user.accounts.create(account_params.merge(account_number: account_number))
     @wallet = @account.create_wallet(balance: 0, account_number: account_number)
-    session[:current_account_id] = @account.id
+    # session[:current_account_id] = @account.id
     session[:account_sid] = @account.id
     if @account.valid? && @wallet.valid?
-      render json: { sessionAccount: session[:account_sid] }, status: :ok
+      render json: { session: session[:account_sid] }, status: :ok
     else
       render json: { errors: @account.errors.merge(@wallet.errors) }, status: :unprocessable_entity
     end
@@ -72,7 +72,7 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.require(:account).permit(:phone_number, :avatar_url, :id_number)
+    params.require(:account).permit(:phone_number, :avatar_url, :id_number, :name)
           .merge(user_id: params[:user_id])
   end
 
