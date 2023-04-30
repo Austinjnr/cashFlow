@@ -1,28 +1,29 @@
 import { Link } from "react-router-dom";
-import "./admin.css";
 
-const UserList = ({ users, title }) => {
+const UserList = ({details}) => {
+
   return (
-    <div>
-      <h2>{title}</h2>
+    <div className="user-list">
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">No.</th>
             <th scope="col">Name</th>
             <th scope="col">Phone Number</th>
-            <th scope="col">Identity Number</th>
-            <th scope="col">Preview</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <th scope="row">{user.id}</th>
-              <td>{user.name}</td>
-              <td>{user.phone_number}</td>
-              <td>{user.id_number}</td>
-              <td><Link to={`/details/${user.id}`}>view</Link></td>
+          {details.map((detail) => (
+            <tr key={detail.id}>
+              <th scope="row">{detail.id}</th>
+              <td>{detail.name}</td>
+              <td>{detail.phone_number}</td>
+              <td>
+                <Link to={`/user/${detail.id}`}>
+                  <i className="fa-solid fa-user-pen"></i>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
