@@ -28,7 +28,7 @@ export const Login = (props) => {
       const data = await res.json();
       sessionStorage.setItem("userId", data.session)
       if (data.message === "admin") {
-        history.push('/admin-home')
+        history.push('/dashboard')
         window.location.reload();
         setMessage(data.message);
       } else if (data.message === "user"){

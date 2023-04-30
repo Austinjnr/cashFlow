@@ -36,14 +36,19 @@ function AdminNav() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <li className='nav-item'>
+              <Link to='/dashboard' className='nav-links' onClick={closeMobileMenu}>
+                Dashboard
+              </Link>
+            </li>
             <li className='nav-item'>
-              <Link to='/admin-home' className='nav-links' onClick={closeMobileMenu}>
-                Home
+              <Link to='/all-users' className='nav-links' onClick={closeMobileMenu}>
+                Users
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/admin-wallet'
+                to='/company-wallet'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
