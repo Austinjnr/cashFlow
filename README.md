@@ -42,7 +42,7 @@ This project was developed under the MIT License.
    
    2. Moses Ochacha: [Mosesochacha](https://github.com/Mosesochacha)
    
-   3. Brian Wahungu:
+   3. Brian Wahungu: [BrianWahungu](https://github.com/BrianWahungu)
    
    4. Alvin Njonjo: [FelaSupa](https://github.com/fela-Supa)
    
