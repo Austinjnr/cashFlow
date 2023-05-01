@@ -17,7 +17,7 @@ function Reset() {
   }
 
   return (
-    <div className='container'>
+    <div className='container-auth'>
       <div className="image-container">
       <img src='/video/Privacy policy.mp4' alt="login" />
       </div>

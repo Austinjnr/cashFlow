@@ -13,7 +13,7 @@ const Contact = () => {
       </p>
     </div>
     <Link to="customer-care">
-        <button>Find Out More</button>
+        <button className='btn btn-dark'>Find Out More <i class="fa-solid fa-circle-info"></i></button>
     </Link>
   </div>
   <div style={{ flex: 5, textAlign: "right" }}>

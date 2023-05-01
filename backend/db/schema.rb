@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_29_120732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_number"], name: "index_accounts_on_account_number", unique: true
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
@@ -33,14 +34,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "account_number"
     t.index ["account_id"], name: "index_beneficiaries_on_account_id"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_type"
     t.integer "amount"
+    t.decimal "balance"
+    t.string "receiver_account_name"
+    t.integer "receiver_account_number"
     t.decimal "transaction_fee", precision: 8, scale: 2
-    t.bigint "account_id"
+    t.bigint "account_id", null: false
     t.bigint "beneficiary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -78,7 +83,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
     t.decimal "company_income_per_week"
     t.decimal "company_income_per_month"
     t.decimal "company_income_per_year"
+    t.integer "account_number"
     t.index ["account_id"], name: "index_wallets_on_account_id"
+    t.index ["account_number"], name: "index_wallets_on_account_number", unique: true
   end
 
   add_foreign_key "accounts", "users"
@@ -86,4 +93,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_024315) do
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "beneficiaries"
   add_foreign_key "wallets", "accounts"
+  add_foreign_key "wallets", "accounts", column: "account_number", primary_key: "account_number"
 end

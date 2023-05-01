@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.create!(transaction_params)
 
-      render json: @transaction, status: :created, location: @transaction
+    render json: @transaction, status: :created, location: @transaction
   end
 
   # PATCH/PUT /transactions/1
@@ -35,13 +35,14 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:trasaction_type, :amount, :trasaction_fee)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:trasaction_type, :amount, :trasaction_fee)
+  end
 end

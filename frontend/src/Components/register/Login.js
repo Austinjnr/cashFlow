@@ -28,7 +28,7 @@ export const Login = (props) => {
       const data = await res.json();
       sessionStorage.setItem("userId", data.session)
       if (data.message === "admin") {
-        history.push('/admin-home')
+        history.push('/dashboard')
         window.location.reload();
         setMessage(data.message);
       } else if (data.message === "user"){
@@ -52,7 +52,7 @@ export const Login = (props) => {
     }
 
     return (
-      <div className="container">
+      <div className="container-auth">
         <div className="image-container">
         <img src='/video/Mobile login.mp4' alt="login"/>
         </div>
@@ -77,7 +77,7 @@ export const Login = (props) => {
                 id="password" 
                 name="password" />
                   <button type="submit" disabled={isLoggingIn}>
-                  {isLoggingIn ? "LoggingIn..." : "LOGIN"}
+                  {isLoggingIn ? "Loading..." : "LOGIN"}
                 </button>
                 <div style={{backgroundColor: "red" , color: "black"}}>
                   {message && <p>{message}</p>}
@@ -86,6 +86,7 @@ export const Login = (props) => {
                 <button className="btn-1" type="submit" onClick={handleChange}>Forgot Password</button>
             </form>
             <button className="link-btn" onClick={() => props.onFormSwitch('sign-up')}>Don't have an account? Register here.</button>
+    
         </div>
         </div>
     )

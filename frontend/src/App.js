@@ -15,6 +15,7 @@ import Navbar from "./Components/userNavbar/Navbar";
 
 import LandingNavbar from "./Components/landing-page/LandingpgNavbar";
 import Fees from "./Components/landing-page/Fees";
+import Rates from "./Components/landing-page/Rates";
 import Contact from "./Components/landing-page/ContactUs";
 import CashFlowLandingpg from "./Components/landing-page/CashFlowHome";
 import Authentication from "./Components/register/Authentication";
@@ -31,6 +32,9 @@ import NotFound from "./Components/NotFound";
 import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
 import Cashflow from "./Components/userNavbar/Cashflow";
+import Dashboard from "./Components/adminNavbar/Dashboard";
+import Contract from "./Components/landing-page/Contract";
+import Questions from "./Components/landing-page/Questions";
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -42,6 +46,7 @@ export default function App() {
   if (
     path === "/" ||
     path === "/fees" ||
+    path === "/rates" ||
     path === "/blogs" ||
     path === "/contact-us" ||
     path === "/customer-care" ||
@@ -60,7 +65,7 @@ export default function App() {
     path === "/user-transaction" ||
     path === "/user-profile" ||
     path === "/new-beneficary" ||
-    path === "/beneficaries" ||
+    path === "/beneficiaries" ||
     path === "/update-profile" ||
     path === "*"
   ) {
@@ -77,25 +82,31 @@ export default function App() {
           {/* landing page  <LandingNavbar />  */}
           <Route exact path="/" component={CashFlowLandingpg} />
           <Route exact path="/fees" component={Fees} />
+          <Route exact path="/rates" component={Rates} />
           <Route exact path="/blogs" component={Blogs} />
           <Route exact path="/contact-us" component={Contact} />
           <Route exact path="/customer-care" component={CustomerCare} />
           <Route exact path="/login" component={Authentication} />
           <Route exact path="/reset-password" component={Reset} />
           <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/contract" component={Contract} />
+          <Route exact path="/questions" component={Questions} />
 
           {/* NAvbar */}
           <Route
             exact
             path="/user-wallet"
-            render={() => <Wallet AccountId={account} />}
+            render={() => <Wallet AccountId={account} 
+            userId={session}
+            />}
           />
-          <Route exact path="/send" component={Send} />
+          <Route exact path="/send" 
+         render={() => <Send AccountId={account} />}
+           />
           <Route
             exact
             path="/top-up"
             render={() => <Deposit AccountId={account} />}
-            component={Deposit}
           />
           <Route
             exact
@@ -113,16 +124,20 @@ export default function App() {
           />
           <Route exact path="/new-beneficary" 
           render={() => <AddBeneficiary AccountId={account} />}/>
-          <Route exact path="/beneficaries" 
-          render={() => <Beneficiaries AccountId={account}/>}/> 
+          <Route exact 
+          path="/beneficiaries" 
+          render={() => <Beneficiaries userId={session}/>}/> 
           <Router exact path="/home" component={Cashflow} />
-          <Route exact path="/user-transaction" component={Transaction} />
+          <Route exact path="/user-transaction" 
+           render={() => <Transaction userId={session} />}
+           />
 
           {/* <AdminNav />    */}
-          <Route exact path="/admin-home" component={AdminHome} />
-          <Route exact path="/details/:id" component={UserDetails} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path="/all-users" component={AdminHome} />
+          <Route exact path="/user/:id" component={UserDetails} />
           <Route exact path="/update-user" component={UpdateUser} />
-          <Route exact path="/Admin-wallet" component={AdminWallet} />
+          <Route exact path="/company-wallet" component={AdminWallet} />
           <Route exact path="/login" component={Authentication} />
           <Route exact path="*" component={NotFound} />
         </Switch>
