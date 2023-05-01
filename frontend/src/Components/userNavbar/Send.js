@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import "./Send.css";
 import BeneficiariesContext from "./BeneficiariesContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Send = ({ AccountId }) => {
   const [isBeneficiarySelected, setIsBeneficiarySelected] = useState(false);
@@ -8,27 +10,30 @@ const Send = ({ AccountId }) => {
   const [accountNumber, setAccountNumber] = useState("");
   const [message, setMessage] = useState("");
   const [amount, setAmount] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   // Get beneficiaries from context
   const beneficiaries = useContext(BeneficiariesContext);
 
   const handleBeneficiaryChange = (event) => {
-    const beneficiaryId = event.target.value;
-    if (beneficiaryId === "other") {
-      setIsBeneficiarySelected(false);
+    const accountNumber = event.target.value;
+    if (accountNumber === "other") {
+      setIsBeneficiarySelected(true);
       setSelectedBeneficiary(null);
     } else {
-      const filteredBeneficiary = beneficiaries.filter((beneficiary) => beneficiary.id === beneficiaryId);
+      const filteredBeneficiary = beneficiaries.find(
+        (beneficiary) => beneficiary.account_number === accountNumber
+      );
       if (filteredBeneficiary) {
         setSelectedBeneficiary(filteredBeneficiary);
         setIsBeneficiarySelected(true);
         setAccountNumber(filteredBeneficiary.account_number);
       }
-      console.log(filteredBeneficiary);
     }
+    setAccountNumber(accountNumber);
   };
-  
 
   const handleAccountNumberChange = (event) => {
     setAccountNumber(event.target.value);
@@ -38,27 +43,38 @@ const Send = ({ AccountId }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setShowSpinner(true);
+    setIsSending(true);
     try {
-      const response = await axios.post(`/send/${accountNumber}/${AccountId}`, {
-        amount,
-        beneficiary_id: selectedBeneficiary ? selectedBeneficiary.account_number : null,
-        message,
-      });
-      console.log(response.data);
-      setAmount("");
-      setMessage("");
-      setIsBeneficiarySelected(false);
-      setSelectedBeneficiary(null);
-      setErrorMessage("");
+      const response = await axios.post(
+        `http://localhost:4000/send/${accountNumber}/${AccountId}`,
+        {
+          amount,
+          beneficiary_id: selectedBeneficiary ? selectedBeneficiary.id : null,
+          message,
+        }
+      );
+      const data = await response.json();
+      if (data.transaction) {
+        setMessage(
+          `Dear customer, you have successfully sent Ksh.${data.transaction.amount} on ${data.transaction.date}.`
+        );
+        window.location.reload();
+      } else {
+        setError(data.error);
+        window.location.reload();
+      }
     } catch (error) {
-      console.error(error.response.data);
-      setErrorMessage(error.response.data);
+      console.log(error);
+      setIsSending(false);
+    } finally {
+      setShowSpinner(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="cards">
         <div>
           <label htmlFor="accountNumber">Account Number:</label>
           <input
@@ -78,32 +94,45 @@ const Send = ({ AccountId }) => {
           />
         </div>
         <div>
-          <label htmlFor="message">Message:</label>
-          <input
-            type="text"
-            id="message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-          />
-        </div>
-        <div>
           <label htmlFor="beneficiary">Beneficiary:</label>
           <select
             id="beneficiary"
-            value={isBeneficiarySelected ? selectedBeneficiary.id : "other"}
+            value={
+              isBeneficiarySelected
+                ? selectedBeneficiary.account_number
+                : "other"
+            }
             onChange={handleBeneficiaryChange}
           >
             <option value="other">Other</option>
             {beneficiaries.map((beneficiary) => (
-              <option key={beneficiary.id} value={beneficiary.id}>
-                {beneficiary.name} ({beneficiary.id})
+              <option key={beneficiary.id} value={beneficiary.account_number}>
+                {beneficiary.name} ({beneficiary.account_number})
               </option>
             ))}
           </select>
         </div>
-        <button type="submit">Send</button>
+        {error && <p>{error}</p>}
+
+        <button
+          className="buttonbtn"
+          type="submit"
+          style={{ width: "10em", height: "3em" }}
+        >
+          {showSpinner && isSending ? (
+            <div
+              className="spinner-border spinner-border-sm btn"
+              id="btn"
+              role="status"
+            >
+              <span className="visually-hidden">Sending...</span>
+              <span class="msg" id="msg"></span>
+            </div>
+          ) : (
+            "Send"
+          )}
+        </button>
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 };

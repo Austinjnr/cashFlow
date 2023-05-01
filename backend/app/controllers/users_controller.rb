@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
- 
+
   def index
     users = User.all
     render json: users
   end
-    
+
   def authenticate
     user = User.find_by(email: params[:email])
 
@@ -14,13 +14,12 @@ class UsersController < ApplicationController
       user_not_found
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
-    
-      role = user.email.include?('admin') ? 'admin' : 'user'
+
+      role = user.email.include?("admin") ? "admin" : "user"
       render json: { message: role, session: session[:user_id] }, status: :ok
     else
       record_invalid("Invalid password")
     end
-
   rescue => e
     render json: { error: "Login failed" }, status: :bad_request
   end

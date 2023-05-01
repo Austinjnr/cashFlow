@@ -1,4 +1,5 @@
-require 'bcrypt'
+require "bcrypt"
+
 class User < ApplicationRecord
   has_many :accounts
   validates :username, presence: true
