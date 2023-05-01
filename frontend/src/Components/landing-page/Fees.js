@@ -1,84 +1,66 @@
-import './landing.css';
+import { Link } from 'react-router-dom';
 
 const Fees = () => {
-    return (  
-        <section className='fee-section'>
-        <h2 className="charges">Charges</h2>
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Receive money</h5>
-                <p className="card-text">Receiving money is always free of charge</p>
-                <h3>FREE</h3>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Send money</h5>
-                <p className="card-text">
-                  You can easily make payments at excellent rates in local
-                  currency.
-                </p>
-                <h3>Below 200 Ksh is Free</h3>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Deposit funds</h5>
-                <p className="card-text">
-                  With a variety of options for depositing your account, there is
-                  always an option that is right for you.
-                </p>
-                <h3>Above 500 Ksh up to 0.5%</h3>
-              </div>
+  return (
+    <section className="mt-5">
+      <h2 className="text-center">Charges</h2>
+      <div style={{marginLeft: '2rem'}}>
+      <div className="row row-cols-1 row-cols-md-2 g-4 text-center col-md-12">
+        <div className="col">
+          <div className="card h-100">
+            <div className="card-body">
+              <h3 className="card-title">Receive money</h3>
+              <p className="card-text">
+                Receiving money is always free of charge
+              </p>
+              <h5>Free</h5>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Send money</h5>
-                <p className="card-text">
-                  You can easily make payments at excellent rates.
-                </p>
-                <h3>Above 200 Ksh up to 1.0%</h3>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Administrative fee</h5>
-                <p className="card-text">
-                  Keep using your cashflow Account and you will never be charged an
-                  administrative fee!
-                </p>
-                <h3>Free</h3>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card text-center mb-3" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">Customer Care</h5>
-                <p className="card-text">
-                  Keep using your cashflow Account and you will never be charged a
-                  consolation fee!
-                </p>
-                <h3>Free</h3>
-              </div>
+        <div className="col">
+          <div className="card h-100">
+            <div className="card-body">
+              <h3 className="card-title">Customer Care</h3>
+              <p className="card-text">
+                Keep using your cashflow Account and you will never be charged a
+                consolation fee!
+              </p>
+              <h5>Free</h5>
             </div>
           </div>
         </div>
-      </section>
-      
-    );
-}
- 
+        <div className="col">
+          <div className="card h-100">
+            <div className="card-body">
+              <h3 className="card-title">Send money</h3>
+              <p className="card-text">
+                You can easily make payments at excellent rates in local
+                currency.
+              </p>
+              <Link to='/rates'>
+              <h5>Check Rates <i className="fa-solid fa-arrow-right"></i></h5>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="card h-100">
+            <div className="card-body">
+              <h3 className="card-title">Deposit funds</h3>
+              <p className="card-text">
+                With a variety of options for depositing your account, there is
+                always an option that is right for you.
+              </p>
+              <Link to='/rates'>
+              <h5>Check Rates <i className="fa-solid fa-arrow-right"></i></h5>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  );
+};
+
 export default Fees;
