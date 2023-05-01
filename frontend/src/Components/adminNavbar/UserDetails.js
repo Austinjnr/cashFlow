@@ -10,6 +10,7 @@ const UserDetails = () => {
   const history = useHistory()
 
   useEffect(() => {
+
     fetch("https://cashflow-1rf2.onrender.com/accounts/" + id)
       .then((res) => {
         if (!res.ok) {
@@ -35,7 +36,6 @@ const UserDetails = () => {
       history.push('/all-users')
     })
   }
-
   return (
     <div className="user-details mt-5">
       <div className="text-center">

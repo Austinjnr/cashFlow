@@ -1,119 +1,175 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-//import axios from "axios";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import "./Send.css";
+import BeneficiariesContext from "./BeneficiariesContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+const Send = ({ AccountId }) => {
+  const [isBeneficiarySelected, setIsBeneficiarySelected] = useState(false);
+  const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
+  const [accountNumber, setAccountNumber] = useState("");
+  const [message, setMessage] = useState("");
+  const [amount, setAmount] = useState("");
+  const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
-const Send = (walletIds) => {
+  // Get beneficiaries from context
+  const beneficiaries = useContext(BeneficiariesContext);
 
-  console.log(walletIds);
+  const handleBeneficiaryChange = (event) => {
+    const accountNumber = event.target.value;
+    if (accountNumber === "Beneficiary") {
+      setIsBeneficiarySelected(true);
+      setSelectedBeneficiary(null);
+    } else {
+      const filteredBeneficiary = beneficiaries.find(
+        (beneficiary) => beneficiary.account_number === accountNumber
+      );
+      if (filteredBeneficiary) {
+        setSelectedBeneficiary(filteredBeneficiary);
+        setIsBeneficiarySelected(true);
+        setAccountNumber(filteredBeneficiary.account_number);
+      }
+    }
+    setAccountNumber(accountNumber);
+  };
 
-    const [amount, setAmount] = useState("");
-    const [beneficiaries, setBeneficiaries] = useState([]);
-    const [selectedBeneficiary, setSelectedBeneficiary] = useState("");
+  const handleAccountNumberChange = (event) => {
+    setAccountNumber(event.target.value);
+    setIsBeneficiarySelected(false);
+    setSelectedBeneficiary(null);
+  };
 
-    //const [newBeneficiary, setNewBeneficiary] = useState({ name: "", email: "", phone_number: "" });
-  
-    useEffect(() => {
-      fetchBeneficiaries();
-    }, []);
-  
-    const fetchBeneficiaries = async () => {
-        try {
-          const response = await fetch("");
-          const data = await response.json();
-          setBeneficiaries(data);
-        } catch (error) {
-          console.log(error);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setShowSpinner(true);
+    setIsSending(true);
+    try {
+      const response = await axios.post(
+        `https://cashflow-1rf2.onrender.com/send/${accountNumber}/${AccountId}`,
+        {
+          amount,
+          beneficiary_id: selectedBeneficiary ? selectedBeneficiary.id : null,
+          message,
         }
-      };
-  
-    const handleAmountChange = (event) => {
-      setAmount(event.target.value);
-    };
-  
-    const handleBeneficiaryChange = (event) => {
-      setSelectedBeneficiary(event.target.value);
-    };
-  
-    // const handleNewBeneficiaryChange = (event) => {
-    //   setNewBeneficiary({ ...newBeneficiary, [event.target.name]: event.target.value });
-    // };
-  
-    // const handleAddBeneficiary = async () => {
-    //   try {
-    //     const response = await axios.post("/beneficiaries", { beneficiary: newBeneficiary });
-    //     setBeneficiaries([...beneficiaries, response.data]);
-    //     setNewBeneficiary({ name: "", email: "", phone_number: "" });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-  
-    const handleSendMoney = async () => {
-        try {
-          const response = await fetch( `https://cashflow-dwee.onrender.com/wallets/${walletIds}/send_money`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: amount, beneficiary_id: selectedBeneficiary })
-          });
-          const data = await response.json();
-          if (data.success) {
-            alert(data.message);
-            setAmount("");
-            setSelectedBeneficiary("");
-          } else {
-            throw new Error(data.error);
+      );
+      const data = response.data;
+      if (data.transaction) {
+        const date = new Date(data.transaction.created_at).toLocaleString(
+          "en-US",
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            timeZoneName: "short",
           }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      
+        );
+        setMessage(
+          <div style={{ color: "black" }}>
+            Dear customer, you have successfully sent{" "}
+            <span style={{ color: "blue" }}>Ksh.{data.transaction.amount}</span>{" "}
+            to{" "}
+            <span style={{ color: "blue" }}>
+              {data.transaction.receiver_account_name}
+            </span>{" "}
+            ,
+            <span style={{ color: "blue" }}>
+              {data.transaction.receiver_account_number}
+            </span>{" "}
+            on <span style={{ color: "blue" }}>{date}</span>.<br />
+            Your new account balance is{" "}
+            <span style={{ color: "blue" }}>
+              Ksh.{data.transaction.balance}
+            </span>
+            .<br />
+            Transaction fee was{" "}
+            <span style={{ color: "blue" }}>
+              Ksh.{data.transaction.transaction_fee}
+            </span>
+            .<br />
+            Thank you for choosing CashFlow. We move together.
+          </div>
+        );
 
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsSending(false);
+    } finally {
+      setShowSpinner(false);
+    }
+  };
 
-    return ( 
-        <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="w-50">
-          <h2 className="text-center mb-4">Send Money</h2>
-          <div className="mb-3">
-            <label htmlFor="amount" className="form-label">
-              Amount
-            </label>
-            <input type="number" className="form-control" id="amount" value={amount} onChange={handleAmountChange} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="beneficiary" className="form-label">
-              Beneficiary
-            </label>
-            <select className="form-select" id="beneficiary" value={selectedBeneficiary} onChange={handleBeneficiaryChange}>
-              <option value="">Select beneficiary</option>
-              {beneficiaries.map((beneficiary) => (
-                <option key={beneficiary.id} value={beneficiary.id}>
-                  {beneficiary.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          {/* <div className="mb-3">
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
-              Add Beneficiary
-            </button>
-          </div> */}
-          <div className="mb-3">
-            <Link to='/user-transactions'>
-            {<button type="button" className="btn btn-primary" onClick={handleSendMoney}>
-              Send Money
-            </button>}
-            {<button disable>
-              Sending...
-            </button>}
-            </Link>
-          </div>
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className="cards">
+        <div>
+          <label htmlFor="accountNumber">Account Number:</label>
+          <input
+            type="text"
+            id="accountNumber"
+            value={accountNumber}
+            onChange={handleAccountNumberChange}
+          />
         </div>
-      </div>
-          
-    
-     );
-}
- 
+        <div>
+          <label htmlFor="amount">Amount:</label>
+          <input
+            type="number"
+            id="amount"
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="beneficiary">Beneficiary:</label>
+          <select
+            id="beneficiary"
+            value={
+              isBeneficiarySelected
+                ? selectedBeneficiary.account_number
+                : "other"
+            }
+            onChange={handleBeneficiaryChange}
+          >
+            <option value="Beneficiary">Beneficiaries</option>
+            {beneficiaries.map((beneficiary) => (
+              <option key={beneficiary.id} value={beneficiary.account_number}>
+                {beneficiary.name} ({beneficiary.account_number})
+              </option>
+            ))}
+          </select>
+        </div>
+        {error && <p>{error}</p>}
+        {message && <p>{message}</p>}
+
+        <button
+          className="buttonbtn"
+          type="submit"
+          style={{ width: "10em", height: "3em" }}
+        >
+          {showSpinner && isSending ? (
+            <div
+              className="spinner-border spinner-border-sm btns"
+              id="btns"
+              role="status"
+            >
+              <span className="visually-hidden">Sending...</span>
+              <span className="msg" id="msg"></span>
+            </div>
+          ) : (
+            "Send"
+          )}
+        </button>
+      </form>
+    </div>
+  );
+};
+
 export default Send;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import WalletStatistics from "./statistics";
+import { useState, useEffect } from "react";
 import { Line } from 'react-chartjs-2';
 import { 
     Chart as ChartJS,
@@ -46,6 +46,7 @@ const line = {
   ],
 };
 
+
      const options = {
         plugins: {
             legend: true
@@ -58,7 +59,7 @@ const line = {
         }
     }
 
-  useEffect(() => {
+useEffect(() => {
     fetch("https://cashflow-1rf2.onrender.com/transactions")
       .then((res) => {
         return res.json();
@@ -68,8 +69,8 @@ const line = {
         setFetchedData(data);
       });
   }, []);
-
   return (
+
     <section className="col-md-12">
     <div className="row mt-5">
 
@@ -87,11 +88,7 @@ const line = {
           <div className="card-body">
             <img src="" alt="avatar" />
             <h5>Admin</h5>
-            <ul>
-              <li>Total Users: </li>
-              <li>Weekly Transactions: </li>
-              <li>Current Balance: Ksh</li>
-            </ul>
+            <WalletStatistics />
           </div>
         </div>
       </div>
@@ -123,6 +120,7 @@ const line = {
       </table>
     )}
   </section>
+
   );
 };
 

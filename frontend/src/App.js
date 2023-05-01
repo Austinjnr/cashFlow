@@ -62,10 +62,10 @@ export default function App() {
     path === "/send" ||
     path === "/profile-setup" ||
     path === "/top-up" ||
-    path === "/user-transactions" ||
+    path === "/user-transaction" ||
     path === "/user-profile" ||
     path === "/new-beneficary" ||
-    path === "/beneficaries" ||
+    path === "/beneficiaries" ||
     path === "/update-profile" ||
     path === "*"
   ) {
@@ -96,14 +96,17 @@ export default function App() {
           <Route
             exact
             path="/user-wallet"
-            render={() => <Wallet AccountId={account} />}
+            render={() => <Wallet AccountId={account} 
+            userId={session}
+            />}
           />
-          <Route exact path="/send" component={Send} />
+          <Route exact path="/send" 
+         render={() => <Send AccountId={account} />}
+           />
           <Route
             exact
             path="/top-up"
             render={() => <Deposit AccountId={account} />}
-            component={Deposit}
           />
           <Route
             exact
@@ -121,10 +124,13 @@ export default function App() {
           />
           <Route exact path="/new-beneficary" 
           render={() => <AddBeneficiary AccountId={account} />}/>
-          <Route exact path="/beneficaries" 
-          render={() => <Beneficiaries AccountId={account}/>}/> 
+          <Route exact 
+          path="/beneficiaries" 
+          render={() => <Beneficiaries userId={session}/>}/> 
           <Router exact path="/home" component={Cashflow} />
-          <Route exact path="/user-transaction" component={Transaction} />
+          <Route exact path="/user-transaction" 
+           render={() => <Transaction userId={session} />}
+           />
 
           {/* <AdminNav />    */}
           <Route exact path='/dashboard' component={Dashboard} />
