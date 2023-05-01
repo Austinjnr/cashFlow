@@ -41,6 +41,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_120732) do
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_type"
     t.integer "amount"
+    t.decimal "balance"
+    t.integer "receiver_account_number"
     t.decimal "transaction_fee", precision: 8, scale: 2
     t.bigint "account_id"
     t.bigint "beneficiary_id"

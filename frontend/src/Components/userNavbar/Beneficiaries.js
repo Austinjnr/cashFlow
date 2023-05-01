@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Beneficiaries = ({userId}) => {
-  const [beneficiaries, setBeneficiaries] = useState([]);
+  const [beneficiaries, setBeneficiaries] = useState('');
   
-  useEffect(() => {
-    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
-    .then((res) => {
-      setBeneficiaries(res.data.map((data) => {
-        return data.beneficiaries
+  useEffect(()=>{
+    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/3`)
+    .then((res)=>{
+      setBeneficiaries(res.data.map((datas)=>{
+        return (
+          datas.beneficiaries
+        )
       }))
     })
-  }, [userId])
-
+  },[userId])
+ 
+  console.log(beneficiaries);
   return (
     <>
       <h1 style={{ marginTop: "2rem" }}>My Beneficiaries</h1>

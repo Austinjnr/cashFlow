@@ -93,7 +93,9 @@ export default function App() {
             userId={session}
             />}
           />
-          <Route exact path="/send" component={Send} />
+          <Route exact path="/send" 
+         render={() => <Send AccountId={account} />}
+           />
           <Route
             exact
             path="/top-up"

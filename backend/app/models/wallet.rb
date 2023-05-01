@@ -6,6 +6,4 @@ class Wallet < ApplicationRecord
   def self.find_by_account_number(account_number)
     joins(:account).find_by("accounts.account_number": account_number)
   end
-  
-  
 end
