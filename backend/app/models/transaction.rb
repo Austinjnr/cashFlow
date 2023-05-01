@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-  belongs_to :account
+  belongs_to :account ,  dependent: :destroy
   belongs_to :beneficiary, optional: true
 
   validates :beneficiary, presence: true, if: -> { transaction_type == "Send Money" }

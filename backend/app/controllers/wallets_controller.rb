@@ -65,7 +65,7 @@ class WalletsController < ApplicationController
       beneficiary_id: receiver_wallet.account_id,
       balance: sender_wallet.balance,
       receiver_account_number: receiver_wallet.account_number,
-      receiver_account_name: account.name, # add the receiver's account name
+      receiver_account_name: account.name, 
       created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
       updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
     )

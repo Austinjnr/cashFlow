@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_120732) do
     t.string "receiver_account_name"
     t.integer "receiver_account_number"
     t.decimal "transaction_fee", precision: 8, scale: 2
-    t.bigint "account_id"
+    t.bigint "account_id", null: false
     t.bigint "beneficiary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
