@@ -24,10 +24,10 @@ function Navbar() {
 
   window.addEventListener('resize', showButton);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
-  };
+  // const handleLogout = () => {
+  //   localStorage.clear();
+  //   window.location.href = '/login';
+  // };
 
   return (
     <section>
@@ -77,7 +77,7 @@ function Navbar() {
           {button && (
             <Button
               buttonStyle='btn--outline'
-              onClick={handleLogout}
+              // onClick={handleLogout}
             >
               LOG OUT
             </Button>

@@ -4,7 +4,7 @@ import axios from "axios";
 import "./User.css";
 
 const Profile = ({ userId }) => {
-  console.log(userId);
+  // console.log(userId);
 
   const API = `https://cashflow-1rf2.onrender.com/userprofile/${userId}`;
 
@@ -16,6 +16,7 @@ const Profile = ({ userId }) => {
       .then((res) => {
         if (Array.isArray(res.data)) {
           const updateProfile = res.data.map((profile) => {
+            console.log(profile);
             return {
               ...profile,
               editing: false,
@@ -27,12 +28,13 @@ const Profile = ({ userId }) => {
             };
           });
           setProfiles(updateProfile);
+          sessionStorage.setItem("AccountId", res.data[0].id);
         } else {
           setError("Please create account");
         }
       })
       .catch((error) => {
-        setError(error.message);
+        setError("Please create account");
       });
   }, [API]);
 
