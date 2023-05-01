@@ -65,16 +65,16 @@ class AccountsController < ApplicationController
   private
 
   def set_account
-    @account = Account.find_by(id: params[:id], user_id: params[:user_id])
+    @account = Account.find_by(id: params[:id])
     if @account.nil?
       render json: { error: "Account not found." }, status: :not_found
     end
   end
-
+  
   def account_params
-    params.require(:account).permit(:phone_number, :avatar_url, :id_number, :name)
-          .merge(user_id: params[:user_id])
+    params.permit(:phone_number, :avatar_url, :id_number, :name).merge(user_id: params[:user_id])
   end
+  
 
   def create_wallet(params)
     @wallet = @account.build_wallet(params)

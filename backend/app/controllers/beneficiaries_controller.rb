@@ -1,6 +1,7 @@
 class BeneficiariesController < ApplicationController
   before_action :set_account, only: [:create]
   before_action :set_beneficiary, only: [:show, :update, :destroy]
+  # before_action :beneficiaries, only: [:create]
 
   # GET /beneficiaries
   def index
@@ -15,18 +16,26 @@ class BeneficiariesController < ApplicationController
 
   # POST /accounts/:account_id/beneficiaries
   def create
-    account = Account.find_by(account_number: params[:account_number])
-    @beneficiary = account.beneficiaries.new(beneficiary_params)
-    if account.present?
+    begin
+      @account_number = Account.find_by(account_number: params[:account_number])
+      raise ActiveRecord::RecordNotFound.new("Dear Customer, the Beneficiary Account number you entered was not found. Kindly confirm it again. Thank you for choosing CashFlow.") unless @account_number.present?
+    
+      @account = Account.find_by(id: params[:account_id])
+      raise ActiveRecord::RecordNotFound.new("Dear Customer, the Beneficiary Account number you entered was not found. Kindly confirm it again. Thank you for choosing CashFlow.") unless @account.present?
+  
+      @beneficiary = @account.beneficiaries.new(beneficiary_params)
       if @beneficiary.save
         render json: @beneficiary, status: :created
       else
         render json: @beneficiary.errors, status: :unprocessable_entity
       end
-    else
-      render json: { message: "Dear Customer, the Beneficiary Account number you entered was not found. Kindly confirm it again. Thank you for choosing CashFlow." }
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: e.message }, status: 404
+    rescue => e
+      render json: { error: "An error occurred while creating the beneficiary. Please try again later." }, status: 500
     end
   end
+  
 
   # PATCH/PUT /beneficiaries/1
   def update
@@ -53,6 +62,6 @@ class BeneficiariesController < ApplicationController
   end
 
   def beneficiary_params
-    params.require(:beneficiary).permit(:name, :email, :phone_number, :account_number)
+    params.require(:beneficiary).permit(:phone_number, :name, :email, :account_number).merge(account_id: params[:account_id])
   end
 end

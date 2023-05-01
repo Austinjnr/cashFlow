@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # Transaction routes
   resources :transactions
-  post "transactions/:account_id", to: "transactions#create"
+  post "transactions/:account_id/:account_number", to: "transactions#create"
 
   # Beneficiary routes
   resources :beneficiaries
@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   put "/userprofile/:user_id/:id", to: "accounts#update"
   delete "/accounts/:user_id/:id", to: "accounts#destroy"
   post "/accounts/:user_id", to: "accounts#create"
+  delete "/accounts/:id", to: "accounts#destroy"
+
   delete "/userprofile/:user_id/:id", to: "accounts#destroy"
   get "/accounts", to: "accounts#account"
 end
+

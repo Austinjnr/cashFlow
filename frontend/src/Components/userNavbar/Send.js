@@ -54,15 +54,51 @@ const Send = ({ AccountId }) => {
           message,
         }
       );
-      const data = await response.json();
+      const data = response.data;
       if (data.transaction) {
-        setMessage(
-          `Dear customer, you have successfully sent Ksh.${data.transaction.amount} on ${data.transaction.date}.`
+        const date = new Date(data.transaction.created_at).toLocaleString(
+          "en-US",
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            timeZoneName: "short",
+          }
         );
-        window.location.reload();
+        setMessage(
+          <div style={{ color: "black" }}>
+            Dear customer, you have successfully sent{" "}
+            <span style={{ color: "blue" }}>Ksh.{data.transaction.amount}</span>{" "}
+            to{" "}
+            <span style={{ color: "blue" }}>
+              {data.transaction.receiver_account_name}
+            </span>{" "}
+            ,
+            <span style={{ color: "blue" }}>
+              {data.transaction.receiver_account_number}
+            </span>{" "}
+            on <span style={{ color: "blue" }}>{date}</span>.<br />
+            Your new account balance is{" "}
+            <span style={{ color: "blue" }}>
+              Ksh.{data.transaction.balance}
+            </span>
+            .<br />
+            Transaction fee was{" "}
+            <span style={{ color: "blue" }}>
+              Ksh.{data.transaction.transaction_fee}
+            </span>
+            .<br />
+            Thank you for choosing CashFlow. We move together.
+          </div>
+        );
+
+        // window.location.reload();
       } else {
         setError(data.error);
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -113,6 +149,7 @@ const Send = ({ AccountId }) => {
           </select>
         </div>
         {error && <p>{error}</p>}
+        {message && <p>{message}</p>}
 
         <button
           className="buttonbtn"
@@ -126,7 +163,7 @@ const Send = ({ AccountId }) => {
               role="status"
             >
               <span className="visually-hidden">Sending...</span>
-              <span class="msg" id="msg"></span>
+              <span className="msg" id="msg"></span>
             </div>
           ) : (
             "Send"
