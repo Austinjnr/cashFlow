@@ -1,0 +1,26 @@
+<%= action_cable_meta_tag %>
+<%= javascript_include_tag 'application' %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chatChannel = consumer.subscriptions.create({
+      channel: "Chat"
+    }, {
+      connected() {
+        console.log("Connected to chat channel.")
+      },
+      disconnected() {
+        console.log("Disconnected from chat channel.")
+      },
+      received(data) {
+        console.log(`Received message: ${data.message}`);
+        // Add code to display the message in the chat interface
+      },
+      send(message) {
+        this.perform('receive', { message: message });
+      }
+    });
+
+    // Add code to handle sending messages from the chat interface
+  });
+</script>
