@@ -10,6 +10,7 @@ gem "pg", "~> 1.1"
 gem 'rspec-rails', '~> 5.0.0'
 #sending sms using safaricom 
 # gem 'shortuuid-rails'
+gem 'actioncable', '~> 7.0'
 
 gem 'shrine', '~> 3.4'
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
