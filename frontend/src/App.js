@@ -32,6 +32,7 @@ import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
 import Cashflow from "./Components/userNavbar/Cashflow";
 import Dashboard from "./Components/adminNavbar/Dashboard";
+import Chat from "./Components/Chat,js";
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -125,6 +126,7 @@ export default function App() {
            render={() => <Transaction userId={session} />}
            />
 
+           <Route exact path="/chart" component={Chat}/>
           {/* <AdminNav />    */}
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path="/all-users" component={AdminHome} />
