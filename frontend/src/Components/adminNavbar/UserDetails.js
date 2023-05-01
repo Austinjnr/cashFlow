@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
+import './Admin.css';
 
 const UserDetails = () => {
   const { id } = useParams();
   const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const history = useHistory()
 
   useEffect(() => {
 
@@ -27,6 +29,13 @@ const UserDetails = () => {
       });
   }, [id]);
 
+  const handleClick = () => {
+    fetch(`https://cashflow-1rf2.onrender.com/accounts/${id}`, {
+      method: 'DELETE',
+    }).then(() => {
+      history.push('/all-users')
+    })
+  }
   return (
     <div className="user-details mt-5">
       <div className="text-center">
@@ -81,12 +90,12 @@ const UserDetails = () => {
                       {user.account?.wallet.balance} Ksh
                     </li>
                   </ul>
-                  <Link to="update-user">
+                  <Link className="update" to='/update-user'>
                     <button className="btn btn-secondary">
-                      Update Account
-                    </button>
+                      Update
+                    </button>  <span></span>
                   </Link>
-                  <button className="btn btn-danger">Delete Account</button>
+                  <button className="btn btn-danger" onClick={handleClick}>Delete</button>
                 </div>
               </div>
             </div>
@@ -103,15 +112,14 @@ const UserDetails = () => {
               </tr>
             </thead>
             <tbody>
-  {user.account?.transactions.map((transaction) => (
-    <tr key={transaction.id}>
-      <td>{transaction.transaction_type}</td>
-      <td>{transaction.amount}</td>
-      <td>{transaction.transaction_fee}</td>
-    </tr>
-  ))}
-</tbody>
-
+              {user.account?.transactions.map((transaction) => (
+                <tr key={transaction.id}>
+                  <td>{transaction.transaction_type}</td>
+                  <td>{transaction.amount}</td>
+                  <td>{transaction.transaction_fee}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>

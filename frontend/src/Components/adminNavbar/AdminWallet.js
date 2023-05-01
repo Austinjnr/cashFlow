@@ -20,22 +20,32 @@ ChartJS.register(
 
 const AdminWallet = () => {
   const [transaction, setTransaction] = useState(null);
-  const line = {
-        labels: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
-        datasets: [{
-            label: 'weekly transitions',
-            data: [1000, 2000, 300, 4500, 500, 60000, 10500],
-            backgroundColor: [
-                'rgba(137,118,199,0.5)'
-            ],
-            borderColor: 'black',
-            pointBorderColor: [
-                '#8976C7'
-            ],
-            fill: true,
-            tension: 0.4
-        }]
-    }
+  const [fetchedData, setFetchedData] = useState([]);
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dailyData = new Array(7).fill(0);
+
+fetchedData.forEach((item) => {
+  const date = new Date(item.created_at);
+  const dayOfWeek = date.getDay(); 
+  dailyData[dayOfWeek] += item.amount;
+});
+
+
+const line = {
+  labels: daysOfWeek,
+  datasets: [
+    {
+      label: "Weekly Transactions",
+      data: dailyData,
+      backgroundColor: ["rgba(137,118,199,0.5)"],
+      borderColor: "black",
+      pointBorderColor: ["#8976C7"],
+      fill: true,
+      tension: 0.4,
+    },
+  ],
+};
+
 
      const options = {
         plugins: {
@@ -56,6 +66,7 @@ useEffect(() => {
       })
       .then((data) => {
         setTransaction(data);
+        setFetchedData(data);
       });
   }, []);
   return (
@@ -81,6 +92,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      
     </div>
 
     {transaction && (
