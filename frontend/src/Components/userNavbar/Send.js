@@ -95,10 +95,8 @@ const Send = ({ AccountId }) => {
           </div>
         );
 
-        // window.location.reload();
       } else {
         setError(data.error);
-        // window.location.reload();
       }
     } catch (error) {
       console.log(error);

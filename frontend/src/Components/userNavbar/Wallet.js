@@ -38,14 +38,7 @@ const Wallet = ({userId}) => {
       }))
     })
   },[userId])
-  // console.log(details);
-  // useEffect(() => {
-  //   fetch(")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setDetails(data[0]);
-  //     });
-  // },);
+
 
   return (
     <>

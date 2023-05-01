@@ -14,7 +14,6 @@ const Transaction = ({ userId }) => {
       }))
     })
   },[userId])
-  // console.log(transaction[0]);
   return (
     <section >
      {transaction.length > 0 && (
@@ -44,9 +43,3 @@ const Transaction = ({ userId }) => {
 };
 
 export default Transaction;
-  // return (
-  //   <section>
- 
-  //   </section> */
-  // );
-

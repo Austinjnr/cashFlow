@@ -4,7 +4,6 @@ import axios from "axios";
 import "./User.css";
 
 const Profile = ({ userId }) => {
-  // console.log(userId);
 
   const API = `https://cashflow-1rf2.onrender.com/userprofile/${userId}`;
 
