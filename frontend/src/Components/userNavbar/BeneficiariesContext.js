@@ -11,7 +11,7 @@ const BeneficiariesProvider = ({ userId, children }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/userprofile/1`)
+      .get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
       .then((res) => {
         setBeneficiaries(res.data.flatMap((data) => data.beneficiaries));
       });

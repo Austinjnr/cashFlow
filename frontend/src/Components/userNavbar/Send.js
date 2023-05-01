@@ -19,7 +19,7 @@ const Send = ({ AccountId }) => {
 
   const handleBeneficiaryChange = (event) => {
     const accountNumber = event.target.value;
-    if (accountNumber === "other") {
+    if (accountNumber === "Beneficiary") {
       setIsBeneficiarySelected(true);
       setSelectedBeneficiary(null);
     } else {
@@ -47,7 +47,7 @@ const Send = ({ AccountId }) => {
     setIsSending(true);
     try {
       const response = await axios.post(
-        `http://localhost:4000/send/${accountNumber}/${AccountId}`,
+        `https://cashflow-1rf2.onrender.com/send/${accountNumber}/${AccountId}`,
         {
           amount,
           beneficiary_id: selectedBeneficiary ? selectedBeneficiary.id : null,
@@ -104,7 +104,7 @@ const Send = ({ AccountId }) => {
             }
             onChange={handleBeneficiaryChange}
           >
-            <option value="other">Other</option>
+            <option value="Beneficiary">Beneficiaries</option>
             {beneficiaries.map((beneficiary) => (
               <option key={beneficiary.id} value={beneficiary.account_number}>
                 {beneficiary.name} ({beneficiary.account_number})
@@ -121,8 +121,8 @@ const Send = ({ AccountId }) => {
         >
           {showSpinner && isSending ? (
             <div
-              className="spinner-border spinner-border-sm btn"
-              id="btn"
+              className="spinner-border spinner-border-sm btns"
+              id="btns"
               role="status"
             >
               <span className="visually-hidden">Sending...</span>
