@@ -2,6 +2,7 @@ require "twilio-ruby"
 require "dotenv/load"
 
 class Account < ApplicationRecord
+  include ImageUploader::Attachment(:avatar_url)
   # after_create :send_welcome_sms
   belongs_to :user
   has_many :beneficiaries, dependent: :destroy

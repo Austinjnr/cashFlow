@@ -5,9 +5,8 @@ import './Register.css';
 function ProfileSetup({userId}) {
   const [phone_number, setPhoneNumber] = useState('');
   const [id_number, setIdNumber] = useState('');
-  const [account_number, setAccountNumber] = useState('');
   const [avatar_url, setAvatarUrl] = useState('');
-  const [username, setUsername]=useState('')
+  const [name, setName]=useState('')
 
   const [error, setError] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
@@ -31,8 +30,7 @@ function ProfileSetup({userId}) {
           phone_number,
           avatar_url,
           id_number,
-          account_number,
-          username
+          name
         })
       });
 
@@ -59,21 +57,13 @@ function ProfileSetup({userId}) {
         <label htmlFor="account_number">Full Name</label>
           <input
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             type="text"
             id="username"
             name="username"
           />
-          <label htmlFor="account_number">Account Number</label>
-          <input
-            required
-            value={account_number}
-            onChange={(e) => setAccountNumber(e.target.value)}
-            type="password"
-            id="account_number"
-            name="account_number"
-          />
+       
           <label htmlFor="id_number">ID Number</label>
           <input
             required

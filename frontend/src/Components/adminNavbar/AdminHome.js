@@ -1,20 +1,20 @@
-import './admin.css'
+import "./Admin.css";
 import UserList from "./UserList";
 import useFetch from "./useFetch";
 
 const AdminHome = () => {
+    const  {data: details, isLoading, error} = useFetch('https://cashflow-1rf2.onrender.com/accounts')
 
-    const { data: users, isLoading, error} = useFetch('https://cashflow-1rf2.onrender.com/accounts');
+  return (
+    <div className="admin-home mt-5">
+      <h2 className="text-center">List of All Users</h2>
+      <div className="text-center">
+      {error && <div>{error}</div>}
+      {isLoading && <div> <i className="fa-solid fa-spinner fa-spin-pulse fa-xl"></i> </div>}
+      </div>
+      {details && <UserList details={details}/>}
+    </div>
+  );
+};
 
-    return (  
-        <section>
-            { error && <div>{ error }</div>}
-            { isLoading && <div>LOADING...</div>}
-                { users && <div className="home-section">
-                    <UserList users={users} title="List of All Users" />
-                </div> }
-        </section>
-    );
-}
- 
 export default AdminHome;

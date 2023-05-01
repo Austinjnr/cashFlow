@@ -12,6 +12,7 @@ const Deposit = ({AccountId}) => {
 
     axios.post(`https://cashflow-1rf2.onrender.com/deposit/${AccountId}`, {
       amount: amount,
+
     })
     .then((response) => {
       seMessage(response.data.message);

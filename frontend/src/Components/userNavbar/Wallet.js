@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { UserData } from "../Data";
 import Chart from "../Chart";
+import axios from "axios";
 
 
-const Wallet = () => {
-  const [details, setDetails] = useState({});
-
+const Wallet = ({userId}) => {
+  const [details, setDetails] = useState('');
+ console.log(userId);
   const [userData] = useState({
     labels: UserData.map((transaction) => transaction.transaction_type),
     datasets: [
@@ -27,13 +28,24 @@ const Wallet = () => {
     ],
   });
 
-  useEffect(() => {
-    fetch("https://cashflow-1rf2.onrender.com/wallets/")
-      .then((res) => res.json())
-      .then((data) => {
-        setDetails(data[0]);
-      });
-  },);
+  useEffect(()=>{
+    axios.get(`https://cashflow-1rf2.onrender.com//userprofile/${userId}`)
+    .then((res)=>{
+      setDetails(res.data.map((data)=>{
+        return (
+          data = data.wallet.balance
+        )
+      }))
+    })
+  },[userId])
+  // console.log(details);
+  // useEffect(() => {
+  //   fetch(")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDetails(data[0]);
+  //     });
+  // },);
 
   return (
     <>
@@ -50,7 +62,7 @@ const Wallet = () => {
         >
           <div>
             <h2>Your CashFlow Balance is:</h2>
-            {details && <h3>ksh {details.balance}</h3>}
+            {details && <h3>ksh {details}</h3>}
           </div>
           <div></div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
