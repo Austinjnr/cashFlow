@@ -56,13 +56,16 @@ class WalletsController < ApplicationController
     receiver_wallet.last_transaction = "receive"
     receiver_wallet.save!
   
+    account = receiver_wallet.account # get the associated account
     transaction = Transaction.create!(
       transaction_type: "send",
       amount: amount,
       transaction_fee: transaction_fee,
       account_id: sender_wallet.account_id,
       beneficiary_id: receiver_wallet.account_id,
+      balance: sender_wallet.balance,
       receiver_account_number: receiver_wallet.account_number,
+      receiver_account_name: account.name, # add the receiver's account name
       created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
       updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
     )
@@ -72,6 +75,7 @@ class WalletsController < ApplicationController
       transaction: transaction
     }, status: :ok
   end
+  
   
 
   def wallet_statistics
