@@ -9,7 +9,7 @@ class Account < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_one :wallet, dependent: :destroy
   validates :user_id, uniqueness: true
-  # include ImageUploader::Attachment(:avatar_url)
+
   def send_welcome_sms
     puts "Sending welcome SMS..."
     account_sid = ENV["TWILIO_ACCOUNT_SID"]
