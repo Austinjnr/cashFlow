@@ -45,9 +45,9 @@ function SignUp(props) {
   };
 
   return (
-    <div className="container">
+    <div className="container-auth">
       <div className="image-container">
-        <video src='/video/Mobile login.mp4' autoPlay muted loop></video>
+      <img src='/video/Mobile login.mp4' alt="login"/>
       </div>
       <div className="auth-form-container">
         <h2>Join Us</h2>
@@ -92,7 +92,7 @@ function SignUp(props) {
             placeholder="**********"
             name="confirm"
           />
-          <button type="submit"   className="link-btn">
+          <button type="submit">
             {isRegistering ? "Registering..." : "Register"}
           </button>
           <div style={{ backgroundColor: "red", color: "black" }}>
@@ -100,7 +100,7 @@ function SignUp(props) {
             {error && <p>{error}</p>}
           </div>
         </form>
-        <button
+        <button className="link-btn"
           
           onClick={() => props.onFormSwitch("login")}
         >
