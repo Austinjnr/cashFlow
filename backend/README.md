@@ -5,7 +5,7 @@
 ## BACKEND
 - Below is the ERD diagram to demonstrate the database models and associations:
 
-        ![Alt text](CashFLow_18%20April.png)
+       ![Alt text](CashFLow_18%20April.png)
 
   + The backend API was developed to enable both user features and administrative features, with the database including various routes for each type of user. 
 
