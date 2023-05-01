@@ -58,10 +58,15 @@
   + This project was contributed by:
 
    1. Austin Obonyo: [AustinJnr](https://github.com/Austinjnr)
+
     2. Moses Ochacha: [Mosesochacha](https://github.com/Mosesochacha)
+
     3. Brian Wahungu: []
+
     4. Alvin Njonjo: [FelaSupa](https://github.com/fela-Supa)
+
     5. Maxwell Muchiri: [maxwellmuchiri](https://github.com/maxwellmuchiri)
+    
     6. Roy Ngei: [RoyZiO](https://github.com/RoyZiO)
 
   
