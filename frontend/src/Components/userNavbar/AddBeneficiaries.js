@@ -53,13 +53,15 @@ const AddBeneficiary = ({ AccountId }) => {
       .then((data) => {
         console.log("Successfully created beneficiary:", data);
         setIsLoading(false);
-        history.push("/beneficiaries");
+        history.push("/user-profile");
       })
       .catch((error) => {
         setErrorMessage(
+          
           "Dear Customer, the Beneficiary Account number you entered was not found. Kindly confirm it again. Thank you for choosing CashFlow."
         );
         setIsLoading(false);
+        // history.push("/beneficiaries");
       });
   };
  console.log(account_number);

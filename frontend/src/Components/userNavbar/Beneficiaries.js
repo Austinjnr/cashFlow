@@ -5,7 +5,7 @@ const Beneficiaries = ({userId}) => {
   const [beneficiaries, setBeneficiaries] = useState('');
   
   useEffect(()=>{
-    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/3`)
+    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
     .then((res)=>{
       setBeneficiaries(res.data.map((datas)=>{
         return (
