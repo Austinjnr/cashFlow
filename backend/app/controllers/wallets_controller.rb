@@ -43,7 +43,7 @@ class WalletsController < ApplicationController
     receiver_wallet = Wallet.find_by_account_number(params[:receiver_account_number])
 
     if sender_wallet.nil? || receiver_wallet.nil?
-      render json: { error: "Invalid sender or receiver account" }, status: :bad_request
+      render json: { error: "Dear customer, the account number entered is not found. Kindly confirm or contact your beneficiary. Thank you for transacting with us." }, status: :bad_request
       return
     end
 
@@ -51,7 +51,7 @@ class WalletsController < ApplicationController
     transaction_fee = calculate_transaction_fee(amount)
 
     if sender_wallet.balance < amount + transaction_fee
-      render json: { error: "Insufficient funds" }, status: :bad_request
+      render json: { error: "Dear customer, you have insufficient funds. Your balance is Ksh.#{sender_wallet.balance}." }, status: :bad_request
       return
     end
 
