@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import './Register.css';
 
 function ProfileSetup({userId}) {
@@ -36,7 +37,7 @@ function ProfileSetup({userId}) {
       sessionStorage.setItem("AccountId", data.session );
       setMessage("Profile created successfully!");
       history.push("/user-profile");
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       setError(error.message);
       setMessage("");
@@ -93,11 +94,12 @@ function ProfileSetup({userId}) {
           />
           <button type="submit">Create Account</button>
         </form>
-        {isRegistering && <div className="spinner"></div>}
+        {isRegistering && <Spinner animation="border" role="status" />}
         {message && <div className="message">{message}</div>}
         {error && <div className="error">{error}</div>}
       </div>
     </div>
   );
 }
+
 export default ProfileSetup

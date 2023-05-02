@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import './Register.css';
+import "./Register.css";
+import { Spinner } from "react-bootstrap";
 
 function SignUp(props) {
   const [username, setUsername] = useState("");
@@ -11,43 +12,47 @@ function SignUp(props) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
   const history = useHistory();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://cashflow-1rf2.onrender.com/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      }),
-    });
+    setIsRegistering(true);
+
+    const response = await fetch(
+      "https://cashflow-1rf2.onrender.com/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          password_confirmation: passwordConfirmation,
+        }),
+      }
+    );
 
     const { message, errors } = await response.json();
 
     if (message) {
       setMessage(message);
-      setIsRegistering(true)
 
-      history.push("/login"); 
+      history.push("/login");
 
       window.location.reload();
     } else {
       setError(errors);
-      setIsRegistering(false);
     }
+
+    setIsRegistering(false);
   };
 
   return (
     <div className="container-auth">
       <div className="image-container">
-      <img src='/video/Mobile login.mp4' alt="login"/>
+        <img src="/video/Mobile login.mp4" alt="login" />
       </div>
       <div className="auth-form-container">
         <h2>Join Us</h2>
@@ -92,16 +97,20 @@ function SignUp(props) {
             placeholder="**********"
             name="confirm"
           />
-          <button type="submit">
-            {isRegistering ? "Registering..." : "Register"}
+          <button type="submit" disabled={isRegistering}>
+            {isRegistering ? (
+              <Spinner animation="border" variant="light" size="sm" />
+            ) : (
+              "Register"
+            )}
           </button>
           <div style={{ backgroundColor: "red", color: "black" }}>
             {message && <p>{message}</p>}
             {error && <p>{error}</p>}
           </div>
         </form>
-        <button className="link-btn"
-          
+        <button
+          className="link-btn"
           onClick={() => props.onFormSwitch("login")}
         >
           Already have an account? Login here.

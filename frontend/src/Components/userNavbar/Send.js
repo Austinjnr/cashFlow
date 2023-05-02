@@ -59,13 +59,13 @@ const Send = ({ AccountId }) => {
         const date = new Date(data.transaction.created_at).toLocaleString(
           "en-US",
           {
+            timeZone: "Africa/Nairobi",
             weekday: "long",
             year: "numeric",
             month: "long",
             day: "numeric",
             hour: "numeric",
             minute: "numeric",
-            timeZoneName: "short",
           }
         );
         setMessage(
@@ -107,10 +107,11 @@ const Send = ({ AccountId }) => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5" style={{fontFamily: "Times New Roman"}}>
       <form onSubmit={handleSubmit} className="formup">
       <span className="signup">Transfar Money</span>
           <input
+          required
             type="text"
             id="accountNumber"
             placeholder="enter account number"
@@ -121,6 +122,7 @@ const Send = ({ AccountId }) => {
        
         <div>
           <input
+          required
             type="number"
             id="amount"
             placeholder="enter amount"

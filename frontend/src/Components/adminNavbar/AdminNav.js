@@ -36,7 +36,7 @@ function AdminNav() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className='nav-item'>
+            <li className='nav-item'>
               <Link to='/dashboard' className='nav-links' onClick={closeMobileMenu}>
                 Dashboard
               </Link>
@@ -47,30 +47,26 @@ function AdminNav() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/company-wallet'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                  wallet
+              <Link to='/company-wallet' className='nav-links' onClick={closeMobileMenu}>
+                wallet
               </Link>
             </li>
             <li>
-              
-              <Link
-                to='/login'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Login
+              <Link to='/' className='nav-links-mobile' onClick={closeMobileMenu}>
+                Logout
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'
-           onClick={()=>{
-            // window.location.reload();
-           }}
-          >LOG OUT</Button>}
+          {button && (
+            <Button
+              buttonStyle='btn--outline'
+              onClick={() => {
+                window.location.href = '/';
+              }}
+            >
+              LOG OUT
+            </Button>
+          )}
         </div>
       </nav>
     </section>
