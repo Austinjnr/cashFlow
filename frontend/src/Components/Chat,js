@@ -1,0 +1,52 @@
+import React, { useState, useEffect } from "react";
+import { ActionCable } from "react-actioncable-provider";
+
+const Chat = () => {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const cable = ActionCable.createConsumer("wss://cashflow-1rf2.onrender.com/cable");
+    const chatChannel = cable.subscriptions.create("ChatChannel", {
+      received: (data) => {
+        setMessages([...messages, data]);
+      },
+    });
+    return () => {
+      chatChannel.unsubscribe();
+    };
+  }, [messages]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const cable = ActionCable.createConsumer("wss://cashflow-1rf2.onrender.com/cable");
+    const chatChannel = cable.subscriptions.subscriptions[0];
+    chatChannel.send({ message: input });
+    setInput("");
+  };
+
+  return (
+    <div>
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <p>{message.author}</p>
+            <p>{message.content}</p>
+          </div>
+        ))}
+      </div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={input} onChange={(event) => setInput(event.target.value)} />
+        <button type="submit">Send</button>
+      </form>
+      <ActionCable
+        channel={{ channel: "ChatChannel" }}
+        onReceived={(data) => {
+          setMessages([...messages, data]);
+        }}
+      />
+    </div>
+  );
+};
+
+export default Chat;
