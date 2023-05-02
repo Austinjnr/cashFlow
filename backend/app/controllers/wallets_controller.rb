@@ -3,12 +3,12 @@ class WalletsController < ApplicationController
     account_id = params[:account_id]
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
-
+  
     wallet = Wallet.find_by(account_id: account_id)
     wallet.balance += amount - transaction_fee
     wallet.last_transaction = "deposit"
     wallet.save!
-
+  
     transaction = Transaction.create!(
       transaction_type: "deposit",
       amount: amount,
@@ -18,12 +18,13 @@ class WalletsController < ApplicationController
       transaction_fee: transaction_fee,
       account_id: account_id,
     )
-
+  
     render json: {
-      transaction: transaction
-      message: "Dear customer, you have successfully deposited Ksh. <span style='color: blue;'>#{amount}</span>. Your new account balance is <span style='color: yellow;'>#{wallet.balance}</span> on <span style='color: blue;'>#{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}</span>, at <span style='color: blue;'>#{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}</span>. Thank you for choosing CashFlow. We move together.",
+      transaction: transaction,
+      message: "Dear customer, you have successfully deposited Ksh.#{amount}. Your new account balance is #{wallet.balance} ,on #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}, at #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}. Thank you for choosing CashFlow. We move together.",
     }, status: :ok
   end
+  
 
   # index
   def index
