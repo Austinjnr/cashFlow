@@ -17,10 +17,11 @@ const Beneficiaries = ({userId}) => {
  
   console.log(beneficiaries);
   return (
-    <>
-      <h1 style={{ marginTop: "2rem" }}>My Beneficiaries</h1>
+    <section className="mt-5">
+      <h1 className="text-center">My Beneficiaries</h1>
+      <div className="row col-md-12">
       {beneficiaries.length > 0 ? (
-        <div className="row" style={{ marginLeft: "2rem" }}>
+        <div className="row">
           {beneficiaries[0].map(beneficiary => (
             <div key={beneficiary.id} className="col-sm-6">
               <div className="card">
@@ -28,8 +29,8 @@ const Beneficiaries = ({userId}) => {
                   <ul>
                     <li>Name: {beneficiary.name}</li>
                     <li>Phone Number: {beneficiary.phone_number}</li>
+                    <li>Account Number: {beneficiary.account_number}</li>
                   </ul>
-                  <button>Select</button>
                   {/* <button>Delete</button> */}
                 </div>
               </div>
@@ -39,7 +40,8 @@ const Beneficiaries = ({userId}) => {
       ) : (
         <div>No beneficiaries found.</div>
       )}
-    </>
+      </div>
+    </section>
   );
 };
 

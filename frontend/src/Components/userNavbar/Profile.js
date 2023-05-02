@@ -4,7 +4,6 @@ import axios from "axios";
 import "./User.css";
 
 const Profile = ({ userId }) => {
-
   const API = `https://cashflow-1rf2.onrender.com/userprofile/${userId}`;
 
   const [profiles, setProfiles] = useState([]);
@@ -37,8 +36,6 @@ const Profile = ({ userId }) => {
       });
   }, [API]);
 
-
-  
   if (error) {
     return (
       <center>
@@ -116,8 +113,8 @@ const Profile = ({ userId }) => {
     handleUpdate(id, updatedData);
   };
   return (
-    <div className="container-profile">
-      <div className="main-body">
+    <div className="container-profile mt-5">
+      <div className="row col-md-12 main-body">
         {profiles.map((profile) => (
           <div className="row gutters-sm" key={profile.id}>
             <div className="col-md-4 mb-3">
@@ -135,9 +132,20 @@ const Profile = ({ userId }) => {
                     />
                     <div className="mt-3">
                       <h4>{profile.username}</h4>
-                      <Link to='/new-beneficary'>
-                          <button>New Beneficiary</button>
-                      </Link>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "110%",
+                        }}
+                      >
+                        <Link to="/beneficiaries">
+                          <button>beneficiaries</button>
+                        </Link>
+                        <Link to="/new-beneficary">
+                          <button>new beneficary</button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

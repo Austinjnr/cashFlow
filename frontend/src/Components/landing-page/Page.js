@@ -1,17 +1,25 @@
-
 function Page() {
   return (
     <section className="mt-5">
       <h1 className="text-center">What can you do with CashFlow?</h1>
       <div className="row col-md-12 page-container">
-        <p className="col-md-7 text-center">
+        <p
+          className="col-md-7 text-center"
+          style={{
+            marginLeft: "1rem",
+            marginTop: "10rem",
+            display: "inline-block",
+            fontSize: "1.2em",
+          }}
+        >
           With CashFlow, you can send money, receive money, pay a friend, shop
           online, and check your spending statistics. Say goodbye to financial
           stress and uncertainty, and take control of your cash flow with
           CashFlow. Join us today and experience the convenience, efficiency,
           and peace of mind that our web app provides.
         </p>
-        <div className="col-md-5">
+
+        <div className="col-md-4">
           <div className="row row-cols-1 row-cols-md-2 g-4">
             <div className="col">
               <div className="card" style={{ width: "100%" }}>
