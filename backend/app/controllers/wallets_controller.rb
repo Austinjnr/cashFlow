@@ -25,6 +25,7 @@ class WalletsController < ApplicationController
     }, status: :ok
   end
 
+  # index
   def index
     wallets = Wallet.all
     render json: { wallets: wallets }
