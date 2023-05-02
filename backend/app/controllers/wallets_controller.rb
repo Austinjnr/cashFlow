@@ -16,14 +16,15 @@ class WalletsController < ApplicationController
       created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
       updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
       transaction_fee: transaction_fee,
-      account_id: account_id,
+      account_id: account_id
     )
   
     render json: {
       transaction: transaction,
-      message: "Dear customer, you have successfully deposited Ksh.#{amount}. Your new account balance is #{wallet.balance} ,on #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}, at #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}. Thank you for choosing CashFlow. We move together.",
+      message: "Dear customer, you have successfully deposited Ksh.#{amount}. Your new account balance is #{wallet.balance} ,on #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}, at #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}. Thank you for choosing CashFlow. We move together."
     }, status: :ok
   end
+  
   
 
   # index
