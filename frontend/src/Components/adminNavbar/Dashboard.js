@@ -120,10 +120,12 @@ const Dashboard = () => {
   const Baroptions = {};
 
   return (
-    <section className="overview mt-5">
-      <h1 className="text-center">WELCOME</h1>
-      <h3 className="text-center">Applicction Overview</h3>
-      <div className="row row-cols-1 row-cols-md-2 g-4">
+    <section className="row col-md-12 overview mt-5 d-flex justify-content-center align-items-center">
+      <div className="text-center">
+        <h1>WELCOME</h1>
+        <h3>Application Overview</h3>
+      </div>
+      <div className="row row-cols-1 row-cols-md-2">
         <div className="col">
           <div className="card">
             <div className="card-body">
@@ -137,7 +139,7 @@ const Dashboard = () => {
         <div className="col">
           <div className="card">
             <div className="card-body">
-              <h5 className="text-center">Monthy Transactions</h5>
+              <h5 className="text-center">Monthly Transactions</h5>
               <Bar data={bar} options={Baroptions} />
             </div>
           </div>

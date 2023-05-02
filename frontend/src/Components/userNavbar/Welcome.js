@@ -1,6 +1,6 @@
 import React from "react";
 
-function Cashflow() {
+function Welcome() {
     return (
       <div style={{ display: "flex", alignItems: "center", marginTop: "3rem" }}>
         <img
@@ -28,4 +28,4 @@ function Cashflow() {
   }
   
 
-export default Cashflow;
+export default Welcome;

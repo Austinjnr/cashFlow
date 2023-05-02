@@ -65,8 +65,7 @@ const AddBeneficiary = ({ AccountId }) => {
  console.log(account_number);
   return (
     <form
-      className="form"
-      style={{ marginTop: "5rem", marginLeft: "10rem", marginRight: "10rem" }}
+      className="formup mt-5"
       onSubmit={handleSubmit}
     >
       <span className="signup">Add a Beneficiary</span>
@@ -76,7 +75,7 @@ const AddBeneficiary = ({ AccountId }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="beneficiary@gmail.com"
-        className="form--input"
+        className="formup--input"
       />
       <input
         type="text"
@@ -84,15 +83,15 @@ const AddBeneficiary = ({ AccountId }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Full Name"
-        className="form--input"
+        className="formup--input"
       />
       <input
         required
         type="number"
         value={account_number}
         onChange={(e) => setAccountNumber(e.target.value)}
-        placeholder="123456"
-        className="form--input"
+        placeholder="A/c number"
+        className="formup--input"
       />
       <input
         required
@@ -100,13 +99,13 @@ const AddBeneficiary = ({ AccountId }) => {
         value={phone_number}
         onChange={(e) => setPhoneNumber(e.target.value)}
         placeholder="+254"
-        className="form--input"
+        className="formup--input"
       />
       < >
       {errorMessage && <div className="error" style={{fontFamily: "Times New Roman" , font: "Bold"}}>{errorMessage}</div>}
       </>
       {!isLoading && (
-        <button className="form--submit">Create Beneficiary</button>
+        <button className="formup--submit">Create Beneficiary</button>
       )}
       {isLoading && (
         <button className="...">

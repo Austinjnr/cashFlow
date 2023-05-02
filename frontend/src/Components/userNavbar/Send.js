@@ -107,22 +107,24 @@ const Send = ({ AccountId }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="cards">
-        <div>
-          <label htmlFor="accountNumber">Account Number:</label>
+    <div className="mt-5">
+      <form onSubmit={handleSubmit} className="formup">
+      <span className="signup">Transfar Money</span>
           <input
             type="text"
             id="accountNumber"
+            placeholder="enter account number"
+          className="form--input"
             value={accountNumber}
             onChange={handleAccountNumberChange}
           />
-        </div>
+       
         <div>
-          <label htmlFor="amount">Amount:</label>
           <input
             type="number"
             id="amount"
+            placeholder="enter amount"
+            className="form--input"
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
           />
