@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# cashFlow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ - This application will enable a user to to send and receive money across international borders, without the need for a bank account. The application will also allow the user to top up and track their progress
 
-## Available Scripts
+## FRONTEND
 
-In the project directory, you can run:
+### Technologies
 
-### `npm start`
+1. React.js
+2. Bootstrap CSS
+3. Figma
+4. Vercell
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installations
 
-### `npm test`
+1. This project will use data from a Sinatra API created by the project contributor. The link to the repository with the code for the API can be found here: [backend](https://github.com/Austinjnr/cashFlow/tree/main/backend)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Before running the application, make sure you have followed the installation guides, including `npm install` to initiate the frontend dependencies, and `bundle` when in the backend directory to install the ruby gems. 
 
-### `npm run build`
+3. To start the frontend server, got to the frontend directory and run `npm start`. To start the backend server, `run rails s --port=4000` when inside the backend directory.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Live Link to the Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
++ The live link to the application can be found here: [cashFlow](https://cashflow1.vercel.app/)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Minimum Viable Product
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### User
++ The user should be able to: 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ - Create an account as a new user 
+ - Login to the platform 
+ - View analytics about his/ her wallet account
+ - View their profile & Update profile details
+ - Add funds to their existing wallet account
+ - Add beneficiaries as contacts to their account so as to be able to send money them
+ - Send money to existing beneficiaries within their accounts.
+ - View a summary of transactions made by them within their account.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Admin
+  + The admin should be able to:
+  
+  - Perform CRUD operations on all users and their accounts. 
+  - View a summary of all transactions made by users. 
+  - View analytics of all user wallet accounts.
+  - View trends in terms of profits made by a transaction so as to make future decisions.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  ### License 
+  + This project is licensed under the MIT License. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+  ### Authors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  + This project was contributed by:
 
-### Analyzing the Bundle Size
+   1. Austin Obonyo: [AustinJnr](https://github.com/Austinjnr)
+   
+   2. Moses Ochacha: [Mosesochacha](https://github.com/Mosesochacha)
+   
+   3. Brian Wahungu: []
+   
+   4. Alvin Njonjo: [FelaSupa](https://github.com/fela-Supa)
+   
+   5. Maxwell Muchiri: [maxwellmuchiri](https://github.com/maxwellmuchiri)
+   
+   6. Roy Ngei: [RoyZiO](https://github.com/RoyZiO)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  

@@ -1,26 +1,24 @@
 import { useEffect, useState } from "react";
+import "./User.css";
+import axios from "axios";
 
-const Transaction = () => {
-  const [transactions, setTransactions] = useState(null);
+const Transaction = ({ userId }) => {
+  const [transaction, setTransactions] = useState('');
 
-  useEffect(() => {
-    fetch('https://cashflow-1rf2.onrender.com/transactions/')
-      .then(res => res.json())
-      .then(data => {
-        // Assuming the transactions are sorted by date in descending order
-        // and you only want the last 10 transactions
-        const lastTenTransactions = data.slice(0, 10);
-        setTransactions(lastTenTransactions);
-      })
-      .catch(error => {
-        console.error("Error fetching transactions:", error);
-      });
-  }, []);
-
+  useEffect(()=>{
+    axios.get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
+    .then((res)=>{
+      setTransactions(res.data.map((data)=>{
+        return (
+          data.transactions
+        )
+      }))
+    })
+  },[userId])
   return (
-    <section>
-      {transactions && (
-        <table className="table table-borderless" style={{ marginLeft: "6rem" }}>
+    <section >
+     {transaction.length > 0 && (
+        <table className="table table-borderless mt-5" style={{ marginLeft: "6rem" }}>
           <thead>
             <tr>
               <th scope="col"></th>
@@ -30,12 +28,12 @@ const Transaction = () => {
             </tr>
           </thead>
           <tbody>
-            {transactions.map(transaction => (
-              <tr key={transaction.id}>
-                <th scope="row"></th>
-                <td>{transaction.transaction_type}</td>
+            {transaction[0].map((transact) => (
+              <tr key={transact.id}>
                 <td></td>
-                <td>{transaction.amount} Ksh</td>
+                <td>{transact.transaction_type}</td>
+                <td></td>
+                <td>{transact.amount} Ksh</td>
               </tr>
             ))}
           </tbody>

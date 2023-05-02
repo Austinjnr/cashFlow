@@ -15,7 +15,7 @@ end
 User.all.sample(7).each do |user|
   account = Account.create!(
     name: user.username,
-    phone_number: ["+254784596400"],
+    phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254').slice(0, 11),
     avatar_url: Faker::Avatar.image,
     id_number: Faker::Number.number(digits: 8),
     account_number: Faker::Number.number(digits: 8),
@@ -23,21 +23,26 @@ User.all.sample(7).each do |user|
   )
 
   # Create some beneficiaries for each account
+  account_numbers = Account.pluck(:account_number)
   3.times do
     Beneficiary.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254'),
+      account_number: account_numbers.sample,
+      phone_number: Faker::PhoneNumber.cell_phone_in_e164.gsub(/^0/, '+254').slice(0..11),
       account: account
     )
   end
 
-  # Create a wallet for each account
-  Wallet.create!(
-    balance: Faker::Number.number(digits: 6),
-    last_transaction: "Deposit",
-    account: account
-  )
+  # Create a wallet for each account, only if it doesn't already exist
+  unless account.wallet.present?
+    Wallet.create!(
+      balance: Faker::Number.number(digits: 6),
+      last_transaction: ["deposit", "rent" , "rent", "fee"].sample,
+      account_number: account.account_number,
+      account: account
+    )
+  end
 
   # Create some transactions for each account
   4.times do

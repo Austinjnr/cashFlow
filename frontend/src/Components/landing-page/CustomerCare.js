@@ -1,6 +1,6 @@
 const CustomerCare = () => {
     return ( 
-        <section style={{ textAlign: "center", marginTop: "4rem" }}>
+        <section className="mt-5" style={{ textAlign: "center"}}>
             <div>
                 <h1>Connect With Us</h1>
                 <p>If you're unable to login to your account or you don't have one yet. </p>
@@ -8,7 +8,7 @@ const CustomerCare = () => {
                     <h3>Email Option</h3>
                     <p style={{ textAlign: "center" }}>Send us an email via: <span></span>
                         <i>
-                        <b>adminemail@gmail.com</b>
+                        <b>cashflowadmin@gmail.com</b>
                         </i>
                     </p>
 

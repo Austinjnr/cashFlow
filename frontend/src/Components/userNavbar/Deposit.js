@@ -1,78 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import axios from 'axios'
+import React, { useState } from "react";
+import "./User.css";
+import axios from "axios";
 
-const Deposit= () => {
+const Deposit = ({ AccountId }) => {
+  console.log(AccountId);
+  const [amount, setAmount] = useState("");
+  const [message, seMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-    
-    const [walletIds, setWalletIds] = useState(null);
-    
-    const [amount, setAmount] = useState("");
-    
-                useEffect(() => {
-                    axios.get("https://cashflow-1rf2.onrender.com/wallets")
-                    .then((res) => {
-                    const walletIds = res.data.map((wallet) => wallet.id);
-            setWalletIds(walletIds);
-            })
-            .catch((error) => {
-            console.error(error);
-            });
-        }, []);
-
-        //console.log(walletIds);
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      fetch(`https://cashflow-dwee.onrender.com/wallets/${walletIds}/top_up`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          balance: amount,
-          last_transaction: "Top Up",
-        }),
-        
+    axios
+      .post(`https://cashflow-1rf2.onrender.com/deposit/${AccountId}`, {
+        amount: amount,
       })
-        .then((response) => response.json())
-        .then((data) => {
-          alert("Transaction successful!");
-          setAmount("");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    };
-    return (
-        <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+      .then((response) => {
+        seMessage(response.data.message);
+        setAmount("");
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  };
 
-        <div className="text-center">
-            <h1>Top Up Your Account</h1>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Amount: 
-                    <input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                    />
-                    </label>
-                <br/>
-                <Link to='/user-transactions'>
-            {<button>
-              Top Up
-            </button>}
-            {<button disable="true">
-              Depositing....
-            </button>}
-            </Link>
-                </form>
-        </div>
-        </div>
+  return (
+    <div className="deposit mt-5">
+      <form className="formup" onSubmit={handleSubmit}>
+        <span className="signup">Deposit to Your Account</span>
+        <input
+          type="number"
+          placeholder="enter amount"
+          className="formup--input"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        {message && <p>{message}</p>}
+        <button
+          className="formup--submit"
+          type="submit"
+          disabled={!amount || isLoading}
+        >
+          {isLoading ? "Depositing..." : "Deposit"}
+        </button>
+      </form>
+    </div>
+  );
+};
 
-  
-     );
-}
- 
 export default Deposit;
