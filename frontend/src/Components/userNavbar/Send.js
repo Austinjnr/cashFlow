@@ -119,7 +119,6 @@ const Send = ({ AccountId }) => {
             value={accountNumber}
             onChange={handleAccountNumberChange}
           />
-       
         <div>
           <input
           required
