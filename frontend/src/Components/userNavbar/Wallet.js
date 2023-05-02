@@ -47,7 +47,7 @@ const Wallet = ({ userId }) => {
               <button>Send</button>
             </Link>
             <Link to="/top-up">
-              <button>Top Up</button>
+              <button>Deposit</button>
             </Link>
           </div>
           <img

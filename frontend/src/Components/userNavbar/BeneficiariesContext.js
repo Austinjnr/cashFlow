@@ -16,7 +16,7 @@ const BeneficiariesProvider = ({ userId, children }) => {
         setBeneficiaries(res.data.flatMap((data) => data.beneficiaries));
       });
   }, [userId]);
- console.log(beneficiaries);
+//  console.log(beneficiaries);
   return (
     <BeneficiariesContext.Provider value={beneficiaries}>
       {children}
