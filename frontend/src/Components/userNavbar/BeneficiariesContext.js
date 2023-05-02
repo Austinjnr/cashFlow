@@ -11,12 +11,12 @@ const BeneficiariesProvider = ({ userId, children }) => {
 
   useEffect(() => {
     axios
-      .get(`https://cashflow-1rf2.onrender.com/userprofile/3`)
+      .get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
       .then((res) => {
         setBeneficiaries(res.data.flatMap((data) => data.beneficiaries));
       });
   }, [userId]);
- console.log(beneficiaries);
+//  console.log(beneficiaries);
   return (
     <BeneficiariesContext.Provider value={beneficiaries}>
       {children}
