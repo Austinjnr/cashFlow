@@ -49,7 +49,7 @@ function ProfileSetup({userId}) {
   };
 
   return (
-    <div className="container">
+    <div className="container-auth">
       <div className="image-container">
         <img src='/video/video-2.mp4' alt="profile" />
       </div>

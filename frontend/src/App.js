@@ -15,6 +15,7 @@ import Navbar from "./Components/userNavbar/Navbar";
 
 import LandingNavbar from "./Components/landing-page/LandingpgNavbar";
 import Fees from "./Components/landing-page/Fees";
+import Rates from "./Components/landing-page/Rates";
 import Contact from "./Components/landing-page/ContactUs";
 import CashFlowLandingpg from "./Components/landing-page/CashFlowHome";
 import Authentication from "./Components/register/Authentication";
@@ -30,9 +31,12 @@ import UpdateUser from "./Components/adminNavbar/UpdateUser";
 import NotFound from "./Components/NotFound";
 import Blogs from "./Components/landing-page/Blogs";
 import CustomerCare from "./Components/landing-page/CustomerCare";
-import Cashflow from "./Components/userNavbar/Cashflow";
 import Dashboard from "./Components/adminNavbar/Dashboard";
-import Chat from "./Components/Chat,js";
+
+import Contract from "./Components/landing-page/Contract";
+import Questions from "./Components/landing-page/Questions";
+import Home from "./Components/userNavbar/Home.js";
+
 
 export default function App() {
   let session = sessionStorage.getItem("userId");
@@ -44,6 +48,7 @@ export default function App() {
   if (
     path === "/" ||
     path === "/fees" ||
+    path === "/rates" ||
     path === "/blogs" ||
     path === "/contact-us" ||
     path === "/customer-care" ||
@@ -54,7 +59,7 @@ export default function App() {
   ) {
     navbar = <LandingNavbar />;
   } else if (
-    path === "/home" ||
+    path === "/welcome" ||
     path === "/user-wallet" ||
     path === "/send" ||
     path === "/profile-setup" ||
@@ -79,12 +84,16 @@ export default function App() {
           {/* landing page  <LandingNavbar />  */}
           <Route exact path="/" component={CashFlowLandingpg} />
           <Route exact path="/fees" component={Fees} />
+          <Route exact path="/rates" component={Rates} />
           <Route exact path="/blogs" component={Blogs} />
           <Route exact path="/contact-us" component={Contact} />
           <Route exact path="/customer-care" component={CustomerCare} />
           <Route exact path="/login" component={Authentication} />
           <Route exact path="/reset-password" component={Reset} />
           <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/contract" component={Contract} />
+          <Route exact path="/questions" component={Questions} />
+          <Route exact path='/welcome' component={Home} />
 
           {/* NAvbar */}
           <Route
@@ -121,7 +130,6 @@ export default function App() {
           <Route exact 
           path="/beneficiaries" 
           render={() => <Beneficiaries userId={session}/>}/> 
-          <Router exact path="/home" component={Cashflow} />
           <Route exact path="/user-transaction" 
            render={() => <Transaction userId={session} />}
            />

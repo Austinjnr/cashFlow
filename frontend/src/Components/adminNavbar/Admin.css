@@ -3,3 +3,29 @@
     margin: 48px auto;
     padding: 20px;
 }
+.update{
+    text-decoration: none;
+    align-items: center;
+}
+.edit{
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.edit label{
+    text-align: left;
+    display: block;
+}
+.edit h2{
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 30px;
+}
+.edit input{
+    width: 100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}

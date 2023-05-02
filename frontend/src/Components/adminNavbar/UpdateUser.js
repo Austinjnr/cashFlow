@@ -1,63 +1,71 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import './admin.css';
+import { useParams, useHistory } from "react-router-dom";
+import "./Admin.css";
 
 const UpdateUser = () => {
+  const { id } = useParams();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [profile, setProfile] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+  
+  
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  const user = { name, phone, profile };
+  console.log("User:", user);
+  console.log("ID:", id);
+  
+  fetch(`https://cashflow-1rf2.onrender.com/accounts/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  })
+    .then((response) => {
+      console.log("Response:", response);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      setIsLoading(false);
+      history.go(-1);
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
+      setIsLoading(false);
+    });
+};
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [profile, setProfile] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsLoading(true); 
-
-        const user = { name, email, phone, profile };
-        fetch(`https://cashflow-1rf2.onrender.com/accounts/${user}`, {
-            method: 'PUT', 
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
-        }).then(() => {
-            console.log('updated user');
-            setIsLoading(false); 
-            history.go(-1);
-        });
-    }
-
-    return (
-        <div className="update">
-            <h2>Update Account</h2>
-            <form onSubmit={handleSubmit}>
-                <label>UserName:</label>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Full Name" />
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="useremail@gmail.com" />
-                <label>Phone Number:</label>
-                <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+254" />
-                <label>Profile Picture:</label>
-                <input
-                    type="file"
-                    onChange={(e) => setProfile(e.target.files[0])} /> 
-                {!isLoading && <button>Update User</button>}
-                {isLoading && <button disabled>Updating...</button>}
-            </form>
-        </div>
-    );
+  return (
+    <div className="edit mt-5">
+      <h2>Update Account</h2>
+      <form onSubmit={handleSubmit}>
+        <label>UserName:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Full Name"
+        />
+        <label>Phone Number:</label>
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="+254"
+        />
+        <label>Select Picture:</label>
+        <input type="file" onChange={(e) => setProfile(e.target.files[0])} />
+        {!isLoading && <button className="btn btn-success">Update User</button>}
+        {isLoading && (
+          <button className="btn btn-success" disabled>
+            Updating...
+          </button>
+        )}
+      </form>
+    </div>
+  );
 };
 
 export default UpdateUser;

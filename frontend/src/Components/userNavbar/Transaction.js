@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./User.css";
 import axios from "axios";
 
 const Transaction = ({ userId }) => {
@@ -14,11 +15,10 @@ const Transaction = ({ userId }) => {
       }))
     })
   },[userId])
-  // console.log(transaction[0]);
   return (
     <section >
      {transaction.length > 0 && (
-        <table className="table table-borderless" style={{ marginLeft: "6rem" }}>
+        <table className="table table-borderless mt-5" style={{ marginLeft: "6rem" }}>
           <thead>
             <tr>
               <th scope="col"></th>
@@ -44,9 +44,3 @@ const Transaction = ({ userId }) => {
 };
 
 export default Transaction;
-  // return (
-  //   <section>
- 
-  //   </section> */
-  // );
-

@@ -1,34 +1,22 @@
-import React from 'react';
-import { FaInstagram, FaFacebookF, FaTwitter, FaWhatsapp } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className="Footer">
-      <ul>
-        <li>
-          <a href="https://www.instagram.com/">
-            <FaInstagram className="icon" />
-          </a>
-          <a href="https://www.facebook.com/">
-            <FaFacebookF className="icon" />
-          </a>
-          <a href="https://www.twitter.com/">
-            <FaTwitter className="icon" />
-          </a>
-          <a href="https://www.whatsapp.com/">
-            <FaWhatsapp className="icon" />
-          </a>
-        </li>
-        <li>Copyright </li>
-        <li>
-          <a href="/terms-of-use">Terms of Use/Service</a>
-        </li>
-        <li>
-          <a href="/faq">Frequently Asked Questions</a>
-        </li>
-      </ul>
-    </div>
+    <div className="container" style={{color: "blue"}}>
+  <footer className="py-3 my-4">
+    <ul className="nav justify-content-center border-bottom pb-3 mb-3">
+      <li className="nav-item">
+        <Link to='/contract' className="nav-link px-2 text-body-secondary">
+          <h5>Terms&Conditions</h5>
+        </Link>
+      </li>
+      <li className="nav-item">
+      </li>
+    </ul>
+    <p className="text-center text-body-secondary">© 2023 CashFlow, Inc</p>
+  </footer>
+</div>
+
   );
 };
 
