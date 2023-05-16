@@ -39,7 +39,7 @@ const WalletStatistics = () => {
           </tr>
           <tr>
             <th scope="row"></th>
-            <td>Amount made</td>
+            <td>Amount Transacted</td>
             <td>{statistics.rows[1][1]} Ksh</td>
             <td>{statistics.rows[1][3]} Ksh</td>
           </tr>

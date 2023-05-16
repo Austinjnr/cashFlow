@@ -55,17 +55,18 @@ const Send = ({ AccountId }) => {
         }
       );
       const data = response.data;
+      console.log(response.data);
       if (data.transaction) {
         const date = new Date(data.transaction.created_at).toLocaleString(
           "en-US",
           {
+            timeZone: "Africa/Nairobi",
             weekday: "long",
             year: "numeric",
             month: "long",
             day: "numeric",
             hour: "numeric",
             minute: "numeric",
-            timeZoneName: "short",
           }
         );
         setMessage(
@@ -94,23 +95,24 @@ const Send = ({ AccountId }) => {
             Thank you for choosing CashFlow. We move together.
           </div>
         );
-
-      } else {
+      } else if (data.error) {
         setError(data.error);
+        // console.log(data.error);
       }
     } catch (error) {
-      console.log(error);
-      setIsSending(false);
+      setError(error.response.data.error);
     } finally {
+      setIsSending(false);
       setShowSpinner(false);
     }
-  };
+  }
 
   return (
-    <div className="mt-5">
+    <div className="mt-5" style={{fontFamily: "Times New Roman"}}>
       <form onSubmit={handleSubmit} className="formup">
       <span className="signup">Transfar Money</span>
           <input
+          required
             type="text"
             id="accountNumber"
             placeholder="enter account number"
@@ -118,9 +120,9 @@ const Send = ({ AccountId }) => {
             value={accountNumber}
             onChange={handleAccountNumberChange}
           />
-       
         <div>
           <input
+          required
             type="number"
             id="amount"
             placeholder="enter amount"

@@ -3,24 +3,31 @@ class WalletsController < ApplicationController
     account_id = params[:account_id]
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
-
+  
     wallet = Wallet.find_by(account_id: account_id)
     wallet.balance += amount - transaction_fee
     wallet.last_transaction = "deposit"
     wallet.save!
-
+  
     transaction = Transaction.create!(
       transaction_type: "deposit",
       amount: amount,
+      balance: wallet.balance,
+      created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
+      updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
       transaction_fee: transaction_fee,
-      account_id: account_id,
+      account_id: account_id
     )
-
+  
     render json: {
-      message: "Dear customer, you have successfully deposited Ksh. <span style='color: blue;'>#{amount}</span>. Your new account balance is <span style='color: yellow;'>#{wallet.balance}</span> on <span style='color: blue;'>#{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}</span>, at <span style='color: blue;'>#{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}</span>. Thank you for choosing CashFlow. We move together.",
+      transaction: transaction,
+      message: "Dear customer, you have successfully deposited Ksh.#{amount}. Your new account balance is #{wallet.balance} ,on #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}, at #{transaction.created_at.in_time_zone("Africa/Nairobi").strftime("%I:%M %p")}. Thank you for choosing CashFlow. We move together."
     }, status: :ok
   end
+  
+  
 
+  # index
   def index
     wallets = Wallet.all
     render json: { wallets: wallets }
@@ -34,28 +41,28 @@ class WalletsController < ApplicationController
   def send_money
     sender_wallet = Wallet.find_by(account_id: params[:sender_account_id])
     receiver_wallet = Wallet.find_by_account_number(params[:receiver_account_number])
-  
+
     if sender_wallet.nil? || receiver_wallet.nil?
-      render json: { error: "Invalid sender or receiver account" }, status: :bad_request
+      render json: { error: "Dear customer, the account number entered is not found. Kindly confirm or contact your beneficiary. Thank you for transacting with us." }, status: :bad_request
       return
     end
-  
+
     amount = params[:amount].to_i
     transaction_fee = calculate_transaction_fee(amount)
-  
+
     if sender_wallet.balance < amount + transaction_fee
-      render json: { error: "Insufficient funds" }, status: :bad_request
+      render json: { error: "Dear customer, you have insufficient funds. Your balance is Ksh.#{sender_wallet.balance}." }, status: :bad_request
       return
     end
-  
+
     sender_wallet.balance -= amount + transaction_fee
     sender_wallet.last_transaction = "send"
     sender_wallet.save!
-  
+
     receiver_wallet.balance += amount
     receiver_wallet.last_transaction = "receive"
     receiver_wallet.save!
-  
+
     account = receiver_wallet.account # get the associated account
     transaction = Transaction.create!(
       transaction_type: "send",
@@ -65,18 +72,16 @@ class WalletsController < ApplicationController
       beneficiary_id: receiver_wallet.account_id,
       balance: sender_wallet.balance,
       receiver_account_number: receiver_wallet.account_number,
-      receiver_account_name: account.name, 
+      receiver_account_name: account.name,
       created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
       updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
     )
-  
+
     render json: {
       message: "Dear customer, you have successfully sent #{amount} to #{receiver_wallet.account_number} on #{Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y")}, at #{Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M")}. Your new account balance is #{sender_wallet.balance}. Transaction fee was #{transaction_fee}. Thank you for choosing CashFlow. We move together.",
-      transaction: transaction
+      transaction: transaction,
     }, status: :ok
   end
-  
-  
 
   def wallet_statistics
     stats = {

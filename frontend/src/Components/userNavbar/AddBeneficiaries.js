@@ -18,13 +18,13 @@ const AddBeneficiary = ({ AccountId }) => {
     setIsLoading(true);
     setErrorMessage("");
 
-    const regex = /^[1-9]\d{7}$/;
+    const regex = /^[1-9]\d{4,9}$/;
     if (!regex.test(account_number)) {
-      setErrorMessage("Account number should be an 8-digit positive number");
+      setErrorMessage("Account number should be a positive number with 5 to 10 digits");
       setIsLoading(false);
       return;
     }
-
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setErrorMessage("Invalid email address");
@@ -53,13 +53,15 @@ const AddBeneficiary = ({ AccountId }) => {
       .then((data) => {
         console.log("Successfully created beneficiary:", data);
         setIsLoading(false);
-        history.push("/beneficiaries");
+        history.push("/user-profile");
       })
       .catch((error) => {
         setErrorMessage(
+          
           "Dear Customer, the Beneficiary Account number you entered was not found. Kindly confirm it again. Thank you for choosing CashFlow."
         );
         setIsLoading(false);
+        // history.push("/beneficiaries");
       });
   };
  console.log(account_number);
