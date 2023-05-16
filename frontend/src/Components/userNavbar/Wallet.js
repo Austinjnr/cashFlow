@@ -12,41 +12,57 @@ const Wallet = ({ userId }) => {
       .get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
       .then((res) => {
         setDetails(res.data.map((data) => data.wallet));
-        setTransactions(res.data.map((data) => data.transactions));
+        setTransactions(res.data.map((data) => data.transactions.slice(0, 10)));
       });
   }, [userId]);
 
   return (
     <section className="text-center mt-5">
-      <div className="row">
-        <div className="col-md-6">
-          <h2>Your CashFlow Balance is:</h2>
+      <div className="row col-md-12">
+        <div
+          className="col-md-5"
+          style={{ marginLeft: "1rem", position: "relative" }}
+        >
           {details.length > 0 && (
             <div key={details[0].id}>
+              <p>
+                Your Account Number:{" "}
+                <i>
+                  <b>{details[0].account_number}</b>
+                </i>
+              </p>
+              <h2>Account Balance:</h2>
               <h5>ksh.{details[0].balance}</h5>
-              <h2>Your CashFlow Account Number is:</h2>
-              <h5>{details[0].account_number}</h5>
             </div>
           )}
-          <div className="d-flex justify-content-between">
+          <div >
             <button
-              className="btn btn-primary"
+              className="btn btn-secondary btn-sm"
+              style={{marginRight: '10px'}}
               onClick={() => {
                 history.push("/send");
               }}
             >
               Send
             </button>
-
             <Link to="/top-up">
-              <button className="btn btn-primary">Deposit</button>
+              <button className="btn btn-secondary btn-sm">Deposit</button>
             </Link>
           </div>
-          <img
-            src="/images/3D card holder Illustration.png"
-            alt="wallet"
-            className="img-fluid"
-          />
+          {/* <div
+            style={{
+              position: "absolute",
+              top: "66%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <img
+              src="/images/3D card holder Illustration.png"
+              alt="wallet"
+              className="img-fluid"
+            />
+          </div> */}
         </div>
 
         <div className="col-md-6">
