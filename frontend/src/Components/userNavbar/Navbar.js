@@ -7,7 +7,24 @@ function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
-  const handleClick = () => setClick(!click);
+  const handleClick = () => {
+    setClick(!click);
+    if (window.location.pathname === '/user-profile') {
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
+    }
+  };
+
+  const handleLogout = () => {
+    if (window.location.pathname === '/user-profile') {
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
+    }
+    // Perform the logout logic here
+  };
+
   const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
@@ -23,14 +40,13 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
+
   return (
     <section>
       <nav className='navbar'>
         <div className='navbar-container'>
-           <div className='navbar-logo'>
-           CashFlow
-           </div>
-            <i className="fa-solid fa-money-bill-transfer" style={{"color": "#ffffff"}}></i>
+          <div className='navbar-logo'>CashFlow</div>
+          <i className="fa-solid fa-money-bill-transfer" style={{ "color": "#ffffff" }}></i>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -57,22 +73,19 @@ function Navbar() {
             <li className='nav-item'>
               <Link
                 to='/user-profile'
-                className='nav-links's
+                className='nav-links'
                 onClick={closeMobileMenu} >
                 Profile
               </Link>
             </li>
             <li>
-              <a href="/" className='nav-links-mobile' onClick={closeMobileMenu}>
+              <a href="/" className='nav-links-mobile' onClick={handleLogout}>
                 Logout
               </a>
             </li>
           </ul>
           {button && (
-            <Button
-              buttonStyle='btn--outline'
-              // onClick={handleLogout}
-            >
+            <Button buttonStyle='btn--outline'>
               LOG OUT
             </Button>
           )}
