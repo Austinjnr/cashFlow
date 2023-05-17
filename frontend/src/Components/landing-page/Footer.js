@@ -14,6 +14,7 @@ const Footer = () => {
       </li>
     </ul>
     <p className="text-center text-body-secondary">© 2023 CashFlow, Inc</p>
+    
   </footer>
 </div>
 

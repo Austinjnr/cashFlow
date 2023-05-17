@@ -1,9 +1,8 @@
 import React from "react";
-import './Contract.css'
 
 function Contract() {
   return (
-    <section className="mt-5">
+    <section className="me-5 ms-5 mt-5">
     <h1 className="text-center" style={{textAlign: "center", fontSize: "3rem", color: "#333"}}>Terms and Conditions</h1>
     <p style={{fontSize: "1.2rem", lineHeight: 1.5, color: "#666", marginTop: "1.5rem"}}>
       Please read the following terms and conditions carefully before using
