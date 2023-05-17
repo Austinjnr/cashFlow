@@ -30,8 +30,19 @@ module Backend
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-  
-    config.time_zone = "Nairobi"
+    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Africa/Nairobi"
+
+    config.active_record.time_zone_aware_types = [:datetime]
+
+    # Set the time format using I18n
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en]
+    config.i18n.enforce_available_locales = true
+    config.i18n.backend = I18n::Backend::Simple.new
+    config.i18n.backend.load_translations
+    config.i18n.backend.store_translations(:en, time: { formats: { default: "%H:%M %p" } })
+
 
     # config.eager_load_paths << Rails.root.join("extras")
 

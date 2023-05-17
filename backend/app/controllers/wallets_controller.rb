@@ -14,7 +14,7 @@ class WalletsController < ApplicationController
       amount: amount,
       balance: wallet.balance,
       created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%A, %d %B %Y"),
-      updated_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
+      created_at: Time.now.in_time_zone("Africa/Nairobi").strftime("%H:%M"),
       transaction_fee: transaction_fee,
       account_id: account_id
     )
