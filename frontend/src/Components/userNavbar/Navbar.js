@@ -1,94 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '../landing-page/Button';
-import { Link } from 'react-router-dom';
-import '../Navbar.css';
+import React, { useState } from "react";
+import { Link , useHistory} from "react-router-dom";
+import "../Navbar.css";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
-
+const history = useHistory()
   const handleClick = () => {
     setClick(!click);
-    if (window.location.pathname === '/user-profile') {
-      setTimeout(() => {
-        window.location.reload();
-      }, 0);
-    }
   };
 
   const handleLogout = () => {
-    if (window.location.pathname === '/user-profile') {
+    history.push("/")
+    if (window.location.pathname === "/") {
       setTimeout(() => {
         window.location.reload();
-      }, 0);
+      }, -100);
     }
+
     // Perform the logout logic here
   };
 
-  const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
+  const closeMobileMenu = () => {
+    setClick(false);
   };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener('resize', showButton);
 
   return (
     <section>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          <div className='navbar-logo'>CashFlow</div>
-          <i className="fa-solid fa-money-bill-transfer" style={{ "color": "#ffffff" }}></i>
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-logo">CashFlow</div>
+          <i
+            className="fa-solid fa-money-bill-transfer"
+            style={{ color: "#ffffff" }}
+          ></i>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/welcome' className='nav-links' onClick={closeMobileMenu}>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <Link
+                to="/welcome"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 Home
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link to='/user-wallet' className='nav-links' onClick={closeMobileMenu}>
+            <li className="nav-item">
+              <Link
+                to="/user-wallet"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 Wallet
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <Link
-                to='/user-transaction'
-                className='nav-links'
+                to="/user-transaction"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Transactions
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <Link
-                to='/user-profile'
-                className='nav-links'
-                onClick={closeMobileMenu} >
+                to="/user-profile"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 Profile
               </Link>
             </li>
             <li>
-              <a href="/" className='nav-links-mobile' onClick={handleLogout}>
+              <Link
+                to="/"
+                className="nav-links-mobile"
+                onClick={handleLogout}
+              >
                 Logout
-              </a>
+              </Link>
             </li>
           </ul>
-          {button && (
-            <Button buttonStyle='btn--outline'>
-              LOG OUT
-            </Button>
-          )}
+          <Link
+            to="/"
+            className="nav-links-mobile"
+            onClick={handleLogout}
+          >
+            Logout
+          </Link>
+          <button className="btn--outline" onClick={handleLogout}>
+            LOG OUT
+          </button> 
         </div>
       </nav>
     </section>
