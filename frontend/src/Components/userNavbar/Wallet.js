@@ -12,7 +12,7 @@ const Wallet = ({ userId }) => {
       .get(`https://cashflow-1rf2.onrender.com/userprofile/${userId}`)
       .then((res) => {
         setDetails(res.data.map((data) => data.wallet));
-        setTransactions(res.data.map((data) => data.transactions.slice(0, 10)));
+        setTransactions(res.data.map((data) => data.transactions.slice(0, 10)).reverse());
       });
   }, [userId]);
 
@@ -92,7 +92,7 @@ const Wallet = ({ userId }) => {
                     <td>{transact.amount} Ksh</td>
                     <td>{transact.transaction_fee} Ksh</td>
                   </tr>
-                ))}
+                )).reverse()}
               </tbody>
             </table>
           )}
