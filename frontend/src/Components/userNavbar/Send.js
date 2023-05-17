@@ -45,6 +45,9 @@ const Send = ({ AccountId }) => {
     event.preventDefault();
     setShowSpinner(true);
     setIsSending(true);
+    setError("");
+    setMessage("");
+
     try {
       const response = await axios.post(
         `https://cashflow-1rf2.onrender.com/send/${accountNumber}/${AccountId}`,
@@ -71,33 +74,37 @@ const Send = ({ AccountId }) => {
         );
         setMessage(
           <div style={{ color: "black" }}>
-            Dear customer, you have successfully sent{" "}
-            <span style={{ color: "blue" }}>Ksh.{data.transaction.amount}</span>{" "}
-            to{" "}
-            <span style={{ color: "blue" }}>
-              {data.transaction.receiver_account_name}
-            </span>{" "}
-            ,
-            <span style={{ color: "blue" }}>
-              {data.transaction.receiver_account_number}
-            </span>{" "}
-            on <span style={{ color: "blue" }}>{date}</span>.<br />
-            Your new account balance is{" "}
-            <span style={{ color: "blue" }}>
-              Ksh.{data.transaction.balance}
-            </span>
-            .<br />
-            Transaction fee was{" "}
-            <span style={{ color: "blue" }}>
-              Ksh.{data.transaction.transaction_fee}
-            </span>
-            .<br />
+            <p>
+              {" "}
+              Dear customer, you have successfully sent{" "}
+              <span style={{ color: "blue" }}>
+                Ksh.{data.transaction.amount}
+              </span>{" "}
+              to{" "}
+              <span style={{ color: "blue" }}>
+                {data.transaction.receiver_account_name}
+              </span>{" "}
+              ,
+              <span style={{ color: "blue" }}>
+                {data.transaction.receiver_account_number}
+              </span>{" "}
+              on <span style={{ color: "blue" }}>{date}</span>.<br />
+              Your new account balance is{" "}
+              <span style={{ color: "blue" }}>
+                Ksh.{data.transaction.balance}
+              </span>
+              {/* .<br /> */}
+              Transaction fee was{" "}
+              <span style={{ color: "blue" }}>
+                Ksh.{data.transaction.transaction_fee}
+              </span>
+              .<br />
+            </p>
             Thank you for choosing CashFlow. We move together.
           </div>
         );
       } else if (data.error) {
         setError(data.error);
-        // console.log(data.error);
       }
     } catch (error) {
       setError(error.response.data.error);
@@ -105,24 +112,24 @@ const Send = ({ AccountId }) => {
       setIsSending(false);
       setShowSpinner(false);
     }
-  }
+  };
 
   return (
-    <div className="mt-5" style={{fontFamily: "Times New Roman"}}>
+    <div className="mt-5" style={{ fontFamily: "Times New Roman" }}>
       <form onSubmit={handleSubmit} className="formup">
-      <span className="signup">Transfar Money</span>
-          <input
+        <span className="signup">Transfar Money</span>
+        <input
           required
-            type="text"
-            id="accountNumber"
-            placeholder="enter account number"
+          type="text"
+          id="accountNumber"
+          placeholder="enter account number"
           className="form--input"
-            value={accountNumber}
-            onChange={handleAccountNumberChange}
-          />
+          value={accountNumber}
+          onChange={handleAccountNumberChange}
+        />
         <div>
           <input
-          required
+            required
             type="number"
             id="amount"
             placeholder="enter amount"
