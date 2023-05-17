@@ -16,12 +16,22 @@ const Wallet = ({ userId }) => {
       });
   }, [userId]);
 
+  const handleSendButtonClick = () => {
+    history.push("/send");
+  };
+
   return (
     <section className="text-center mt-5">
       <div className="row col-md-12">
         <div
           className="col-md-5"
-          style={{ marginLeft: "1rem", position: "relative" }}
+          style={{
+            marginLeft: "1rem",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
           {details.length > 0 && (
             <div key={details[0].id}>
@@ -35,13 +45,11 @@ const Wallet = ({ userId }) => {
               <h5>ksh.{details[0].balance}</h5>
             </div>
           )}
-          <div >
+          <div>
             <button
               className="btn btn-secondary btn-sm"
-              style={{marginRight: '10px'}}
-              onClick={() => {
-                history.push("/send");
-              }}
+              style={{ marginRight: "10px" }}
+              onClick={handleSendButtonClick}
             >
               Send
             </button>
@@ -49,20 +57,20 @@ const Wallet = ({ userId }) => {
               <button className="btn btn-secondary btn-sm">Deposit</button>
             </Link>
           </div>
-          {/* <div
+          <div
             style={{
-              position: "absolute",
-              top: "66%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              marginTop: "1rem",
+              width: "200px",
+              height: "auto",
             }}
           >
             <img
               src="/images/3D card holder Illustration.png"
               alt="wallet"
               className="img-fluid"
+              style={{ margin: "0 auto" }}
             />
-          </div> */}
+          </div>
         </div>
 
         <div className="col-md-6">
