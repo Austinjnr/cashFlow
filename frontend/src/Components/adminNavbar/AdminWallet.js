@@ -24,12 +24,16 @@ const AdminWallet = () => {
     "Friday",
     "Saturday",
   ];
+
+  const today = new Date();
   const dailyData = new Array(7).fill(0);
 
   fetchedData.forEach((item) => {
     const date = new Date(item.created_at);
-    const dayOfWeek = date.getDay();
-    dailyData[dayOfWeek] += item.amount;
+    if (date.getDate() === today.getDate()) {
+      const dayOfWeek = date.getDay();
+      dailyData[dayOfWeek] += item.amount;
+    }
   });
 
   const line = {
@@ -71,7 +75,9 @@ const AdminWallet = () => {
   }, []);
 
   if (transaction) {
-    transaction.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    transaction.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
   }
 
   return (
@@ -84,7 +90,6 @@ const AdminWallet = () => {
           </div>
         </div>
       </div>
-
       <div className="col-md-5">
         <div className="card mb-3">
           <div className="card-body">
@@ -93,7 +98,6 @@ const AdminWallet = () => {
           </div>
         </div>
       </div>
-
       {transaction && (
         <table className="table" style={{ marginLeft: "1rem" }}>
           <thead className="thead-light">
@@ -109,7 +113,10 @@ const AdminWallet = () => {
             {transaction.map((transaction) => (
               <tr key={transaction.id}>
                 <th scope="row">{transaction.id}</th>
-                <td>{daysOfWeek[new Date(transaction.created_at).getDay()]}, {new Date(transaction.created_at).toLocaleDateString()}</td>
+                <td>
+                  {daysOfWeek[new Date(transaction.created_at).getDay()]},{" "}
+                  {new Date(transaction.created_at).toLocaleDateString()}
+                </td>
                 <td>{transaction.transaction_type}</td>
                 <td>{transaction.amount} Ksh</td>
                 <td>{transaction.transaction_fee}</td>

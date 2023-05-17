@@ -72,7 +72,7 @@ function Page() {
                   style={{ height: "200px", objectFit: "cover" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">Affiliate Marketing</h5>
+                  <h5 className="card-title">Marketing</h5>
                 </div>
               </div>
             </div>

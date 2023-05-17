@@ -31,12 +31,16 @@ export const Login = (props) => {
     sessionStorage.setItem("userId", data.session);
     if (data.message === "admin") {
       history.push("/dashboard");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, -50);
       setMessage(data.message);
     } else if (data.message === "user") {
-      history.push("/user-profile");
+      history.push("/welcome");
+      setTimeout(() => {
+        window.location.reload();
+      }, -50);
       setMessage(data.message);
-      window.location.reload();
     } else {
       setMessage("");
       setError(data.errors);

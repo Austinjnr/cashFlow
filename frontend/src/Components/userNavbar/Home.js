@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div style={{ display: "flex", alignItems: "center", marginTop: "3rem" }}>
+    <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
       <img
         className="homepageImage"
         src="/images/home.png"

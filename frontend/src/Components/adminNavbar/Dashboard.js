@@ -129,7 +129,7 @@ const Dashboard = () => {
         <div className="col">
           <div className="card">
             <div className="card-body">
-              <h5 className="text-center">Weekly Gained Users</h5>
+              <h5 className="text-center">Monthly Gained Users</h5>
               <div>
                 <Line data={line} options={options} />
               </div>
@@ -139,7 +139,7 @@ const Dashboard = () => {
         <div className="col">
           <div className="card">
             <div className="card-body">
-              <h5 className="text-center">Monthly Transactions</h5>
+              <h5 className="text-center">Monthly Total Transactions</h5>
               <Bar data={bar} options={Baroptions} />
             </div>
           </div>
