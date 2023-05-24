@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  #agents 
+  resources :agents , only: [:index]
+  post 'agents/:account_id', to: "agents#create"
+  post '/slots/:agent_number', to: "agents#purchase_slots"
   #wallet
   resources :wallets, only: [:index], param: :id
 
